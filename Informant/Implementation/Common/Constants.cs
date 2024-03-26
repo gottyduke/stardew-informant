@@ -2,19 +2,18 @@
 // ReSharper disable UnusedMember.Global
 // ReSharper disable UnusedType.Global
 
-using System.Linq;
-
 namespace Slothsoft.Informant.Implementation.Common;
 
 /// <summary>
 /// Contains constants for all the seasons.
 /// </summary>
-internal static class Seasons {
+internal static class Seasons
+{
     public const string Spring = "spring";
     public const string Summer = "summer";
     public const string Fall = "fall";
     public const string Winter = "winter";
-    public static readonly string[] All = {Spring, Summer, Fall, Winter};
+    public static readonly string[] All = { Spring, Summer, Fall, Winter };
 
     public const int LengthInDays = 28;
 }
@@ -23,7 +22,8 @@ internal static class Seasons {
 /// These constants can be used to compare to <code>Object.ParentSheetIndex</code>.
 /// See https://stardewcommunitywiki.com/Modding:Big_craftables_data
 /// </summary>
-public static class BigCraftableIds {
+public static class BigCraftableIds
+{
     public const int BeeHouse = 10;
     public const int Cask = 163;
     public const int CheesePress = 16;
@@ -201,7 +201,7 @@ public static class BigCraftableIds {
         WoodLamppost, IronLamppost, Hmtgf, JunimoKartArcadeSystem, PinkyLemon, Foroguemo, SolidGoldLewis, AutoGrabber, DeluxeScarecrow, Barrel, Crate,
         Workbench, MiniJukebox, Telephone, CursedPkArcadeSystem, MiniObelisk, FarmComputer, SewingMachine, AutoPetter, Hopper, Campfire2,
     }).ToArray();
-    
+
     public static readonly int[] AllRarecrows = {
         Rarecrow, Rarecrow2, Rarecrow3, Rarecrow4, Rarecrow5, Rarecrow6, Rarecrow7, Rarecrow8
     };
@@ -211,7 +211,7 @@ public static class BigCraftableIds {
 /// These constants can be used to compare to <code>Object.ParentSheetIndex</code>.
 /// See https://stardewcommunitywiki.com/Modding:Object_data
 /// </summary>
-public static class ObjectIds {
-    public const int GingerForageCropId = 2;
-    public const int Ginger = 829;
+public static class ObjectIds
+{
+    public const string Ginger = "829";
 }
