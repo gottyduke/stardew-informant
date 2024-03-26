@@ -49,8 +49,9 @@
   "TreeTooltipGenerator.Type7": "大蘑菇",
   "TreeTooltipGenerator.Type8": "桃花心木",
   "TreeTooltipGenerator.Type9": "棕榈树",
-  "TreeTooltipGenerator.Type10": "苔藓",
+  "TreeTooltipGenerator.Type10": "蕨菜树",
   "TreeTooltipGenerator.Type13": "神秘树",
+  "TreeTooltipGenerator.MossCovered": "长满苔藓的{{X}}",
 
   "Config.Decorators.GeneralSection": "通用标记",
   "Config.Decorators.Visibility": "标记开关",

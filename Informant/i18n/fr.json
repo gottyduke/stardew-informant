@@ -49,8 +49,9 @@
   "TreeTooltipGenerator.Type7": "Arbre à champignon",
   "TreeTooltipGenerator.Type8": "Acajou",
   "TreeTooltipGenerator.Type9": "Palmier",
-  "TreeTooltipGenerator.Type10": "Mossy Tree",
+  "TreeTooltipGenerator.Type10": "Mossy Wild Tree",
   "TreeTooltipGenerator.Type13": "Mystic Tree",
+  "TreeTooltipGenerator.MossCovered": "Mossy {{X}}",
 
   "Config.Decorators.GeneralSection": "Infobulle - Général",
   "Config.Decorators.Visibility": "Infobulle - Visibilité",

@@ -49,8 +49,9 @@
   "TreeTooltipGenerator.Type7": "Mantar Ağacı",
   "TreeTooltipGenerator.Type8": "Maun Ağacı",
   "TreeTooltipGenerator.Type9": "Palmiye Ağacı",
-  "TreeTooltipGenerator.Type10": "Mossy Tree",
+  "TreeTooltipGenerator.Type10": "Mossy Wild Tree",
   "TreeTooltipGenerator.Type13": "Mystic Tree",
+  "TreeTooltipGenerator.MossCovered": "Mossy {{X}}",
 
   "Config.Decorators.GeneralSection": "Belirteçler - Genel",
   "Config.Decorators.Visibility": "Belirteçler - Görünürlük",

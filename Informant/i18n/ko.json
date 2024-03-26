@@ -49,8 +49,9 @@
   "TreeTooltipGenerator.Type7": "버섯나무",
   "TreeTooltipGenerator.Type8": "마호가니 나무",
   "TreeTooltipGenerator.Type9": "야자수",
-  "TreeTooltipGenerator.Type10": "Mossy Tree",
+  "TreeTooltipGenerator.Type10": "Mossy Wild Tree",
   "TreeTooltipGenerator.Type13": "Mystic Tree",
+  "TreeTooltipGenerator.MossCovered": "Mossy {{X}}",
 
   "Config.Decorators.GeneralSection": "표시기 - 일반",
   "Config.Decorators.Visibility": "표시기 - 활성화",
