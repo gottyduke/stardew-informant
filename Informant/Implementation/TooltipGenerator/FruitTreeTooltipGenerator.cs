@@ -1,56 +1,65 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Slothsoft.Informant.Api;
-using Slothsoft.Informant.Implementation.Common;
 using StardewValley.TerrainFeatures;
 
 namespace Slothsoft.Informant.Implementation.TooltipGenerator;
 
-internal class FruitTreeTooltipGenerator : ITooltipGenerator<TerrainFeature> {
+internal class FruitTreeTooltipGenerator : ITooltipGenerator<TerrainFeature>
+{
 
     private readonly IModHelper _modHelper;
-    
-    public FruitTreeTooltipGenerator(IModHelper modHelper) {
+
+    public FruitTreeTooltipGenerator(IModHelper modHelper)
+    {
         _modHelper = modHelper;
     }
-    
+
     public string Id => "fruit-tree";
     public string DisplayName => _modHelper.Translation.Get("FruitTreeTooltipGenerator");
     public string Description => _modHelper.Translation.Get("FruitTreeTooltipGenerator.Description");
-    
-    public bool HasTooltip(TerrainFeature input) {
+
+    public bool HasTooltip(TerrainFeature input)
+    {
         return input is FruitTree;
     }
 
-    public Tooltip Generate(TerrainFeature input) {
-        return CreateTooltip((FruitTree) input);
+    public Tooltip Generate(TerrainFeature input)
+    {
+        return CreateTooltip((FruitTree)input);
     }
 
-    private Tooltip CreateTooltip(FruitTree fruitTree) {
-        var displayName = GameInformation.GetObjectDisplayName(fruitTree.indexOfFruit.Value);
+    private Tooltip CreateTooltip(FruitTree fruitTree)
+    {
+        var displayName = fruitTree.GetDisplayName();
         var daysLeft = CropTooltipGenerator.ToDaysLeftString(_modHelper, CalculateDaysLeft(fruitTree));
-        return new Tooltip($"{displayName}\n{daysLeft}") {
+        return new Tooltip($"{displayName}\n{daysLeft}")
+        {
             Icon = Icon.ForParentSheetIndex(
-                fruitTree.indexOfFruit.Value, 
-                false, 
+                fruitTree.indexOfFruit.Value,
+                false,
                 IPosition.CenterRight,
                 new Vector2(Game1.tileSize / 2, Game1.tileSize / 2)
             ),
         };
     }
 
-    internal int CalculateDaysLeft(FruitTree fruitTree) {
+    internal int CalculateDaysLeft(FruitTree fruitTree)
+    {
         var daysLeft = fruitTree.daysUntilMature.Value;
-        if (daysLeft <= 0) {
+        if (daysLeft <= 0)
+        {
             // if mature, 0 days are left if there are fruits on the tree, else 1 day
             daysLeft = fruitTree.fruitsOnTree.Value <= 0 ? 1 : 0;
         }
-        if (daysLeft > 0) {
-            if (fruitTree.currentLocation?.IsGreenhouse ?? false) {
+        if (daysLeft > 0)
+        {
+            if (fruitTree.currentLocation?.IsGreenhouse ?? false)
+            {
                 // if we are in the greenhouse, we don't need to add anything for seasons
                 return daysLeft;
             }
-            if (fruitTree.currentLocation?.Name.Contains("Island") ?? false) {
+            if (fruitTree.currentLocation?.Name.Contains("Island") ?? false)
+            {
                 // if we are on the island, we don't need to add anything for seasons
                 return daysLeft;
             }
@@ -61,13 +70,16 @@ internal class FruitTreeTooltipGenerator : ITooltipGenerator<TerrainFeature> {
 
             var futureSeasonIndex = Array.IndexOf(Seasons.All, Game1.currentSeason) + seasonsLeft;
             var futureSeason = Seasons.All[futureSeasonIndex % Seasons.All.Length];
-            while (futureSeason != fruitTree.fruitSeason.Value) {
+            while (futureSeason != fruitTree.fruitSeason.Value)
+            {
                 futureSeasonIndex++;
-                futureSeason = Seasons.All[futureSeasonIndex % Seasons.All.Length];
-                daysLeft += Seasons.LengthInDays - futureDay; // add only the remainder of the month
+                futureSeasonIndex %= WorldDate.MonthsPerYear;
+                futureSeason = (Season)futureSeasonIndex;
+                daysLeft += WorldDate.DaysPerMonth - futureDay; // add only the remainder of the month
                 futureDay = 0; // and after the remainder was added, all following months are fully added
 
-                if (daysLeft > Seasons.All.Length * Seasons.LengthInDays) {
+                if (daysLeft > Seasons.All.Length * Seasons.LengthInDays)
+                {
                     // daysLeft is now more than one year - which might happen if the fruitSeason is unknown
                     // (or I misspelled "winter" in the seasons constants) -> just ignore this
                     return -1;
