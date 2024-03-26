@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
+﻿namespace Slothsoft.Informant;
 
-namespace Slothsoft.Informant;
-
-internal record InformantConfig {
+internal record InformantConfig
+{
     public Dictionary<string, bool> DisplayIds { get; set; } = new();
     public TooltipTrigger TooltipTrigger { get; set; } = TooltipTrigger.Hover;
     public SButton TooltipTriggerButton { get; set; } = SButton.MouseRight;
@@ -10,12 +9,14 @@ internal record InformantConfig {
     public bool DecorateLockedBundles { get; set; }
 }
 
-internal enum TooltipTrigger {
+internal enum TooltipTrigger
+{
     Hover,
     ButtonHeld,
 }
 
-internal enum HideMachineTooltips {
+internal enum HideMachineTooltips
+{
     ForNonMachines,
     ForChests,
     Never,

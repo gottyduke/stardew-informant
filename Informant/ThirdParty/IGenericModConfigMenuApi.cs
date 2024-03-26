@@ -1,12 +1,11 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI.Utilities;
 
 // ReSharper disable UnusedMember.Global
 #pragma warning disable CS8625
 
-namespace Slothsoft.Informant.ThirdParty; 
+namespace Slothsoft.Informant.ThirdParty;
 
 /// <summary>
 /// The API which lets other mods add a config UI through Generic Mod Config Menu.

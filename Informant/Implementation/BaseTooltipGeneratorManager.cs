@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using Slothsoft.Informant.Api;
 using System.Collections.Immutable;
-using System.Linq;
-using Slothsoft.Informant.Api;
 
-namespace Slothsoft.Informant.Implementation; 
+namespace Slothsoft.Informant.Implementation;
 
-internal class BaseTooltipGeneratorManager<TInput> : ITooltipGeneratorManager<TInput> {
+internal class BaseTooltipGeneratorManager<TInput> : ITooltipGeneratorManager<TInput>
+{
 
     private readonly List<ITooltipGenerator<TInput>> _generators = new();
 
     public IEnumerable<IDisplayable> Generators => _generators.ToImmutableArray();
 
-    internal IEnumerable<Tooltip> Generate(params TInput[] inputs) {
+    internal IEnumerable<Tooltip> Generate(params TInput[] inputs)
+    {
         var config = InformantMod.Instance?.Config ?? new InformantConfig();
         return _generators
             .Where(g => config.DisplayIds.GetValueOrDefault(g.Id, true))
@@ -20,12 +20,14 @@ internal class BaseTooltipGeneratorManager<TInput> : ITooltipGeneratorManager<TI
                 .Select(g.Generate)
             );
     }
-    
-    public void Add(ITooltipGenerator<TInput> generator) {
+
+    public void Add(ITooltipGenerator<TInput> generator)
+    {
         _generators.Add(generator);
     }
 
-    public void Remove(string generatorId) {
+    public void Remove(string generatorId)
+    {
         _generators.RemoveAll(g => g.Id == generatorId);
     }
 }

@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-
-namespace Slothsoft.Informant.Api; 
+﻿namespace Slothsoft.Informant.Api;
 
 /// <summary>
 /// A general manager that allows hooking new providers for a specific type into.
 /// </summary>
-public interface IDecoratorManager<TInput> {
+public interface IDecoratorManager<TInput>
+{
 
     /// <summary>
     /// Returns the decorators this manager has.
@@ -17,7 +16,7 @@ public interface IDecoratorManager<TInput> {
     /// </summary>
     /// <param name="decorator">the decorator to add.</param>
     void Add(IDecorator<TInput> decorator);
-    
+
     /// <summary>
     /// Removes a decorator that provides information for a specific type.
     /// </summary>

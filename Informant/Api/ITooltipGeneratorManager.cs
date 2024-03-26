@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-
-namespace Slothsoft.Informant.Api; 
+﻿namespace Slothsoft.Informant.Api;
 
 /// <summary>
 /// A general manager that allows hooking new providers for a specific type into.
 /// </summary>
-public interface ITooltipGeneratorManager<TInput> {
+public interface ITooltipGeneratorManager<TInput>
+{
 
     /// <summary>
     /// Returns the generators this manager has.
@@ -17,7 +16,7 @@ public interface ITooltipGeneratorManager<TInput> {
     /// </summary>
     /// <param name="generator">the generator to add.</param>
     void Add(ITooltipGenerator<TInput> generator);
-    
+
     /// <summary>
     /// Removes a generator that provides information for a specific type.
     /// </summary>

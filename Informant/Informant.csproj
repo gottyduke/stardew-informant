@@ -1,12 +1,12 @@
-<Project>
-
-    <PropertyGroup>
-        <RootNamespace>Slothsoft.Informant</RootNamespace>
-    </PropertyGroup>
-
-    <Import Project="..\build\common.targets" />
-
-    <ItemGroup>
-        <Reference Include="0Harmony" HintPath="$(GamePath)\smapi-internal\0Harmony.dll" />
-    </ItemGroup>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <Import Project="..\build\common.targets" />
+  <ItemGroup>
+    <Using Include="StardewValley" />
+    <Using Include="StardewModdingAPI" />
+  </ItemGroup>
 </Project>

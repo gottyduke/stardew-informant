@@ -1,15 +1,16 @@
-﻿using System;
-using Slothsoft.Informant.Api;
+﻿using Slothsoft.Informant.Api;
 
 namespace Slothsoft.Informant.Implementation.TooltipGenerator;
 
-internal class TooltipGenerator<TInput> : ITooltipGenerator<TInput> {
-    
+internal class TooltipGenerator<TInput> : ITooltipGenerator<TInput>
+{
+
     private readonly Func<string> _displayName;
     private readonly Func<string> _description;
     private readonly Func<TInput, string?> _generator;
 
-    public TooltipGenerator(string id, Func<string> displayName, Func<string> description, Func<TInput, string?> generator) {
+    public TooltipGenerator(string id, Func<string> displayName, Func<string> description, Func<TInput, string?> generator)
+    {
         Id = id;
         _displayName = displayName;
         _description = description;
@@ -20,11 +21,13 @@ internal class TooltipGenerator<TInput> : ITooltipGenerator<TInput> {
     public string DisplayName => _displayName();
     public string Description => _description();
 
-    public bool HasTooltip(TInput input) {
+    public bool HasTooltip(TInput input)
+    {
         return _generator(input) != null;
     }
 
-    public Tooltip Generate(TInput input) {
+    public Tooltip Generate(TInput input)
+    {
         return new Tooltip(_generator(input)!);
     }
 }

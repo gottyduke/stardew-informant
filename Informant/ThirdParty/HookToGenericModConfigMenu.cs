@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Slothsoft.Informant.Api;
-using Slothsoft.Informant.Implementation;
-using Slothsoft.Informant.Implementation.Decorator;
+﻿using Slothsoft.Informant.Api;
 
-namespace Slothsoft.Informant.ThirdParty; 
+namespace Slothsoft.Informant.ThirdParty;
 
-internal static class HookToGenericModConfigMenu {
-    
-    public static void Apply(InformantMod informantMod, IInformant api) {
+internal static class HookToGenericModConfigMenu
+{
+
+    public static void Apply(InformantMod informantMod, IInformant api)
+    {
         // get Generic Mod Config Menu's API (if it's installed)
         var configMenu = informantMod.Helper.ModRegistry.GetApi<IGenericModConfigMenuApi>("spacechase0.GenericModConfigMenu");
         if (configMenu is null)
@@ -21,7 +18,7 @@ internal static class HookToGenericModConfigMenu {
             reset: () => informantMod.Config = new InformantConfig(),
             save: () => informantMod.Helper.WriteConfig(informantMod.Config)
         );
-        
+
         // add some config options for tooltip generators
         configMenu.AddSectionTitle(informantMod.ModManifest, () => informantMod.Helper.Translation.Get("Config.TooltipGenerators.GeneralSection"));
         configMenu.AddEnumOption(
@@ -44,13 +41,13 @@ internal static class HookToGenericModConfigMenu {
             setValue: value => informantMod.Config.HideMachineTooltips = value,
             getDisplayName: value => informantMod.Helper.Translation.Get("Config.HideMachineTooltips." + value)
         );
-        
+
         configMenu.AddSectionTitle(informantMod.ModManifest, () => informantMod.Helper.Translation.Get("Config.TooltipGenerators.Visibility"));
         var configurables = new List<IDisplayable>();
         configurables.AddRange(api.ObjectTooltipGenerators.Generators);
         configurables.AddRange(api.TerrainFeatureTooltipGenerators.Generators);
         CreateDisplayableOptions(configMenu, configurables, informantMod);
-        
+
         // add some config options for decorators
         configMenu.AddSectionTitle(informantMod.ModManifest, () => informantMod.Helper.Translation.Get("Config.Decorators.GeneralSection"));
         configMenu.AddBoolOption(
@@ -60,19 +57,20 @@ internal static class HookToGenericModConfigMenu {
             getValue: () => informantMod.Config.DecorateLockedBundles,
             setValue: value => informantMod.Config.DecorateLockedBundles = value
         );
-        
+
         configMenu.AddSectionTitle(informantMod.ModManifest, () => informantMod.Helper.Translation.Get("Config.Decorators.Visibility"));
         configurables = new List<IDisplayable>();
         configurables.AddRange(api.ItemDecorators.Decorators);
-        configurables.AddRange(api.GeneralDisplayables); 
+        configurables.AddRange(api.GeneralDisplayables);
         CreateDisplayableOptions(configMenu, configurables, informantMod);
     }
-    
-    private static void AddEnumOption<TEnum>(this IGenericModConfigMenuApi configMenu, IManifest mod, Func<TEnum> getValue, Action<TEnum> setValue, 
-        Func<string> name, Func<TEnum, string> getDisplayName) where TEnum: notnull {
+
+    private static void AddEnumOption<TEnum>(this IGenericModConfigMenuApi configMenu, IManifest mod, Func<TEnum> getValue, Action<TEnum> setValue,
+        Func<string> name, Func<TEnum, string> getDisplayName) where TEnum : notnull
+    {
         var enumValues = Enum.GetValues(typeof(TEnum)).Cast<TEnum>().ToArray();
         var enumStrings = enumValues.Select(e => e.ToString()!).ToArray();
-        
+
         configMenu.AddTextOption(
             mod: mod,
             name: name,
@@ -83,7 +81,8 @@ internal static class HookToGenericModConfigMenu {
         );
     }
 
-    private static void CreateDisplayableOptions(IGenericModConfigMenuApi configMenu, IEnumerable<IDisplayable> configurables, InformantMod informantMod) {
+    private static void CreateDisplayableOptions(IGenericModConfigMenuApi configMenu, IEnumerable<IDisplayable> configurables, InformantMod informantMod)
+    {
         foreach (var configurable in configurables.OrderBy(d => d.DisplayName)) {
             configMenu.AddBoolOption(
                 mod: informantMod.ModManifest,
