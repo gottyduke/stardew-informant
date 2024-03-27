@@ -75,8 +75,8 @@ internal class NewRecipeDisplayable : IDisplayable
 
         // recipe.timesCrafted is not updated it seems
         var timesCrafted = recipe.isCookingRecipe
-                ? (Game1.player.recipesCooked.ContainsKey(recipe.getIndexOfMenuView()) ? Game1.player.recipesCooked[recipe.getIndexOfMenuView()] : 0)
-                : (Game1.player.craftingRecipes.ContainsKey(recipe.name) ? Game1.player.craftingRecipes[recipe.name] : 0);
+                ? (Game1.MasterPlayer.recipesCooked.ContainsKey(recipe.getIndexOfMenuView()) ? Game1.MasterPlayer.recipesCooked[recipe.getIndexOfMenuView()] : 0)
+                : (Game1.MasterPlayer.craftingRecipes.ContainsKey(recipe.name) ? Game1.MasterPlayer.craftingRecipes[recipe.name] : 0);
         if (timesCrafted > 0) {
             // we are on the recipe page, have a recipe which was already craftet? nice, it's not new
             return;

@@ -31,7 +31,7 @@ internal class ShippingBinDecorator : IDecorator<Item>
                 return false;
             }
             var parentSheetIndex = input.ParentSheetIndex.ToString();
-            var alreadyShipped = Game1.player.basicShipped.ContainsKey(parentSheetIndex) ? Game1.player.basicShipped[parentSheetIndex] : 0;
+            var alreadyShipped = Game1.MasterPlayer.basicShipped.ContainsKey(parentSheetIndex) ? Game1.MasterPlayer.basicShipped[parentSheetIndex] : 0;
 
             if (!Ship15Items.Contains(input.ParentSheetIndex)) {
                 // we only need to ship this item once
@@ -58,7 +58,7 @@ internal class ShippingBinDecorator : IDecorator<Item>
             return null;
         }
         var parentSheetIndex = input.ParentSheetIndex.ToString();
-        var alreadyShipped = Game1.player.basicShipped.ContainsKey(parentSheetIndex) ? Game1.player.basicShipped[parentSheetIndex] : 0;
+        var alreadyShipped = Game1.MasterPlayer.basicShipped.ContainsKey(parentSheetIndex) ? Game1.MasterPlayer.basicShipped[parentSheetIndex] : 0;
         const int needToBeShipped = 15;
         if (alreadyShipped >= needToBeShipped) {
             // we don't need to ship anything? why even show the decorator?

@@ -28,11 +28,15 @@ internal class BundleDecorator : IDecorator<Item>
 
     public bool HasDecoration(Item input)
     {
+        if (Game1.MasterPlayer.mailReceived.Contains("JojaMember")) {
+            return false;
+        }
+
         if (_bundles.Any() && input is SObject obj && !obj.bigCraftable.Value) {
 
             int[]? allowedAreas;
 
-            if (!Game1.player.mailReceived.Contains("canReadJunimoText")) {
+            if (!Game1.MasterPlayer.mailReceived.Contains("canReadJunimoText")) {
                 // if player can't read Junimo text, they can't have bundles yet
                 allowedAreas = null;
             } else {
