@@ -59,7 +59,7 @@ internal class BundleDecorator : IDecorator<Item>
             }
 
             _lastCachedBundles = GetNeededItems(allowedAreas, InformantMod.Instance?.Config.DecorateLockedBundles ?? false)
-                .Where(item => input.ItemId == item.UnqualifiedItemId && input.quality.Value <= item.Quality);
+                .Where(item => input.ItemId == item.UnqualifiedItemId && input.quality.Value >= item.Quality);
             return _lastCachedBundles.Any();
         }
         return false;
@@ -139,7 +139,7 @@ internal class BundleDecorator : IDecorator<Item>
             .Select(bundle => new Decoration(GetOrCacheBundleTexture(bundle.Color)) { Counter = bundle.Quantity })
             .ToArray();
         return new Decoration(GetOrCacheBundleTexture(_lastCachedBundles!.First().Color)) {
-            Counter = _lastCachedBundles!.First().Quantity,
+            Counter = _lastCachedBundles?.First().Quantity,
             ExtraDecorations = decorations
         };
     }
