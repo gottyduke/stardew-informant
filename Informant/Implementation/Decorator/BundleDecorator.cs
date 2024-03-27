@@ -2,8 +2,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Slothsoft.Informant.Api;
 using Slothsoft.Informant.Helper;
 using StardewValley.Locations;
-using StardewValley.Menus;
-using Color = Microsoft.Xna.Framework.Color;
 using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
 
@@ -101,7 +99,7 @@ internal class BundleDecorator : IDecorator<Item>
                 // bundle was not yet unlocked or already completed
                 continue;
             }
-            
+
             _ = int.TryParse(bundleTitleSplit[1], out var bundleIndex);
             var bundleDataSplit = bundleData[bundleTitle].Split('/');
             var indexStackQuality = bundleDataSplit[2].Split(' ');
