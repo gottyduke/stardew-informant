@@ -13,7 +13,7 @@ internal class BundleDecorator : IDecorator<Item>
 {
     internal record ParsedSimpleBundle
     {
-        public int ParentSheetIndex;
+        public string? UnqualifiedItemId;
         public int Quantity;
         public int Quality;
         public int Color;
@@ -61,7 +61,7 @@ internal class BundleDecorator : IDecorator<Item>
             }
 
             _lastCachedBundles = GetNeededItems(allowedAreas, InformantMod.Instance?.Config.DecorateLockedBundles ?? false)
-                .Where(item => input.ParentSheetIndex == item.ParentSheetIndex && input.quality.Value <= item.Quality);
+                .Where(item => input.ItemId == item.UnqualifiedItemId && input.quality.Value <= item.Quality);
             return _lastCachedBundles.Any();
         }
         return false;
@@ -79,6 +79,8 @@ internal class BundleDecorator : IDecorator<Item>
         //
         // bundleTitle = Pantry/0
         // bundleData = Spring Crops/O 465 20/24 1 0 188 1 0 190 1 0 192 1 0/0/4/0
+        // !!in 1.6 remixed bundles, it can be item name as well:
+        // bundleData = Spring Crops/O 465 20/24 1 0 188 1 0 190 1 0 Carrot 1 0/0/4/0
         //
         // bundleTitle = Boiler Room/22
         // bundleData = Adventurer's/R 518 1/766 99 0 767 10 0 768 1 0 881 10 0/1/2/22
@@ -105,17 +107,17 @@ internal class BundleDecorator : IDecorator<Item>
             var indexStackQuality = bundleDataSplit[2].Split(' ');
             for (var index = 0; index < indexStackQuality.Length; index += 3) {
                 if (!bundlesCompleted[bundleIndex][index / 3]) {
-                    if (int.TryParse(indexStackQuality[index], out var parentSheetIndex)) {
-                        _ = int.TryParse(indexStackQuality[index + 1], out var quantity);
-                        _ = int.TryParse(indexStackQuality[index + 2], out var quality);
-                        _ = int.TryParse(bundleDataSplit[3], out var color);
-                        yield return new ParsedSimpleBundle { 
-                            ParentSheetIndex = parentSheetIndex,
-                            Quantity = quantity,
-                            Quality = quality,
-                            Color = color,
-                        };
-                    }
+                    _ = int.TryParse(indexStackQuality[index + 1], out var quantity);
+                    _ = int.TryParse(indexStackQuality[index + 2], out var quality);
+                    _ = int.TryParse(bundleDataSplit[3], out var color);
+                    // old index, unqualified
+                    var unqualifiedItem = ItemRegistry.GetDataOrErrorItem(indexStackQuality[index]);
+                    yield return new ParsedSimpleBundle {
+                        UnqualifiedItemId = unqualifiedItem.IsErrorItem ? indexStackQuality[index] : unqualifiedItem.ItemId,
+                        Quantity = quantity,
+                        Quality = quality,
+                        Color = color,
+                    };
                 }
             }
         }
