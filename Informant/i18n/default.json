@@ -61,6 +61,9 @@
   "Config.DecorateLockedBundles": "Decorate Locked Bundles",
   "Config.DecorateLockedBundles.Description": "Displays Bundles Decorator for still locked bundles",
 
+  "Config.ShowCropFertilizer": "Display Fertilizer",
+  "Config.ShowCropFertilizer.Description": "Display soil fertilizer on crop tooltip",
+
   "Config.TooltipTrigger": "Tooltip Trigger",
   "Config.TooltipTrigger.Hover": "On hover",
   "Config.TooltipTrigger.ButtonHeld": "On button held",

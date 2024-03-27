@@ -44,9 +44,15 @@ internal static class HookToGenericModConfigMenu
 
         configMenu.AddSectionTitle(informantMod.ModManifest, () => informantMod.Helper.Translation.Get("Config.TooltipGenerators.Visibility"));
         var configurables = new List<IDisplayable>();
-        configurables.AddRange(api.ObjectTooltipGenerators.Generators);
-        configurables.AddRange(api.TerrainFeatureTooltipGenerators.Generators);
+        configurables = [.. api.ObjectTooltipGenerators.Generators, ..api.TerrainFeatureTooltipGenerators.Generators];
         CreateDisplayableOptions(configMenu, configurables, informantMod);
+        configMenu.AddBoolOption(
+            mod: informantMod.ModManifest,
+            name: () => informantMod.Helper.Translation.Get("Config.ShowCropFertilizer"),
+            tooltip: () => informantMod.Helper.Translation.Get("Config.ShowCropFertilizer.Description"),
+            getValue: () => informantMod.Config.ShowCropFertilizer,
+            setValue: value => informantMod.Config.ShowCropFertilizer = value
+        );
 
         // add some config options for decorators
         configMenu.AddSectionTitle(informantMod.ModManifest, () => informantMod.Helper.Translation.Get("Config.Decorators.GeneralSection"));
@@ -59,9 +65,8 @@ internal static class HookToGenericModConfigMenu
         );
 
         configMenu.AddSectionTitle(informantMod.ModManifest, () => informantMod.Helper.Translation.Get("Config.Decorators.Visibility"));
-        configurables = new List<IDisplayable>();
-        configurables.AddRange(api.ItemDecorators.Decorators);
-        configurables.AddRange(api.GeneralDisplayables);
+        configurables = [];
+        configurables = [.. api.ItemDecorators.Decorators, .. api.GeneralDisplayables];
         CreateDisplayableOptions(configMenu, configurables, informantMod);
     }
 

@@ -61,6 +61,9 @@
   "Config.DecorateLockedBundles": "锁定的社区包",
   "Config.DecorateLockedBundles.Description": "标记还未献祭的物品, 即使社区包还未解锁",
 
+  "Config.ShowCropFertilizer": "显示肥料",
+  "Config.ShowCropFertilizer.Description": "显示作物信息时同时显示土地肥料",
+
   "Config.TooltipTrigger": "信息显示模式",
   "Config.TooltipTrigger.Hover": "鼠标悬停",
   "Config.TooltipTrigger.ButtonHeld": "按键按下",

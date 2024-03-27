@@ -61,6 +61,9 @@
   "Config.DecorateLockedBundles": "Dekoriere versteckte Bündel",
   "Config.DecorateLockedBundles.Description": "Bündel-Dekoration wird auch für noch versteckte Bündel angezeigt",
 
+  "Config.ShowCropFertilizer": "Display Fertilizer",
+  "Config.ShowCropFertilizer.Description": "Display soil fertilizer on crop tooltip",
+
   "Config.TooltipTrigger": "Tooltip-Auslöser",
   "Config.TooltipTrigger.Hover": "Mausberührung",
   "Config.TooltipTrigger.ButtonHeld": "Bei gedrückter Taste",

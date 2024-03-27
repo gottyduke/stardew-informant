@@ -48,7 +48,8 @@ internal class CropTooltipGenerator : ITooltipGenerator<TerrainFeature>
                     IPosition.CenterRight,
                     new Vector2(Game1.tileSize / 2f, Game1.tileSize / 2f)
                 ),
-                dirt.HasFertilizer() ? Icon.ForParentSheetIndex(
+                dirt.HasFertilizer() && (InformantMod.Instance?.Config.ShowCropFertilizer ?? false) ? 
+                Icon.ForParentSheetIndex(
                     dirt.fertilizer.Value,
                     IPosition.CenterRight,
                     new Vector2(Game1.tileSize / 2f, Game1.tileSize / 2f)

@@ -61,6 +61,9 @@
   "Config.DecorateLockedBundles": "Annoter les paquets vérouillés",
   "Config.DecorateLockedBundles.Description": "Affiche les annotations de paquet pour les paquets encore verrouillés",
 
+  "Config.ShowCropFertilizer": "Display Fertilizer",
+  "Config.ShowCropFertilizer.Description": "Display soil fertilizer on crop tooltip",
+
   "Config.TooltipTrigger": "Déclencheur d'infobulle",
   "Config.TooltipTrigger.Hover": "Au survol",
   "Config.TooltipTrigger.ButtonHeld": "Au maintient de bouton",

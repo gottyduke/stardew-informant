@@ -61,6 +61,9 @@
   "Config.DecorateLockedBundles": "Marcador Conjuntos Fechados",
   "Config.DecorateLockedBundles.Description": "Exibe o Marcador de Conjuntos para Conjuntos ainda bloqueados",
 
+  "Config.ShowCropFertilizer": "Display Fertilizer",
+  "Config.ShowCropFertilizer.Description": "Display soil fertilizer on crop tooltip",
+
   "Config.TooltipTrigger": "Acionador Tooltip",
   "Config.TooltipTrigger.Hover": "Passar o mouse",
   "Config.TooltipTrigger.ButtonHeld": "Precionar Botão",
