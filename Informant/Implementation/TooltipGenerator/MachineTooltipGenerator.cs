@@ -44,9 +44,9 @@ internal class MachineTooltipGenerator : ITooltipGenerator<SObject>
     public Tooltip Generate(SObject input)
     {
         if (input.ParentSheetIndex == BigCraftableIds.GardenPot) {
-            var gardenPot = input as IndoorPot;
-            var crop = gardenPot?.hoeDirt.Value.crop;
-            return crop == null ? new Tooltip("???") : CropTooltipGenerator.CreateTooltip(_modHelper, crop);
+            return input is not IndoorPot gardenPot || gardenPot.hoeDirt.Value.crop == null
+                ? new Tooltip("???")
+                : CropTooltipGenerator.CreateTooltip(_modHelper, gardenPot.hoeDirt.Value);
         }
         return CreateTooltip(input);
     }
@@ -62,11 +62,11 @@ internal class MachineTooltipGenerator : ITooltipGenerator<SObject>
         var heldObjectName = heldObject.DisplayName;
         var daysLeft = CalculateMinutesLeftString(input);
         return new Tooltip($"{displayName}\n> {heldObjectName}\n{daysLeft}") {
-            Icon = Icon.ForObject(
+            Icon = [Icon.ForObject(
                 heldObject,
                 IPosition.CenterRight,
                 new Vector2(Game1.tileSize / 2, Game1.tileSize / 2)
-            )
+            )]
         };
     }
 

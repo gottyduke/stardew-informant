@@ -1,8 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Slothsoft.Informant.Api;
-using StardewModdingAPI.Utilities;
 using StardewValley.TerrainFeatures;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Slothsoft.Informant.Implementation.TooltipGenerator;
 
@@ -37,11 +35,11 @@ internal class TeaBushTooltipGenerator : ITooltipGenerator<TerrainFeature>
         var displayName = item.DisplayName;
         var daysLeft = CropTooltipGenerator.ToDaysLeftString(_modHelper, CalculateDaysLeft(bush));
         return new Tooltip($"{displayName}\n{daysLeft}") {
-            Icon = Icon.ForParentSheetIndex(
+            Icon = [Icon.ForParentSheetIndex(
                     item.QualifiedItemId,
                     IPosition.CenterRight,
                     new Vector2(Game1.tileSize / 2, Game1.tileSize / 2)
-            ),
+            )]
         };
     }
 

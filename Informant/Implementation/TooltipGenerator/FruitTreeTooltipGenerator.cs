@@ -38,7 +38,7 @@ internal class FruitTreeTooltipGenerator : ITooltipGenerator<TerrainFeature>
                     IPosition.CenterRight,
                     new Vector2(Game1.tileSize / 2, Game1.tileSize / 2)
                 );
-        return new Tooltip($"{displayName}\n{daysLeft}") { Icon = icon };
+        return new Tooltip($"{displayName}\n{daysLeft}") { Icon = [icon] };
     }
 
     internal int CalculateDaysLeft(FruitTree fruitTree)

@@ -166,15 +166,18 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
         var result = new Rectangle(toolTipBounds.X, toolTipBounds.Y, toolTipBounds.Width, toolTipBounds.Height);
 
         foreach (var tooltip in tooltips) {
-            var icon = tooltip.Icon;
-            if (icon == null) {
+            var icons = tooltip.Icon;
+            if (icons == null) {
                 continue;
             }
-            var iconPosition = icon.CalculateTooltipPosition(result);
-            result.X = Math.Min(result.X, iconPosition.X);
-            result.Y = Math.Min(result.Y, iconPosition.Y);
-            result.Width = Math.Max(result.X + result.Width, iconPosition.X + iconPosition.Width) - result.X;
-            result.Height = Math.Max(result.Y + result.Height, iconPosition.Y + iconPosition.Height) - result.Y;
+            foreach (var icon in icons.Where(i => i != null)) {
+                var iconPosition = icon!.CalculateTooltipPosition(result);
+                result.X = Math.Min(result.X, iconPosition.X);
+                result.Y = Math.Min(result.Y, iconPosition.Y);
+                result.Width = Math.Max(result.X + result.Width, iconPosition.X + iconPosition.Width) - result.X;
+                result.Height = Math.Max(result.Y + result.Height, iconPosition.Y + iconPosition.Height) - result.Y;
+                break;
+            }
         }
         // TODO: test this method?
         return result;
@@ -199,13 +202,61 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
                 Width = textureBoxBounds.Width - 2 * border,
                 Height = textureBoxBounds.Height - 2 * border,
             };
-            b.Draw(
-                tooltip.Icon.Texture,
-                tooltip.Icon.CalculateIconPosition(textureBoxBoundsWithoutBorder),
-                tooltip.Icon.NullSafeSourceRectangle,
-                Color.White
-            );
+
+            var icons = tooltip.Icon
+                .Where(i => i != null)
+                .Select(i => i!)
+                .GroupBy(i => i.Position ?? IPosition.TopLeft);
+            foreach (var subsets in icons) {
+                Rectangle offset = Rectangle.Empty;
+                var count = 0;
+                foreach (var icon in subsets) {
+                    var iconPosition = icon.CalculateIconPosition(textureBoxBoundsWithoutBorder);
+
+                    // if multiple icons, force align from middle
+                    if (subsets.Count() > 1) {
+                        if (count == 0) {
+                            offset = iconPosition;
+                            offset = IsHorizontalAligned(textureBoxBoundsWithoutBorder, iconPosition)
+                                ? new Rectangle {
+                                    X = textureBoxBoundsWithoutBorder.X + (textureBoxBoundsWithoutBorder.Width - iconPosition.Width * subsets.Count()) / 2,
+                                    Y = iconPosition.Y,
+                                    Width = iconPosition.Width,
+                                    Height = 0,
+                                }
+                                : new Rectangle {
+                                    X = iconPosition.X,
+                                    Y = textureBoxBoundsWithoutBorder.Y + (textureBoxBoundsWithoutBorder.Height - iconPosition.Height * subsets.Count()) / 2,
+                                    Width = 0,
+                                    Height = iconPosition.Height,
+                                };
+                        }
+                        iconPosition.X = offset.X + offset.Width * count;
+                        iconPosition.Y = offset.Y + offset.Height * count;
+                        count++;
+                    }
+
+                    b.Draw(
+                        icon.Texture,
+                        iconPosition,
+                        icon.NullSafeSourceRectangle,
+                        Color.White
+                    );
+                }
+            }
         }
+    }
+
+    private static bool IsHorizontalAligned(Rectangle container, Rectangle element)
+    {
+        var diffX = Math.Abs(container.X - element.X);
+        var diffX2 = Math.Abs(container.Width + container.X - element.Width - element.X);
+        diffX = Math.Min(diffX, diffX2);
+        var diffY = Math.Abs(container.Y - element.Y);
+        var diffY2 = Math.Abs(container.Height + container.Y - element.Height - element.Y);
+        diffY = Math.Min(diffY, diffY2);
+
+        return diffX >= diffY;
     }
 
     public void Add(ITooltipGenerator<TerrainFeature> generator)

@@ -28,22 +28,32 @@ internal class CropTooltipGenerator : ITooltipGenerator<TerrainFeature>
 
     public Tooltip Generate(TerrainFeature input)
     {
-        return CreateTooltip(_modHelper, ((HoeDirt)input).crop);
+        return CreateTooltip(_modHelper, ((HoeDirt)input));
     }
 
-    internal static Tooltip CreateTooltip(IModHelper modHelper, Crop crop)
+    internal static Tooltip CreateTooltip(IModHelper modHelper, HoeDirt dirt)
     {
+        var crop = dirt.crop;
         // for some reason, ginger is displayed as weeds
         var parentSheetIndexString = crop.whichForageCrop.Value == Crop.forageCrop_gingerID ? ObjectIds.Ginger : crop.indexOfHarvest.Value;
         Game1.objectData.TryGetValue(parentSheetIndexString, out var data);
         var displayName = TokenParser.ParseText(data?.DisplayName) ?? ItemRegistry.GetErrorItemName();
         var daysLeft = CalculateDaysLeftString(modHelper, crop);
+
         return new Tooltip($"{displayName}\n{daysLeft}") {
-            Icon = Icon.ForParentSheetIndex(
-                parentSheetIndexString,
-                IPosition.CenterRight,
-                new Vector2(Game1.tileSize / 2f, Game1.tileSize / 2f)
-            ),
+            Icon = 
+            [
+                Icon.ForParentSheetIndex(
+                    parentSheetIndexString,
+                    IPosition.CenterRight,
+                    new Vector2(Game1.tileSize / 2f, Game1.tileSize / 2f)
+                ),
+                dirt.HasFertilizer() ? Icon.ForParentSheetIndex(
+                    dirt.fertilizer.Value,
+                    IPosition.CenterRight,
+                    new Vector2(Game1.tileSize / 2f, Game1.tileSize / 2f)
+                ) : null,
+            ]
         };
     }
 
