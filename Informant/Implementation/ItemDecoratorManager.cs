@@ -60,7 +60,11 @@ internal class ItemDecoratorManager : IDecoratorManager<Item>
         var decorations = DecoratorsList
             .Where(g => config.DisplayIds.GetValueOrDefault(g.Id, true))
             .Where(d => d.HasDecoration(hoveredItem))
-            .Select(d => d.Decorate(hoveredItem))
+            .SelectMany(d => {
+                var decoration = d.Decorate(hoveredItem);
+                return new[] { decoration }
+                .Concat(decoration.ExtraDecorations ?? Enumerable.Empty<Decoration>());
+            })
             .ToArray();
 
         if (decorations.Length == 0) {
@@ -94,7 +98,6 @@ internal class ItemDecoratorManager : IDecoratorManager<Item>
                 var y = destinationRectangle.Y + destinationRectangle.Height - NumberSprite.getHeight() + 2;
                 NumberSprite.draw(counter.Value, b, new Vector2(x, y), Color.White, scale, 1, 1, 0);
             }
-
 
             destinationRectangle.X += destinationRectangle.Width + Game1.pixelZoom;
         }

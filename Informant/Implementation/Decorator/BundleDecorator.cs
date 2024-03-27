@@ -1,17 +1,29 @@
 using Microsoft.Xna.Framework.Graphics;
 using Slothsoft.Informant.Api;
+using Slothsoft.Informant.Helper;
 using StardewValley.Locations;
+using StardewValley.Menus;
 using Color = Microsoft.Xna.Framework.Color;
 using Rectangle = Microsoft.Xna.Framework.Rectangle;
+
 
 namespace Slothsoft.Informant.Implementation.Decorator;
 
 internal class BundleDecorator : IDecorator<Item>
 {
+    internal record ParsedSimpleBundle
+    {
+        public int ParentSheetIndex;
+        public int Quantity;
+        public int Quality;
+        public int Color;
+    }
+
+    public const int DefaultBundleColor = -1;
+
     private static Texture2D? _bundle;
     private static Dictionary<int, Texture2D> _bundles = [];
-    private static int? _lastCachedItemQuantity;
-    private static int? _lastCachedBundleColor;
+    private static IEnumerable<ParsedSimpleBundle>? _lastCachedBundles;
 
     private readonly IModHelper _modHelper;
 
@@ -19,7 +31,7 @@ internal class BundleDecorator : IDecorator<Item>
     {
         _modHelper = modHelper;
         _bundle ??= Game1.temporaryContent.Load<Texture2D>("LooseSprites\\JunimoNote");
-        _bundles[-1] = modHelper.ModContent.Load<Texture2D>("assets/bundle.png");
+        _bundles[DefaultBundleColor] = modHelper.ModContent.Load<Texture2D>("assets/bundle.png");
     }
 
     public string Id => "bundles";
@@ -33,7 +45,6 @@ internal class BundleDecorator : IDecorator<Item>
         }
 
         if (_bundles.Any() && input is SObject obj && !obj.bigCraftable.Value) {
-
             int[]? allowedAreas;
 
             if (!Game1.MasterPlayer.mailReceived.Contains("canReadJunimoText")) {
@@ -49,22 +60,14 @@ internal class BundleDecorator : IDecorator<Item>
                     .ToArray();
             }
 
-            var neededItems = GetNeededItems(allowedAreas, InformantMod.Instance?.Config.DecorateLockedBundles ?? false)
-                .Where(item => item[0] == input.ParentSheetIndex);
-            if (neededItems.Any()) {
-                _lastCachedItemQuantity = neededItems.First()[1];
-                _lastCachedBundleColor = neededItems.First()[2];
-            } else {
-                _lastCachedItemQuantity = null;
-                _lastCachedBundleColor = null;
-            }
-
-            return neededItems.Any();
+            _lastCachedBundles = GetNeededItems(allowedAreas, InformantMod.Instance?.Config.DecorateLockedBundles ?? false)
+                .Where(item => input.ParentSheetIndex == item.ParentSheetIndex && input.quality.Value <= item.Quality);
+            return _lastCachedBundles.Any();
         }
         return false;
     }
 
-    internal static IEnumerable<int[]> GetNeededItems(int[]? allowedAreas, bool decorateLockedBundles)
+    internal static IEnumerable<ParsedSimpleBundle> GetNeededItems(int[]? allowedAreas, bool decorateLockedBundles)
     {
         // BUNDLE DATA
         // ============
@@ -96,6 +99,7 @@ internal class BundleDecorator : IDecorator<Item>
                 // bundle was not yet unlocked or already completed
                 continue;
             }
+            
             _ = int.TryParse(bundleTitleSplit[1], out var bundleIndex);
             var bundleDataSplit = bundleData[bundleTitle].Split('/');
             var indexStackQuality = bundleDataSplit[2].Split(' ');
@@ -103,8 +107,14 @@ internal class BundleDecorator : IDecorator<Item>
                 if (!bundlesCompleted[bundleIndex][index / 3]) {
                     if (int.TryParse(indexStackQuality[index], out var parentSheetIndex)) {
                         _ = int.TryParse(indexStackQuality[index + 1], out var quantity);
-                        GetOrCacheBundleTexture(int.TryParse(bundleDataSplit[3], out var color) ? color : null);
-                        yield return [parentSheetIndex, quantity, color];
+                        _ = int.TryParse(indexStackQuality[index + 2], out var quality);
+                        _ = int.TryParse(bundleDataSplit[3], out var color);
+                        yield return new ParsedSimpleBundle { 
+                            ParentSheetIndex = parentSheetIndex,
+                            Quantity = quantity,
+                            Quality = quality,
+                            Color = color,
+                        };
                     }
                 }
             }
@@ -113,24 +123,24 @@ internal class BundleDecorator : IDecorator<Item>
 
     internal static Texture2D GetOrCacheBundleTexture(int? color)
     {
-        var colorIndex = color ?? -1;
-        if (_bundles.ContainsKey(colorIndex)) {
-            return _bundles[colorIndex];
+        var colorIndex = color ?? DefaultBundleColor;
+        if (!_bundles.ContainsKey(colorIndex)) {
+            var rect = new Rectangle(colorIndex * 256 % 512, 244 + colorIndex * 256 / 512 * 16, 16, 16);
+            _bundles[colorIndex] = _bundle!.Blit(rect);
         }
 
-        var rect = new Rectangle(colorIndex * 256 % 512, 244 + colorIndex * 256 / 512 * 16, 16, 16);
-        var note = new Texture2D(Game1.graphics.GraphicsDevice, 16, 16);
-        Color[] data = new Color[256];
-
-        _bundle!.GetData(0, rect, data, 0, data.Length);
-        note.SetData(data);
-        _bundles[colorIndex] = note;
-
-        return note;
+        return _bundles[colorIndex];
     }
 
     public Decoration Decorate(Item input)
     {
-        return new Decoration(GetOrCacheBundleTexture(_lastCachedBundleColor)) { Counter = _lastCachedItemQuantity };
+        var decorations = _lastCachedBundles!
+            .Skip(1)
+            .Select(bundle => new Decoration(GetOrCacheBundleTexture(bundle.Color)) { Counter = bundle.Quantity })
+            .ToArray();
+        return new Decoration(GetOrCacheBundleTexture(_lastCachedBundles!.First().Color)) {
+            Counter = _lastCachedBundles!.First().Quantity,
+            ExtraDecorations = decorations
+        };
     }
 }

@@ -12,4 +12,9 @@ public record Decoration(Texture2D Texture)
     /// Optionally displays a little number over the texture.
     /// </summary>
     public int? Counter { get; init; }
+
+    /// <summary>
+    /// Optional extra decorations of the same decorator.
+    /// </summary>
+    public Decoration[]? ExtraDecorations { get; init; }
 }
