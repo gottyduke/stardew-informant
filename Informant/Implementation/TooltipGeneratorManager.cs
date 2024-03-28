@@ -14,7 +14,7 @@ namespace Slothsoft.Informant.Implementation;
 /// is only one instance for all <see cref="ITooltipGeneratorManager{TInput}"/> implementations.
 /// </summary>
 
-internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature>, ITooltipGeneratorManager<SObject>
+internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature>, ITooltipGeneratorManager<SObject>, ITooltipGeneratorManager<FarmAnimal>
 {
 
     internal static Rectangle TooltipSourceRect = new(0, 256, 60, 60);
@@ -22,6 +22,7 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
     private readonly IModHelper _modHelper;
     private BaseTooltipGeneratorManager<TerrainFeature>? _terrainFeatureManager;
     private BaseTooltipGeneratorManager<SObject>? _objectInformant;
+    private BaseTooltipGeneratorManager<FarmAnimal>? _animalInformant;
 
     private readonly PerScreen<IEnumerable<Tooltip>?> _tooltips = new();
 
@@ -33,11 +34,14 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
         modHelper.Events.Display.Rendered += OnRendered;
     }
 
+    IEnumerable<IDisplayable> ITooltipGeneratorManager<TerrainFeature>.Generators =>
+        _terrainFeatureManager?.Generators.ToImmutableArray() ?? Enumerable.Empty<IDisplayable>();
+
     IEnumerable<IDisplayable> ITooltipGeneratorManager<SObject>.Generators =>
         _objectInformant?.Generators.ToImmutableArray() ?? Enumerable.Empty<IDisplayable>();
 
-    IEnumerable<IDisplayable> ITooltipGeneratorManager<TerrainFeature>.Generators =>
-        _terrainFeatureManager?.Generators.ToImmutableArray() ?? Enumerable.Empty<IDisplayable>();
+    IEnumerable<IDisplayable> ITooltipGeneratorManager<FarmAnimal>.Generators =>
+        _animalInformant?.Generators.ToImmutableArray() ?? Enumerable.Empty<IDisplayable>();
 
     private void OnUpdateTicked(object? sender, UpdateTickedEventArgs e2)
     {
@@ -51,7 +55,11 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
             return;
         }
 
-        _tooltips.Value = GenerateObjectTooltips().Concat(GenerateTerrainFeatureTooltips());
+        _tooltips.Value = [
+            .. GenerateTerrainFeatureTooltips(),
+            .. GenerateObjectTooltips(),
+            .. GenerateAnimalTooltips(),
+        ];
     }
 
     private bool WasTriggered()
@@ -70,39 +78,25 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
 
     private IEnumerable<Tooltip> GenerateTerrainFeatureTooltips()
     {
-        return GenerateTooltips(_terrainFeatureManager, (mousePosX, mousePosY) =>
+        return GenerateTooltips(_terrainFeatureManager, (mouseX, mouseY) =>
             Game1.currentLocation.terrainFeatures.Values
-            .Where(t => mousePosX == (int)t.Tile.X && mousePosY == (int)t.Tile.Y)
+            .Where(t => t.Tile == GetTilePosition(mouseX, mouseY))
             .ToArray());
-    }
-
-    private static IEnumerable<Tooltip> GenerateTooltips<TTile>(BaseTooltipGeneratorManager<TTile>? manager, Func<int, int, TTile[]> getTilesForPosition)
-    {
-        if (manager == null) {
-            // if there is no generator in that, we don't need to do anything further
-            return [];
-        }
-
-        var mouseX = Game1.getOldMouseX();
-        var mouseY = Game1.getOldMouseY();
-
-        var toolbar = Game1.onScreenMenus.FirstOrDefault(m => m is Toolbar);
-        if (toolbar != null && toolbar.isWithinBounds(mouseX, mouseY)) {
-            // mouse is over the toolbar, so we won't generate tooltips for the map
-            return [];
-        }
-
-        var mousePosX = (mouseX + Game1.viewport.X) / Game1.tileSize;
-        var mousePosY = (mouseY + Game1.viewport.Y) / Game1.tileSize;
-
-        return manager.Generate(getTilesForPosition.Invoke(mousePosX, mousePosY));
     }
 
     private IEnumerable<Tooltip> GenerateObjectTooltips()
     {
-        return GenerateTooltips(_objectInformant, (mousePosX, mousePosY) =>
+        return GenerateTooltips(_objectInformant, (mouseX, mouseY) =>
             Game1.currentLocation.netObjects.Values
-                .Where(t => mousePosX == (int)t.TileLocation.X && mousePosY == (int)t.TileLocation.Y)
+                .Where(o => o.TileLocation == GetTilePosition(mouseX, mouseY))
+                .ToArray());
+    }
+
+    private IEnumerable<Tooltip> GenerateAnimalTooltips()
+    {
+        return GenerateTooltips(_animalInformant, (mouseX, mouseY) =>
+            Game1.currentLocation.animals.Values
+                .Where(a => a.GetCursorPetBoundingBox().Contains(mouseX + Game1.viewport.X, mouseY + Game1.viewport.Y))
                 .ToArray());
     }
 
@@ -110,7 +104,6 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
     {
         if (Context.IsPlayerFree && _tooltips.Value != null) {
             var tooltipsArray = _tooltips.Value.ToArray();
-
             if (tooltipsArray.Length == 0) {
                 return;
             }
@@ -139,6 +132,32 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
                 startY += height - borderSize;
             }
         }
+    }
+
+    private static Vector2 GetTilePosition(int x, int y)
+    {
+        var posX = (x + Game1.viewport.X) / Game1.tileSize;
+        var posY = (y + Game1.viewport.Y) / Game1.tileSize;
+        return new Vector2(posX, posY);
+    }
+
+    private static IEnumerable<Tooltip> GenerateTooltips<TTile>(BaseTooltipGeneratorManager<TTile>? manager, Func<int, int, TTile[]> getTilesForBounds)
+    {
+        if (manager == null) {
+            // if there is no generator in that, we don't need to do anything further
+            return [];
+        }
+
+        var mouseX = Game1.getOldMouseX();
+        var mouseY = Game1.getOldMouseY();
+
+        var toolbar = Game1.onScreenMenus.FirstOrDefault(m => m is Toolbar);
+        if (toolbar != null && toolbar.isWithinBounds(mouseX, mouseY)) {
+            // mouse is over the toolbar, so we won't generate tooltips for the map
+            return [];
+        }
+
+        return manager.Generate(getTilesForBounds.Invoke(mouseX, mouseY));
     }
 
     private static Rectangle CalculateApproximateBounds(Tooltip[] tooltips, SpriteFont font)
@@ -208,31 +227,36 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
                 .Select(i => i!)
                 .GroupBy(i => i.Position ?? IPosition.TopLeft);
             foreach (var subsets in icons) {
-                Rectangle offset = Rectangle.Empty;
-                var count = 0;
+                var offset = new Point();
+                var horizontalAlignment = IsHorizontalAligned(textureBoxBoundsWithoutBorder, subsets.First().CalculateIconPosition(textureBoxBoundsWithoutBorder));
+
+                if (subsets.Count() > 1) {
+                    // if multiple icons, force align from middle
+                    var subsetPos = subsets.Select(i => i.CalculateIconPosition(textureBoxBoundsWithoutBorder));
+                    var subsetWidth = subsetPos.Sum(i => i.Width);
+                    var subsetHeight = subsetPos.Sum(i => i.Height);
+
+                    offset = horizontalAlignment
+                        ? new Point {
+                            X = textureBoxBoundsWithoutBorder.X + (textureBoxBoundsWithoutBorder.Width - subsetWidth) / 2,
+                            Y = (int)subsetPos.Average(i => i.Y)
+                        }
+                        : new Point {
+                            X = (int)subsetPos.Average(i => i.X),
+                            Y = textureBoxBoundsWithoutBorder.Y + (textureBoxBoundsWithoutBorder.Height - subsetHeight) / 2,
+                        };
+                }
+
                 foreach (var icon in subsets) {
                     var iconPosition = icon.CalculateIconPosition(textureBoxBoundsWithoutBorder);
 
-                    // if multiple icons, force align from middle
                     if (subsets.Count() > 1) {
-                        if (count == 0) {
-                            offset = IsHorizontalAligned(textureBoxBoundsWithoutBorder, iconPosition)
-                                ? new Rectangle {
-                                    X = textureBoxBoundsWithoutBorder.X + (textureBoxBoundsWithoutBorder.Width - iconPosition.Width * subsets.Count()) / 2,
-                                    Y = iconPosition.Y,
-                                    Width = iconPosition.Width,
-                                    Height = 0,
-                                }
-                                : new Rectangle {
-                                    X = iconPosition.X,
-                                    Y = textureBoxBoundsWithoutBorder.Y + (textureBoxBoundsWithoutBorder.Height - iconPosition.Height * subsets.Count()) / 2,
-                                    Width = 0,
-                                    Height = iconPosition.Height,
-                                };
+                        iconPosition.Location = offset;
+                        if (horizontalAlignment) {
+                            offset.X += iconPosition.Width;
+                        } else {
+                            offset.Y += iconPosition.Height;
                         }
-                        iconPosition.X = offset.X + offset.Width * count;
-                        iconPosition.Y = offset.Y + offset.Height * count;
-                        count++;
                     }
 
                     b.Draw(
@@ -264,15 +288,21 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
         _terrainFeatureManager.Add(generator);
     }
 
-    public void Remove(string generatorId)
-    {
-        _terrainFeatureManager?.Remove(generatorId);
-        _objectInformant?.Remove(generatorId);
-    }
-
     public void Add(ITooltipGenerator<SObject> generator)
     {
         _objectInformant ??= new BaseTooltipGeneratorManager<SObject>();
         _objectInformant.Add(generator);
+    }
+
+    public void Add(ITooltipGenerator<FarmAnimal> generator)
+    {
+        _animalInformant ??= new BaseTooltipGeneratorManager<FarmAnimal>();
+        _animalInformant.Add(generator);
+    }
+
+    public void Remove(string generatorId)
+    {
+        _terrainFeatureManager?.Remove(generatorId);
+        _objectInformant?.Remove(generatorId);
     }
 }

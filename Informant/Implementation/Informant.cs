@@ -11,7 +11,7 @@ public class Informant : IInformant
 
     private readonly IModHelper _modHelper;
 
-    private TooltipGeneratorManager? _terrainFeatureInformant;
+    private TooltipGeneratorManager? _tooltipGeneratorManager;
     private ItemDecoratorManager? _itemDecoratorInformant;
     private readonly SellPriceDisplayable _sellPriceDisplayable;
     private readonly NewRecipeDisplayable _newRecipeDisplayable;
@@ -27,8 +27,8 @@ public class Informant : IInformant
     {
         get
         {
-            _terrainFeatureInformant ??= new TooltipGeneratorManager(_modHelper);
-            return _terrainFeatureInformant;
+            _tooltipGeneratorManager ??= new TooltipGeneratorManager(_modHelper);
+            return _tooltipGeneratorManager;
         }
     }
 
@@ -46,8 +46,8 @@ public class Informant : IInformant
     {
         get
         {
-            _terrainFeatureInformant ??= new TooltipGeneratorManager(_modHelper);
-            return _terrainFeatureInformant;
+            _tooltipGeneratorManager ??= new TooltipGeneratorManager(_modHelper);
+            return _tooltipGeneratorManager;
         }
     }
 
@@ -59,6 +59,25 @@ public class Informant : IInformant
     public void AddObjectTooltipGenerator(string id, Func<string> displayName, Func<string> description, Func<SObject, string?> generator)
     {
         ObjectTooltipGenerators.Add(new TooltipGenerator<SObject>(id, displayName, description, generator));
+    }
+
+    public ITooltipGeneratorManager<FarmAnimal> AnimalTooltipGenerator
+    {
+        get
+        {
+            _tooltipGeneratorManager ??= new TooltipGeneratorManager(_modHelper);
+            return _tooltipGeneratorManager;
+        }
+    }
+
+    public void AddAnimalTooltipGenerator(string id, string displayName, string description, Func<FarmAnimal, string?> generator)
+    {
+        AnimalTooltipGenerator.Add(new TooltipGenerator<FarmAnimal>(id, () => displayName, () => description, generator));
+    }
+
+    public void AddAnimalTooltipGenerator(string id, Func<string> displayName, Func<string> description, Func<FarmAnimal, string?> generator)
+    {
+        AnimalTooltipGenerator.Add(new TooltipGenerator<FarmAnimal>(id, displayName, description, generator));
     }
 
     public IDecoratorManager<Item> ItemDecorators
@@ -80,5 +99,5 @@ public class Informant : IInformant
         ItemDecorators.Add(new Decorator<Item>(id, displayName, description, decorator));
     }
 
-    public IEnumerable<IDisplayable> GeneralDisplayables => new IDisplayable[] { _sellPriceDisplayable, _newRecipeDisplayable };
+    public IEnumerable<IDisplayable> GeneralDisplayables => [_sellPriceDisplayable, _newRecipeDisplayable];
 }
