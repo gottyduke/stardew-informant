@@ -138,7 +138,8 @@ entries is:
 | Version | Issues                                                                         | Changes                                                                                                                                                                                                       |
 | ------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Future  | [Issues](https://github.com/slothsoft/stardew-informant/milestone/1)           |                                                                                                                                                                                                               |
-| 1.5.0   | [Issues](https://github.com/gottyduke/stardew-informant/milestone/15?closed=1) | Quantity and corresponding color on bundle decorator                                                                                                                                                          |
+| 1.6.0   | [Issues](https://github.com/gottyduke/stardew-informant/milestone/2?closed=1)  | Finished major 1.6 stuff and additional features, tea bush, bundle color, mossy tree, and FR i18n                                                                                                             |
+| 1.5.x   | [Issues](https://github.com/gottyduke/stardew-informant/milestone/2?closed=1)  | Preliminary update for SDV 1.6 and various bugfixes                                                                                                                                                           |
 | 1.4.0   | [Issues](https://github.com/slothsoft/stardew-informant/milestone/14?closed=1) | Add rarecrow and field office decorators                                                                                                                                                                      |
 | 1.3.3   | [Issues](https://github.com/slothsoft/stardew-informant/milestone/13?closed=1) | Portuguese translation and bugfixes                                                                                                                                                                           |
 | 1.3.2   | [Issues](https://github.com/slothsoft/stardew-informant/milestone/12?closed=1) | Translations (add French translation; update Korean translation)                                                                                                                                              |
@@ -165,21 +166,21 @@ Right now, not all translations are provided. If you want to help, translate eit
 and test it right in your Stardew Valley (the same folder exists in your _Mods/_ folder). You can than provide it
 to me via [pull request](https://github.com/slothsoft/stardew-informant/fork) or [email](mailto:s.schulz@slothsoft.de).
 
-| Key       | Language  | Translated?                                                                        |
-| --------- | --------- | ---------------------------------------------------------------------------------- |
-| `default` | English   | ✅                                                                                  |
-| `de`      | German    | ✅                                                                                  |
-| `es`      | Spanish   | 🔜                                                                                  |
-| `fr`      | French    | ✅ (thanks to [ArndGlh](https://github.com/ArndGlh))                                |
-| `hu`      | Hungarian | 🔜                                                                                  |
-| `it`      | Italian   | 🔜                                                                                  |
-| `ja`      | Japanese  | 🔜                                                                                  |
-| `ko`      | Korean    | ✅ (thanks to [brighteast99](https://github.com/brighteast99))                      |
-| `pt`      | Portugese | ✅ (thanks to [Mikeliro](https://github.com/Mikeliro)                               |
-| `ru`      | Russian   | 🔜                                                                                  |
-| `th`      | Thai      | 🔜                                                                                  |
-| `tr`      | Turkish   | ✅ (thanks to [ExaBronto](https://www.nexusmods.com/stardewvalley/users/114449313)) |
-| `zh`      | Chinese   | ✅ (thanks to [gottyduke](https://github.com/gottyduke))                            |
+| Key       | Language  | Translated?                                                                                        |
+| --------- | --------- | -------------------------------------------------------------------------------------------------- |
+| `default` | English   | ✅                                                                                                  |
+| `de`      | German    | ✅                                                                                                  |
+| `es`      | Spanish   | 🔜                                                                                                  |
+| `fr`      | French    | ✅ (thanks to [ArndGlh](https://github.com/ArndGlh), [Tenebrosful](https://github.com/Tenebrosful)) |
+| `hu`      | Hungarian | 🔜                                                                                                  |
+| `it`      | Italian   | 🔜                                                                                                  |
+| `ja`      | Japanese  | 🔜                                                                                                  |
+| `ko`      | Korean    | ✅ (thanks to [brighteast99](https://github.com/brighteast99))                                      |
+| `pt`      | Portugese | ✅ (thanks to [Mikeliro](https://github.com/Mikeliro))                                              |
+| `ru`      | Russian   | 🔜                                                                                                  |
+| `th`      | Thai      | 🔜                                                                                                  |
+| `tr`      | Turkish   | ✅ (thanks to [ExaBronto](https://www.nexusmods.com/stardewvalley/users/114449313))                 |
+| `zh`      | Chinese   | ✅ (thanks to [gottyduke](https://github.com/gottyduke))                                            |
 
 
 
