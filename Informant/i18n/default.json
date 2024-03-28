@@ -20,6 +20,9 @@
   "ShippingBinDecorator": "Shipping Decorator",
   "ShippingBinDecorator.Description": "Marks items that were not shipped yet",
 
+  "AnimalTooltipGenerator": "Animals Tooltip",
+  "AnimalTooltipGenerator.Description": "Display additional information for farm animals",
+
   "CropTooltipGenerator": "Crops Tooltip",
   "CropTooltipGenerator.Description": "A tooltip that displays the type of crop and remaining days till harvest",
   "CropTooltipGenerator.0DaysLeft": "Ready to harvest",

@@ -20,6 +20,9 @@
   "ShippingBinDecorator": "Shipping Decorator",
   "ShippingBinDecorator.Description": "Marks items that were not shipped yet",
 
+  "AnimalTooltipGenerator": "Animals Tooltip",
+  "AnimalTooltipGenerator.Description": "Display additional information for farm animals",
+
   "CropTooltipGenerator": "Ekin İpucu",
   "CropTooltipGenerator.Description": "Mahsul türünü ve hasata kalan gün sayısını gösteren bir ipucu",
   "CropTooltipGenerator.0DaysLeft": "Hasata Hazır.",

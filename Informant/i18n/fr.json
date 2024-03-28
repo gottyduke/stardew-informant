@@ -20,6 +20,9 @@
   "ShippingBinDecorator": "Annotation d'expédition",
   "ShippingBinDecorator.Description": "Signale les objets qui n'ont pas encore été expédiés",
 
+  "AnimalTooltipGenerator": "Animals Tooltip",
+  "AnimalTooltipGenerator.Description": "Display additional information for farm animals",
+
   "CropTooltipGenerator": "Infobulle des récoltes",
   "CropTooltipGenerator.Description": "Une infobulle qui affiche le type de culture et le temps restant avant la récolte",
   "CropTooltipGenerator.0DaysLeft": "Prêt à récolter",

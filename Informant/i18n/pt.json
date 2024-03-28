@@ -20,6 +20,9 @@
   "ShippingBinDecorator": "Marcador de Remessas",
   "ShippingBinDecorator.Description": "Marca os itens que ainda não foram enviados",
 
+  "AnimalTooltipGenerator": "Animals Tooltip",
+  "AnimalTooltipGenerator.Description": "Display additional information for farm animals",
+
   "CropTooltipGenerator": "Tooltip de Colheitas",
   "CropTooltipGenerator.Description": "Uma Tooltip que exibe o tipo de colheita e os dias restantes até a colheita",
   "CropTooltipGenerator.0DaysLeft": "Pronto para a colheita",

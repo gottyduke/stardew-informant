@@ -20,6 +20,9 @@
   "ShippingBinDecorator": "Versand-Dekoration",
   "ShippingBinDecorator.Description": "Markiert Gegenstände, die noch nie versandt worden sind",
 
+  "AnimalTooltipGenerator": "Animals Tooltip",
+  "AnimalTooltipGenerator.Description": "Display additional information for farm animals",
+
   "CropTooltipGenerator": "Nutzpflanzen-Tooltip",
   "CropTooltipGenerator.Description": "Ein Tooltip, der die Art der Nutzpflanze und die Tage bis zur Ernte zeigt",
   "CropTooltipGenerator.0DaysLeft": "Bereit zur Ernte",

@@ -20,6 +20,9 @@
   "ShippingBinDecorator": "售卖箱",
   "ShippingBinDecorator.Description": "标记还未放入过售卖箱的物品",
 
+  "AnimalTooltipGenerator": "动物",
+  "AnimalTooltipGenerator.Description": "显示农场动物的额外信息",
+
   "CropTooltipGenerator": "作物",
   "CropTooltipGenerator.Description": "作物相关的信息, 如种类, 收获日",
   "CropTooltipGenerator.0DaysLeft": "成熟",
