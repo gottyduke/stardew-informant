@@ -44,7 +44,7 @@ internal static class HookToGenericModConfigMenu
 
         configMenu.AddSectionTitle(informantMod.ModManifest, () => informantMod.Helper.Translation.Get("Config.TooltipGenerators.Visibility"));
         var configurables = new List<IDisplayable>();
-        configurables = [.. api.ObjectTooltipGenerators.Generators, ..api.TerrainFeatureTooltipGenerators.Generators];
+        configurables = [.. api.ObjectTooltipGenerators.Generators, .. api.TerrainFeatureTooltipGenerators.Generators];
         CreateDisplayableOptions(configMenu, configurables, informantMod);
         configMenu.AddBoolOption(
             mod: informantMod.ModManifest,
@@ -65,7 +65,6 @@ internal static class HookToGenericModConfigMenu
         );
 
         configMenu.AddSectionTitle(informantMod.ModManifest, () => informantMod.Helper.Translation.Get("Config.Decorators.Visibility"));
-        configurables = [];
         configurables = [.. api.ItemDecorators.Decorators, .. api.GeneralDisplayables];
         CreateDisplayableOptions(configMenu, configurables, informantMod);
     }

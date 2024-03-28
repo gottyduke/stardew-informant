@@ -216,7 +216,6 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
                     // if multiple icons, force align from middle
                     if (subsets.Count() > 1) {
                         if (count == 0) {
-                            offset = iconPosition;
                             offset = IsHorizontalAligned(textureBoxBoundsWithoutBorder, iconPosition)
                                 ? new Rectangle {
                                     X = textureBoxBoundsWithoutBorder.X + (textureBoxBoundsWithoutBorder.Width - iconPosition.Width * subsets.Count()) / 2,

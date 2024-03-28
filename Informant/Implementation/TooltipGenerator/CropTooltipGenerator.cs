@@ -41,14 +41,14 @@ internal class CropTooltipGenerator : ITooltipGenerator<TerrainFeature>
         var daysLeft = CalculateDaysLeftString(modHelper, crop);
 
         return new Tooltip($"{displayName}\n{daysLeft}") {
-            Icon = 
+            Icon =
             [
                 Icon.ForParentSheetIndex(
                     parentSheetIndexString,
                     IPosition.CenterRight,
                     new Vector2(Game1.tileSize / 2f, Game1.tileSize / 2f)
                 ),
-                dirt.HasFertilizer() && (InformantMod.Instance?.Config.ShowCropFertilizer ?? false) ? 
+                dirt.HasFertilizer() && (InformantMod.Instance?.Config.ShowCropFertilizer ?? false) ?
                 Icon.ForParentSheetIndex(
                     dirt.fertilizer.Value,
                     IPosition.CenterRight,
