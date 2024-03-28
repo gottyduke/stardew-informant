@@ -20,7 +20,7 @@ internal class BundleDecorator : IDecorator<Item>
     public const int DefaultBundleColor = -1;
 
     private static Texture2D? _bundle;
-    private static Dictionary<int, Texture2D> _bundles = [];
+    private static readonly Dictionary<int, Texture2D> _bundles = [];
     private static IEnumerable<ParsedSimpleBundle>? _lastCachedBundles;
 
     private readonly IModHelper _modHelper;

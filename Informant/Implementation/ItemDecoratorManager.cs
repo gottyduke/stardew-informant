@@ -12,7 +12,7 @@ namespace Slothsoft.Informant.Implementation;
 internal class ItemDecoratorManager : IDecoratorManager<Item>
 {
 
-    private static readonly List<IDecorator<Item>> DecoratorsList = new();
+    private static readonly List<IDecorator<Item>> DecoratorsList = [];
     private static Rectangle? _lastToolTipCoordinates;
 
     private readonly Harmony _harmony;

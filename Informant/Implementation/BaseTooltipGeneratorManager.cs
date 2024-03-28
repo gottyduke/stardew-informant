@@ -6,7 +6,7 @@ namespace Slothsoft.Informant.Implementation;
 internal class BaseTooltipGeneratorManager<TInput> : ITooltipGeneratorManager<TInput>
 {
 
-    private readonly List<ITooltipGenerator<TInput>> _generators = new();
+    private readonly List<ITooltipGenerator<TInput>> _generators = [];
 
     public IEnumerable<IDisplayable> Generators => _generators.ToImmutableArray();
 
