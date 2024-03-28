@@ -1,7 +1,7 @@
 {
   "Name": "Informant",
   "Author": "Slothsoft",
-  "Version": "1.5.7",
+  "Version": "1.5.8",
   "Description": "Displays additional information on various objects.",
   "UniqueID": "Slothsoft.Informant",
   "EntryDll": "Informant.dll",
