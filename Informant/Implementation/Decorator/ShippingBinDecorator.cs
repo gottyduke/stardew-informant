@@ -1,14 +1,11 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Slothsoft.Informant.Api;
+using Slothsoft.Informant.Implementation.Common;
 
 namespace Slothsoft.Informant.Implementation.Decorator;
 
 internal class ShippingBinDecorator : IDecorator<Item>
 {
-
-    private static readonly int[] Ship15Items =
-        [24, 188, 190, 192, 248, 250, 252, 254, 256, 258, 260, 262, 264, 266, 268, 270, 272, 274, 276, 278, 280, 282, 284, 300, 304, 398, 400, 433];
-
     private static Texture2D? _shippingBin;
 
     private readonly IModHelper _modHelper;
@@ -30,10 +27,10 @@ internal class ShippingBinDecorator : IDecorator<Item>
                 // we do not need to ship this item
                 return false;
             }
-            var parentSheetIndex = input.ParentSheetIndex.ToString();
-            var alreadyShipped = Game1.MasterPlayer.basicShipped.ContainsKey(parentSheetIndex) ? Game1.MasterPlayer.basicShipped[parentSheetIndex] : 0;
+            var alreadyShipped = Game1.player.basicShipped.ContainsKey(input.ItemId) ? Game1.player.basicShipped[input.ItemId] : 0;
 
-            if (!Ship15Items.Contains(input.ParentSheetIndex)) {
+            _ = int.TryParse(input.ItemId, out var unqualifiedItemId);
+            if (!CropIds.Polyculture.Contains(unqualifiedItemId)) {
                 // we only need to ship this item once
                 return alreadyShipped == 0;
             }
@@ -53,7 +50,7 @@ internal class ShippingBinDecorator : IDecorator<Item>
 
     public int? CalculateStillNeeded(Item input)
     {
-        if (!Ship15Items.Contains(input.ParentSheetIndex)) {
+        if (!CropIds.Polyculture.Contains(input.ParentSheetIndex)) {
             // we don't need to show any number because we don't need to ship 15
             return null;
         }

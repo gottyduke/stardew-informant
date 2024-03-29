@@ -23,9 +23,9 @@ internal class RarecrowDecorator : IDecorator<Item>
     public bool HasDecoration(Item input)
     {
         if (_rarecrow != null && input is SObject obj && obj.bigCraftable.Value) {
-            var parentSheetIndex = obj.ParentSheetIndex.ToString();
-            return BigCraftableIds.AllRarecrows.Contains(obj.ParentSheetIndex) &&
-                   !Utility.doesItemExistAnywhere(parentSheetIndex);
+            _ = int.TryParse(obj.ItemId, out var unqualifiedItemId);
+            return BigCraftableIds.AllRarecrows.Contains(unqualifiedItemId) &&
+                   !Utility.doesItemExistAnywhere(obj.ItemId);
         }
         return false;
     }
