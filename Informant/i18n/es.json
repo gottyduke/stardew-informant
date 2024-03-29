@@ -1,0 +1,79 @@
+{
+  "BundleTooltipDecorator": "Decorador de Paquetes",
+  "BundleTooltipDecorator.Description": "Marca los objetos necesarios para los paquetes",
+
+  "FieldOfficeDecorator": "Decorador de Oficina de Campo",
+  "FieldOfficeDecorator.Description": "Marca los objetos necesarios para la oficina de campo de la isla",
+
+  "RarecrowDecorator": "Decorador de Espantapájaros Raros",
+  "RarecrowDecorator.Description": "Marca los objetos necesarios para la colección de espantapájaros raros",
+
+  "SellPriceDisplayable": "Decorador de Precio de Venta",
+  "SellPriceDisplayable.Description": "Añade el precio de venta en la parte inferior de la descripción emergente",
+
+  "MuseumDecorator": "Decorador de Museo",
+  "MuseumDecorator.Description": "Marca los objetos necesarios para el museo",
+
+  "NewRecipeDisplayable": "Decorador de Recetas Nuevas",
+  "NewRecipeDisplayable.Description": "Marca las recetas que aún no se han cocinado/elaborado",
+
+  "ShippingBinDecorator": "Decorador de Envío",
+  "ShippingBinDecorator.Description": "Marca los objetos que aún no se han enviado",
+
+  "AnimalTooltipGenerator": "Descripción Emergente de Animales",
+  "AnimalTooltipGenerator.Description": "Muestra información adicional sobre los animales de granja",
+
+  "CropTooltipGenerator": "Descripción Emergente de Cultivos",
+  "CropTooltipGenerator.Description": "Una descripción emergente que muestra el tipo de cultivo y los días restantes hasta la cosecha",
+  "CropTooltipGenerator.0DaysLeft": "Listo para cosechar",
+  "CropTooltipGenerator.1DayLeft": "1 día restante",
+  "CropTooltipGenerator.XDaysLeft": "{{X}} días restantes",
+  "CropTooltipGenerator.Dead": "Muerto",
+
+  "FruitTreeTooltipGenerator": "Descripción Emergente de Árboles Frutales",
+  "FruitTreeTooltipGenerator.Description": "Una descripción emergente que muestra el tipo de árbol frutal y los días restantes hasta la cosecha",
+
+  "TeaBushTooltipGenerator": "Descripción Emergente de Arbustos de Té",
+  "TeaBushTooltipGenerator.Description": "Una descripción emergente que muestra los días restantes del arbusto de té",
+
+  "MachineTooltipGenerator": "Descripción Emergente de Máquinas",
+  "MachineTooltipGenerator.Description": "Una descripción emergente que muestra el tipo de resultado y el tiempo restante",
+  "MachineTooltipGenerator.Finished": "Finalizado",
+  "MachineTooltipGenerator.CannotBeUnloaded": "No se puede descargar",
+  "MachineTooltipGenerator.ForNextQuality": "{{X}} para la siguiente calidad",
+  "MachineTooltipGenerator.ForTotal": "{{X}} en total",
+
+  "TreeTooltipGenerator": "Descripción Emergente de Árboles",
+  "TreeTooltipGenerator.Description": "Una descripción emergente que muestra el tipo de árbol",
+  "TreeTooltipGenerator.Type1": "Árbol de Roble",
+  "TreeTooltipGenerator.Type2": "Árbol de Arce",
+  "TreeTooltipGenerator.Type3": "Árbol de Pino",
+  "TreeTooltipGenerator.Type6": "Palmera",
+  "TreeTooltipGenerator.Type7": "Árbol de Setas",
+  "TreeTooltipGenerator.Type8": "Árbol de Caoba",
+  "TreeTooltipGenerator.Type9": "Palmera",
+  "TreeTooltipGenerator.Type10": "Árbol Silvestre Musgoso",
+  "TreeTooltipGenerator.Type13": "Árbol Místico",
+  "TreeTooltipGenerator.MossCovered": "{{X}} Cubierto de Musgo",
+
+  "Config.Decorators.GeneralSection": "Decoradores - General",
+  "Config.Decorators.Visibility": "Decoradores - Visibilidad",
+  "Config.TooltipGenerators.GeneralSection": "Descripciones Emergentes - General",
+  "Config.TooltipGenerators.Visibility": "Descripciones Emergentes - Visibilidad",
+
+  "Config.DecorateLockedBundles": "Decorar Paquetes Bloqueados",
+  "Config.DecorateLockedBundles.Description": "Muestra el Decorador de Paquetes para paquetes aún bloqueados",
+
+  "Config.ShowCropFertilizer": "Mostrar Fertilizante de Cultivos",
+  "Config.ShowCropFertilizer.Description": "Mostrar fertilizante de suelo en la descripción emergente de cultivos",
+
+  "Config.TooltipTrigger": "Desencadenador de la Descripción Emergente",
+  "Config.TooltipTrigger.Hover": "Al pasar el cursor",
+  "Config.TooltipTrigger.ButtonHeld": "Al mantener presionado el botón",
+  "Config.TooltipTriggerButton": "Botón de la Descripción Emergente",
+
+  "Config.HideMachineTooltips": "Ocultar Descripciones Emergentes de Máquinas",
+  "Config.HideMachineTooltips.ForNonMachines": "Para objetos que no son máquinas",
+  "Config.HideMachineTooltips.ForChests": "Para cofres",
+  "Config.HideMachineTooltips.Never": "Nunca"
+}
