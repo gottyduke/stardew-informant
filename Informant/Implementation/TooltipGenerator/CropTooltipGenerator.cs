@@ -27,23 +27,23 @@ internal class CropTooltipGenerator : ITooltipGenerator<TerrainFeature>
 
     public Tooltip Generate(TerrainFeature input)
     {
-        return CreateTooltip(_modHelper, ((HoeDirt)input));
+        return CreateTooltip(_modHelper, (HoeDirt)input);
     }
 
     internal static Tooltip CreateTooltip(IModHelper modHelper, HoeDirt dirt)
     {
         var crop = dirt.crop;
         // for some reason, ginger is displayed as weeds
-        var parentSheetIndexString = crop.whichForageCrop.Value == Crop.forageCrop_gingerID ? ObjectIds.Ginger : crop.indexOfHarvest.Value;
-        Game1.objectData.TryGetValue(parentSheetIndexString, out var data);
-        var displayName = TokenParser.ParseText(data?.DisplayName) ?? ItemRegistry.GetErrorItemName();
+        var cropId = crop.whichForageCrop.Value == Crop.forageCrop_gingerID ? ObjectIds.Ginger : crop.indexOfHarvest.Value;
+        var produce = ItemRegistry.GetDataOrErrorItem(cropId);
+        var displayName = TokenParser.ParseText(produce.DisplayName);
         var daysLeft = CalculateDaysLeftString(modHelper, crop);
 
         return new Tooltip($"{displayName}\n{daysLeft}") {
             Icon =
             [
                 Icon.ForParentSheetIndex(
-                    parentSheetIndexString,
+                    cropId,
                     IPosition.CenterRight,
                     new Vector2(Game1.tileSize / 2f, Game1.tileSize / 2f)
                 ),
