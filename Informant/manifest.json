@@ -7,7 +7,7 @@
   "EntryDll": "Informant.dll",
   "MinimumApiVersion": "4.0.2",
   "UpdateKeys": [
-    "Nexus:14293",
-    "Github:slothsoft/stardew-informant"
+    "Nexus:21286",
+    "Github:gottyduke/stardew-informant"
   ]
 }
