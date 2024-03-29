@@ -52,12 +52,12 @@ public static class BigCraftableIds
     public const int FishSmoker = 296;
     public const int DeluxeWormbin = 298;
 
-    public static readonly int[] AllMachines = {
+    public static readonly int[] AllMachines = [
         BeeHouse, Cask, CheesePress, Keg, Loom, MayonnaiseMachine, OilMaker, PreservesJar,
         BoneMill, CharcoalKiln, Crystalarium, Furnace, GeodeCrusher, HeavyTapper, LightningRod, OstrichIncubator, RecyclingMachine, SeedMaker, SlimeEggPress,
         SlimeIncubator, SlimeIncubator2, SolarPanel, Tapper, WoodChipper, WormBin, Incubator, Incubator2, Incubator3, CoffeeMaker, Deconstructor,
         StatueOfPerfection, StatueOfTruePerfection, BaitMaker, MushroomLog, Dehydrator, HeavyFurnace, StatueOfBlessings, StatueOfTheDwarfKing, FishSmoker, DeluxeWormbin,
-    };
+    ];
 
     public const int Chest = 130;
     public const int JunimoChest = 256;
@@ -68,9 +68,9 @@ public static class BigCraftableIds
     public const int BigChest = 304;
     public const int BigStoneChest = 328;
 
-    public static readonly int[] AllChests = {
+    public static readonly int[] AllChests = [
         Chest, JunimoChest, MiniFridge, StoneChest, MiniShippingBin, BigChest, BigStoneChest,
-    };
+    ];
 
     public static readonly int[] HousePlants = Enumerable.Range(0, 7 + 1).ToArray();
     public const int Scarecrow = 8;
@@ -187,22 +187,28 @@ public static class BigCraftableIds
     public const int Hopper = 275;
     public const int Campfire2 = 278;
 
-    public static readonly int[] AllStaticCraftables = HousePlants.Concat(BarrelsAndCrates).Concat(SeasonalPlants).Concat(new[] {
-        Scarecrow, TablePieceL, TablePieceR, WoodChair, WoodChair2, SkeletonModel, Obelisk, ChickenStatue, StoneCairn, SuitOfArmor, SignOfTheVessel, BasicLog,
-        LawnFlamingo, WoodSign, StoneSign, DarkSign, BigGreenCane, GreenCanes, MixedCane, RedCanes, BigRedCane, OrnamentalHayBale, LogSection, GraveStone,
-        SeasonalDecor, StoneFrog, StoneParrot, StoneOwl, StoneJunimo, SlimeBall, GardenPot, Bookcase, FancyTable, AncientTable, AncientStool, GrandfatherClock,
-        TeddyTimer, DeadTree, Staircase, TallTorch, RitualMask, Bonfire, Bongo, DecorativeSpears, Boulder, Door, Door2, LockedDoor, LockedDoor2, WickedStatue,
-        WickedStatue2, SlothSkeletonL, SlothSkeletonM, SlothSkeletonR, StandingGeode, ObsidianVase, SingingStone, StoneOwl2, StrangeCapsule, EmptyCapsule,
-        FeedHopper, Heater, Camera, PlushBunny, TubOFlowers, TubOFlowers2, Rarecrow, DecorativePitcher, DriedSunflowers, Rarecrow2, StardewHeroTrophy,
-        SodaMachine, Rarecrow3, StatueOfEndlessFortune, MushroomBox, Rarecrow4, Rarecrow5, Rarecrow6, Rarecrow7, Rarecrow8,
-        PrairieKingArcadeSystem, WoodenBrazier, StoneBrazier, GoldBrazier, Campfire, StumpBrazier, CarvedBrazier, SkullBrazier, BarrelBrazier, MarbleBrazier,
-        WoodLamppost, IronLamppost, Hmtgf, JunimoKartArcadeSystem, PinkyLemon, Foroguemo, SolidGoldLewis, AutoGrabber, DeluxeScarecrow, Barrel, Crate,
-        Workbench, MiniJukebox, Telephone, CursedPkArcadeSystem, MiniObelisk, FarmComputer, SewingMachine, AutoPetter, Hopper, Campfire2,
-    }).ToArray();
+    public static readonly int[] AllStaticCraftables =
+    [
+        .. HousePlants,
+        .. BarrelsAndCrates,
+        .. SeasonalPlants,
+        .. new[] {
+            Scarecrow, TablePieceL, TablePieceR, WoodChair, WoodChair2, SkeletonModel, Obelisk, ChickenStatue, StoneCairn, SuitOfArmor, SignOfTheVessel, BasicLog,
+            LawnFlamingo, WoodSign, StoneSign, DarkSign, BigGreenCane, GreenCanes, MixedCane, RedCanes, BigRedCane, OrnamentalHayBale, LogSection, GraveStone,
+            SeasonalDecor, StoneFrog, StoneParrot, StoneOwl, StoneJunimo, SlimeBall, GardenPot, Bookcase, FancyTable, AncientTable, AncientStool, GrandfatherClock,
+            TeddyTimer, DeadTree, Staircase, TallTorch, RitualMask, Bonfire, Bongo, DecorativeSpears, Boulder, Door, Door2, LockedDoor, LockedDoor2, WickedStatue,
+            WickedStatue2, SlothSkeletonL, SlothSkeletonM, SlothSkeletonR, StandingGeode, ObsidianVase, SingingStone, StoneOwl2, StrangeCapsule, EmptyCapsule,
+            FeedHopper, Heater, Camera, PlushBunny, TubOFlowers, TubOFlowers2, Rarecrow, DecorativePitcher, DriedSunflowers, Rarecrow2, StardewHeroTrophy,
+            SodaMachine, Rarecrow3, StatueOfEndlessFortune, MushroomBox, Rarecrow4, Rarecrow5, Rarecrow6, Rarecrow7, Rarecrow8,
+            PrairieKingArcadeSystem, WoodenBrazier, StoneBrazier, GoldBrazier, Campfire, StumpBrazier, CarvedBrazier, SkullBrazier, BarrelBrazier, MarbleBrazier,
+            WoodLamppost, IronLamppost, Hmtgf, JunimoKartArcadeSystem, PinkyLemon, Foroguemo, SolidGoldLewis, AutoGrabber, DeluxeScarecrow, Barrel, Crate,
+            Workbench, MiniJukebox, Telephone, CursedPkArcadeSystem, MiniObelisk, FarmComputer, SewingMachine, AutoPetter, Hopper, Campfire2,
+        },
+    ];
 
-    public static readonly int[] AllRarecrows = {
+    public static readonly int[] AllRarecrows = [
         Rarecrow, Rarecrow2, Rarecrow3, Rarecrow4, Rarecrow5, Rarecrow6, Rarecrow7, Rarecrow8
-    };
+    ];
 }
 
 /// <summary>
@@ -212,4 +218,12 @@ public static class BigCraftableIds
 public static class ObjectIds
 {
     public const string Ginger = "829";
+}
+
+// Ship 15 of each crop
+public static class CropIds
+{
+    public static readonly int[] Polyculture = [
+        24, 188, 190, 192, 248, 250, 252, 254, 256, 258, 260, 262, 264, 266, 268, 270, 272, 274, 276, 278, 280, 282, 284, 300, 304, 398, 400, 433
+    ];
 }
