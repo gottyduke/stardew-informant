@@ -170,7 +170,7 @@ to me via [pull request](https://github.com/slothsoft/stardew-informant/fork) or
 | --------- | --------- | -------------------------------------------------------------------------------------------------- |
 | `default` | English   | ✅                                                                                                  |
 | `de`      | German    | ✅                                                                                                  |
-| `es`      | Spanish   | 🔜                                                                                                  |
+| `es`      | Spanish   | ✅ (thanks to [Cristofer07](https://github.com/Cristofer07))                                        |
 | `fr`      | French    | ✅ (thanks to [ArndGlh](https://github.com/ArndGlh), [Tenebrosful](https://github.com/Tenebrosful)) |
 | `hu`      | Hungarian | 🔜                                                                                                  |
 | `it`      | Italian   | 🔜                                                                                                  |
