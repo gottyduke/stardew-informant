@@ -7,11 +7,11 @@ internal class AnimalTooltipGenerator : ITooltipGenerator<FarmAnimal>
 {
 
     private readonly IModHelper _modHelper;
-    private static Vector2 _friendship_scale = new(3, 3);
-    private static Rectangle _friendship_full = new(211, 428, 7, 6);
-    private static Rectangle _friendship_left_half = new(211, 428, 4, 6);
-    private static Rectangle _friendship_right_half = new(222, 428, 3, 6);
-    private static Rectangle _friendship_hollow = new(218, 428, 7, 6);
+    private static readonly Vector2 _friendship_scale = new(3, 3);
+    private static readonly Rectangle _friendship_full = new(211, 428, 7, 6);
+    private static readonly Rectangle _friendship_left_half = new(211, 428, 4, 6);
+    private static readonly Rectangle _friendship_right_half = new(222, 428, 3, 6);
+    private static readonly Rectangle _friendship_hollow = new(218, 428, 7, 6);
 
     public AnimalTooltipGenerator(IModHelper modHelper)
     {

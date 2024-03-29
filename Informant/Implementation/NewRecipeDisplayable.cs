@@ -12,7 +12,7 @@ internal class NewRecipeDisplayable : IDisplayable
 {
 
     private static string DisplayableId => "new-recipe";
-    private static readonly Rectangle NewSourceRectangle = new(144, 440, 16, 7);
+    private static readonly Rectangle NewSourceRectangle = new(141, 438, 20, 9);
 
     private readonly IModHelper _modHelper;
     private readonly Harmony _harmony;
@@ -82,7 +82,7 @@ internal class NewRecipeDisplayable : IDisplayable
             return;
         }
 
-        var scale = recipe.isCookingRecipe ? 2f : 3f;
+        var scale = recipe.isCookingRecipe ? 1.5f : 2.5f;
         b.Draw(Game1.mouseCursors, __instance.bounds with {
             Width = (int)(NewSourceRectangle.Width * scale),
             Height = (int)(NewSourceRectangle.Height * scale),
