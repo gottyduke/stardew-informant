@@ -69,11 +69,13 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
             return false; // something went wrong here!
         }
 
-        return config.TooltipTrigger switch {
+        var shouldRender = config.TooltipTrigger switch {
             TooltipTrigger.Hover => true, // hover is ALWAYS triggered
             TooltipTrigger.ButtonHeld => _modHelper.Input.GetState(config.TooltipTriggerButton) == SButtonState.Held,
             _ => false // we don't know this trigger
         };
+
+        return shouldRender && Game1.timerUntilMouseFade > 0;
     }
 
     private IEnumerable<Tooltip> GenerateTerrainFeatureTooltips()
