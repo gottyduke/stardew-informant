@@ -19,17 +19,17 @@ internal class BundleDecorator : IDecorator<Item>
 
     public const int DefaultBundleColor = -1;
 
-    private static Texture2D? _bundle;
-    private static readonly Dictionary<int, Texture2D> _bundles = [];
-    private static IEnumerable<ParsedSimpleBundle>? _lastCachedBundles;
+    private static Texture2D? BundleTexture;
+    private static readonly Dictionary<int, Texture2D> Bundles = [];
+    private static IEnumerable<ParsedSimpleBundle>? LastCachedBundle;
 
     private readonly IModHelper _modHelper;
 
     public BundleDecorator(IModHelper modHelper)
     {
         _modHelper = modHelper;
-        _bundle ??= Game1.temporaryContent.Load<Texture2D>("LooseSprites\\JunimoNote");
-        _bundles[DefaultBundleColor] = modHelper.ModContent.Load<Texture2D>("assets/bundle.png");
+        BundleTexture ??= Game1.content.Load<Texture2D>("LooseSprites\\JunimoNote");
+        Bundles[DefaultBundleColor] = modHelper.ModContent.Load<Texture2D>("assets/bundle.png");
     }
 
     public string Id => "bundles";
@@ -42,7 +42,7 @@ internal class BundleDecorator : IDecorator<Item>
             return false;
         }
 
-        if (_bundles.Any() && input is SObject obj && !obj.bigCraftable.Value) {
+        if (Bundles.Any() && input is SObject obj && !obj.bigCraftable.Value) {
             int[]? allowedAreas;
 
             if (!Game1.MasterPlayer.mailReceived.Contains("canReadJunimoText")) {
@@ -58,9 +58,9 @@ internal class BundleDecorator : IDecorator<Item>
                     .ToArray();
             }
 
-            _lastCachedBundles = GetNeededItems(allowedAreas, InformantMod.Instance?.Config.DecorateLockedBundles ?? false)
+            LastCachedBundle = GetNeededItems(allowedAreas, InformantMod.Instance?.Config.DecorateLockedBundles ?? false)
                 .Where(item => input.ItemId == item.UnqualifiedItemId && input.quality.Value >= item.Quality);
-            return _lastCachedBundles.Any();
+            return LastCachedBundle.Any();
         }
         return false;
     }
@@ -124,22 +124,22 @@ internal class BundleDecorator : IDecorator<Item>
     internal static Texture2D GetOrCacheBundleTexture(int? color)
     {
         var colorIndex = color ?? DefaultBundleColor;
-        if (!_bundles.ContainsKey(colorIndex)) {
+        if (!Bundles.ContainsKey(colorIndex)) {
             var rect = new Rectangle(colorIndex * 256 % 512, 244 + colorIndex * 256 / 512 * 16, 16, 16);
-            _bundles[colorIndex] = _bundle!.Blit(rect);
+            Bundles[colorIndex] = BundleTexture!.Blit(rect);
         }
 
-        return _bundles[colorIndex];
+        return Bundles[colorIndex];
     }
 
     public Decoration Decorate(Item input)
     {
-        var decorations = _lastCachedBundles!
+        var decorations = LastCachedBundle!
             .Skip(1)
             .Select(bundle => new Decoration(GetOrCacheBundleTexture(bundle.Color)) { Counter = bundle.Quantity })
             .ToArray();
-        return new Decoration(GetOrCacheBundleTexture(_lastCachedBundles!.First().Color)) {
-            Counter = _lastCachedBundles?.First().Quantity,
+        return new Decoration(GetOrCacheBundleTexture(LastCachedBundle!.First().Color)) {
+            Counter = LastCachedBundle?.First().Quantity,
             ExtraDecorations = decorations
         };
     }

@@ -40,8 +40,7 @@ internal class CropTooltipGenerator : ITooltipGenerator<TerrainFeature>
         var daysLeft = CalculateDaysLeftString(modHelper, crop);
 
         return new Tooltip($"{displayName}\n{daysLeft}") {
-            Icon =
-            [
+            Icon = [
                 Icon.ForParentSheetIndex(
                     cropId,
                     IPosition.CenterRight,

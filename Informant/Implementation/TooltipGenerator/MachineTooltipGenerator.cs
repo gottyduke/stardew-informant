@@ -65,11 +65,13 @@ internal class MachineTooltipGenerator : ITooltipGenerator<SObject>
         var heldObjectName = heldObject.DisplayName;
         var daysLeft = CalculateMinutesLeftString(input);
         return new Tooltip($"{displayName}\n> {heldObjectName}\n{daysLeft}") {
-            Icon = [Icon.ForObject(
-                heldObject,
-                IPosition.CenterRight,
-                new Vector2(Game1.tileSize / 2, Game1.tileSize / 2)
-            )]
+            Icon = [
+                Icon.ForObject(
+                    heldObject,
+                    IPosition.CenterRight,
+                    new Vector2(Game1.tileSize / 2, Game1.tileSize / 2)
+                )
+            ]
         };
     }
 
