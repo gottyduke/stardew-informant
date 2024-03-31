@@ -38,14 +38,14 @@ internal class BundleDecorator : IDecorator<Item>
 
     public bool HasDecoration(Item input)
     {
-        if (Game1.MasterPlayer.mailReceived.Contains("JojaMember")) {
+        if (Game1.MasterPlayer.hasOrWillReceiveMail("JojaMember")) {
             return false;
         }
 
         if (Bundles.Any() && input is SObject obj && !obj.bigCraftable.Value) {
             int[]? allowedAreas;
 
-            if (!Game1.MasterPlayer.mailReceived.Contains("canReadJunimoText")) {
+            if (!Game1.MasterPlayer.hasOrWillReceiveMail("canReadJunimoText")) {
                 // if player can't read Junimo text, they can't have bundles yet
                 allowedAreas = null;
             } else {
@@ -95,7 +95,7 @@ internal class BundleDecorator : IDecorator<Item>
         foreach (var bundleTitle in bundleData.Keys) {
             var bundleTitleSplit = bundleTitle.Split('/');
             var bundleTitleId = bundleTitleSplit[0];
-            if ((allowedAreas != null && !allowedAreas.Contains(CommunityCenter.getAreaNumberFromName(bundleTitleId))) && !decorateLockedBundles) {
+            if (allowedAreas != null && !allowedAreas.Contains(CommunityCenter.getAreaNumberFromName(bundleTitleId)) && !decorateLockedBundles) {
                 // bundle was not yet unlocked or already completed
                 continue;
             }
