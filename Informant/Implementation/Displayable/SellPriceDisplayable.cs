@@ -6,7 +6,7 @@ using StardewValley.Menus;
 using Color = Microsoft.Xna.Framework.Color;
 using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
-namespace Slothsoft.Informant.Implementation;
+namespace Slothsoft.Informant.Implementation.Displayable;
 
 internal class SellPriceDisplayable : IDisplayable
 {
@@ -106,10 +106,10 @@ internal class SellPriceDisplayable : IDisplayable
         var moneyCoordinatesY = _lastCurrencyCoordinates.Value.Y;
         var moneyCoordinates = new Vector2(moneyCoordinatesX, moneyCoordinatesY);
 
-        b.DrawString(font, __state.Stack.ToString(), moneyCoordinates + new Vector2(2f, 2f), Game1.textShadowColor);
-        b.DrawString(font, __state.Stack.ToString(), moneyCoordinates + new Vector2(0.0f, 2f), Game1.textShadowColor);
-        b.DrawString(font, __state.Stack.ToString(), moneyCoordinates + new Vector2(2f, 0.0f), Game1.textShadowColor);
-        b.DrawString(font, __state.Stack.ToString(), moneyCoordinates, Game1.textColor);
+        b.DrawString(font, __state.Stack.ToString(), moneyCoordinates + new Vector2(2f, -2f), Game1.textShadowColor);
+        b.DrawString(font, __state.Stack.ToString(), moneyCoordinates + new Vector2(0.0f, -2f), Game1.textShadowColor);
+        b.DrawString(font, __state.Stack.ToString(), moneyCoordinates + new Vector2(2f, -4f), Game1.textShadowColor);
+        b.DrawString(font, __state.Stack.ToString(), moneyCoordinates + new Vector2(0.0f, -4f), Game1.textColor);
 
         moneyCoordinates.X += font.MeasureString(__state.Stack.ToString()).X + 0.5f * CoinSourceBounds.Width * Game1.pixelZoom;
 
