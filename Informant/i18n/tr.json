@@ -8,6 +8,9 @@
   "RarecrowDecorator": "Rarecrow Decorator",
   "RarecrowDecorator.Description": "Marks items that are needed for the rarecrow collection",
 
+  "SeedTooltipDecorator": "Seed Preview Decorator",
+  "SeedTooltipDecorator.Description": "Preview the seed product and its sell value",
+
   "SellPriceDisplayable": "Satış Fiyatı Belirteci",
   "SellPriceDisplayable.Description": "Satış fiyatını ipucunun altına ekler.",
 

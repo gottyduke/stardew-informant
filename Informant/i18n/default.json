@@ -8,6 +8,9 @@
   "RarecrowDecorator": "Rarecrow Decorator",
   "RarecrowDecorator.Description": "Marks items that are needed for the rarecrow collection",
 
+  "SeedTooltipDecorator": "Seed Preview Decorator",
+  "SeedTooltipDecorator.Description": "Preview the seed product and its sell value",
+
   "SellPriceDisplayable": "Sell Price Decorator",
   "SellPriceDisplayable.Description": "Adds the sell price at the bottom of the tooltip",
 

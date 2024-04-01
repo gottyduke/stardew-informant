@@ -8,6 +8,9 @@
   "RarecrowDecorator": "Decorador de Espantapájaros Raros",
   "RarecrowDecorator.Description": "Marca los objetos necesarios para la colección de espantapájaros raros",
 
+  "SeedTooltipDecorator": "Seed Preview Decorator",
+  "SeedTooltipDecorator.Description": "Preview the seed product and its sell value",
+
   "SellPriceDisplayable": "Decorador de Precio de Venta",
   "SellPriceDisplayable.Description": "Añade el precio de venta en la parte inferior de la descripción emergente",
 

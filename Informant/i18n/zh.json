@@ -8,6 +8,9 @@
   "RarecrowDecorator": "稀有稻草人/珍奇乌鸦",
   "RarecrowDecorator.Description": "标记还未收集的稀有稻草人/珍奇乌鸦",
 
+  "SeedTooltipDecorator": "种子预览",
+  "SeedTooltipDecorator.Description": "预览种子作物及其售价",
+
   "SellPriceDisplayable": "售价",
   "SellPriceDisplayable.Description": "显示物品售价信息",
 
@@ -52,7 +55,7 @@
   "TreeTooltipGenerator.Type7": "大蘑菇",
   "TreeTooltipGenerator.Type8": "桃花心木",
   "TreeTooltipGenerator.Type9": "棕榈树",
-  "TreeTooltipGenerator.Type10": "蕨菜树",
+  "TreeTooltipGenerator.Type10": "野树",
   "TreeTooltipGenerator.Type13": "神秘树",
   "TreeTooltipGenerator.MossCovered": "长满苔藓的{{X}}",
 

@@ -41,7 +41,7 @@ internal class FruitTreeTooltipGenerator : ITooltipGenerator<TerrainFeature>
         return new Tooltip($"{displayName}\n{daysLeft}") { Icon = [icon] };
     }
 
-    internal int CalculateDaysLeft(FruitTree fruitTree)
+    internal static int CalculateDaysLeft(FruitTree fruitTree)
     {
         var daysLeft = fruitTree.daysUntilMature.Value;
         if (daysLeft <= 0) {

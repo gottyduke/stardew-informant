@@ -8,6 +8,9 @@
   "RarecrowDecorator": "Vogelscheuchen-Dekoration",
   "RarecrowDecorator.Description": "Markiert Gegenstände, die für die Vogelscheuchensammlung gebraucht werden",
 
+  "SeedTooltipDecorator": "Seed Preview Decorator",
+  "SeedTooltipDecorator.Description": "Preview the seed product and its sell value",
+
   "SellPriceDisplayable": "Verkaufspreis-Dekoration",
   "SellPriceDisplayable.Description": "Fügt den Verkaufspreis unten am Tooltip ein",
 

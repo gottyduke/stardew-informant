@@ -226,4 +226,11 @@ public static class CropIds
     public static readonly int[] Polyculture = [
         24, 188, 190, 192, 248, 250, 252, 254, 256, 258, 260, 262, 264, 266, 268, 270, 272, 274, 276, 278, 280, 282, 284, 300, 304, 398, 400, 433
     ];
+
+    public const string MixedFlowers = "MixedFlowerSeeds";
+    public const string MixedSeeds = "770";
+    public const string GreenTeaBush = "251";
+    public const string GreenTeaLeaves = "815";
+    public const string MossySeed = "MossySeed";
+    public const string Moss = "Moss";
 }
