@@ -43,7 +43,7 @@ public class Informant(IModHelper modHelper) : IInformant
         ObjectTooltipGenerators.Add(new TooltipGenerator<SObject>(id, displayName, description, generator));
     }
 
-    public ITooltipGeneratorManager<FarmAnimal> AnimalTooltipGenerator
+    public ITooltipGeneratorManager<Character> CharacterTooltipGenerators
     {
         get
         {
@@ -52,23 +52,9 @@ public class Informant(IModHelper modHelper) : IInformant
         }
     }
 
-    public void AddAnimalTooltipGenerator(string id, Func<string> displayName, Func<string> description, Func<FarmAnimal, string?> generator)
+    public void AddCharacterTooltipGenerator(string id, Func<string> displayName, Func<string> description, Func<Character, string?> generator)
     {
-        AnimalTooltipGenerator.Add(new TooltipGenerator<FarmAnimal>(id, displayName, description, generator));
-    }
-
-    public ITooltipGeneratorManager<Pet> PetTooltipGenerator
-    {
-        get
-        {
-            _tooltipGeneratorManager ??= new TooltipGeneratorManager(modHelper);
-            return _tooltipGeneratorManager;
-        }
-    }
-
-    public void AddPetTooltipGenerator(string id, Func<string> displayName, Func<string> description, Func<Pet, string?> generator)
-    {
-        PetTooltipGenerator.Add(new TooltipGenerator<Pet>(id, displayName, description, generator));
+        CharacterTooltipGenerators.Add(new TooltipGenerator<Character>(id, displayName, description, generator));
     }
 
     public IDecoratorManager<Item> ItemDecorators
