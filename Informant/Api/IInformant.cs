@@ -36,28 +36,16 @@ public interface IInformant
     void AddObjectTooltipGenerator(string id, Func<string> displayName, Func<string> description, Func<SObject, string?> generator);
 
     /// <summary>
-    /// A manager class for the <see cref="FarmAnimal"/>(s) under the mouse position.
+    /// A manager class for the <see cref="Character"/>(s) under the mouse position.
     /// <br/><b>Since Version:</b> 1.5.0
     /// </summary>
-    ITooltipGeneratorManager<FarmAnimal> AnimalTooltipGenerator { get; }
+    ITooltipGeneratorManager<Character> CharacterTooltipGenerators { get; }
 
     /// <summary>
-    /// Adds a tooltip generator for the <see cref="FarmAnimal"/>(s) under the mouse position.
+    /// Adds a tooltip generator for the <see cref="Character"/>(s) under the mouse position.
     /// <br/><b>Since Version:</b> 1.5.0
     /// </summary>
-    void AddAnimalTooltipGenerator(string id, Func<string> displayName, Func<string> description, Func<FarmAnimal, string?> generator);
-
-    /// <summary>
-    /// Adds a tooltip generator for the <see cref="Pet"/>(s) under the mouse position.
-    /// </summary>
-    /// <br/><b>Since Version:</b> 1.7.0
-    public ITooltipGeneratorManager<Pet> PetTooltipGenerator { get; }
-
-    /// <summary>
-    /// Adds a tooltip generator for the <see cref="Pet"/>(s) under the mouse position.
-    /// </summary>
-    /// <br/><b>Since Version:</b> 1.7.0
-    void AddPetTooltipGenerator(string id, Func<string> displayName, Func<string> description, Func<Pet, string?> generator);
+    void AddCharacterTooltipGenerator(string id, Func<string> displayName, Func<string> description, Func<Character, string?> generator);
 
     /// <summary>
     /// A manager class for decorating a tooltip for an <see cref="Item"/>.

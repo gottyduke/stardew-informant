@@ -4,7 +4,7 @@ using StardewValley.Characters;
 
 namespace Slothsoft.Informant.Implementation.TooltipGenerator;
 
-internal class AnimalTooltipGenerator(IModHelper modHelper) : ITooltipGenerator<FarmAnimal>, ITooltipGenerator<Pet>
+internal class AnimalTooltipGenerator(IModHelper modHelper) : ITooltipGenerator<Character>
 {
     public static bool DecoratePet { get; set; }
 
@@ -21,24 +21,23 @@ internal class AnimalTooltipGenerator(IModHelper modHelper) : ITooltipGenerator<
     public string DisplayName => modHelper.Translation.Get("AnimalTooltipGenerator");
     public string Description => modHelper.Translation.Get("AnimalTooltipGenerator.Description");
 
-    public bool HasTooltip(FarmAnimal input)
+    public bool HasTooltip(Character input)
     {
-        return true; // always display for now, until more features added
+        return DecoratePet && input is Pet || input is FarmAnimal;
     }
 
-    public bool HasTooltip(Pet input)
+    public Tooltip Generate(Character input)
     {
-        return DecoratePet;
-    }
+        if (input is FarmAnimal animal) {
+            return CreateTooltip(modHelper, animal.displayName, animal.friendshipTowardFarmer.Value);
+        }
 
-    public Tooltip Generate(FarmAnimal animal)
-    {
-        return CreateTooltip(modHelper, animal.displayName, animal.friendshipTowardFarmer.Value);
-    }
+        if (input is Pet pet) {
+            return CreateTooltip(modHelper, pet.displayName, pet.friendshipTowardFarmer.Value);
+        }
 
-    public Tooltip Generate(Pet pet)
-    {
-        return CreateTooltip(modHelper, pet.displayName, pet.friendshipTowardFarmer.Value);
+        // something is wrong 
+        return CreateTooltip(modHelper, "???", 0);
     }
 
     internal static Tooltip CreateTooltip(IModHelper modHelper, string name, int friendship)

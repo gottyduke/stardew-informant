@@ -15,7 +15,7 @@ namespace Slothsoft.Informant.Implementation;
 /// is only one instance for all <see cref="ITooltipGeneratorManager{TInput}"/> implementations.
 /// </summary>
 
-internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature>, ITooltipGeneratorManager<SObject>, ITooltipGeneratorManager<FarmAnimal>, ITooltipGeneratorManager<Pet>
+internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature>, ITooltipGeneratorManager<SObject>, ITooltipGeneratorManager<Character>
 {
 
     internal static Rectangle TooltipSourceRect = new(0, 256, 60, 60);
@@ -23,8 +23,7 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
     private readonly IModHelper _modHelper;
     private BaseTooltipGeneratorManager<TerrainFeature>? _terrainFeatureManager;
     private BaseTooltipGeneratorManager<SObject>? _objectInformant;
-    private BaseTooltipGeneratorManager<FarmAnimal>? _animalInformant;
-    private BaseTooltipGeneratorManager<Pet>? _petInformant; // actually just the farm animal, but different name
+    private BaseTooltipGeneratorManager<Character>? _characterInformant;
 
     private readonly PerScreen<IEnumerable<Tooltip>?> _tooltips = new();
 
@@ -42,11 +41,8 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
     IEnumerable<IDisplayable> ITooltipGeneratorManager<SObject>.Generators =>
         _objectInformant?.Generators.ToImmutableArray() ?? Enumerable.Empty<IDisplayable>();
 
-    IEnumerable<IDisplayable> ITooltipGeneratorManager<FarmAnimal>.Generators =>
-        _animalInformant?.Generators.ToImmutableArray() ?? Enumerable.Empty<IDisplayable>();
-
-    IEnumerable<IDisplayable> ITooltipGeneratorManager<Pet>.Generators =>
-        _petInformant?.Generators.ToImmutableArray() ?? Enumerable.Empty<IDisplayable>();
+    IEnumerable<IDisplayable> ITooltipGeneratorManager<Character>.Generators =>
+        _characterInformant?.Generators.ToImmutableArray() ?? Enumerable.Empty<IDisplayable>();
 
     private void OnUpdateTicked(object? sender, UpdateTickedEventArgs e2)
     {
@@ -63,8 +59,7 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
         _tooltips.Value = [
             .. GenerateTerrainFeatureTooltips(),
             .. GenerateObjectTooltips(),
-            .. GenerateAnimalTooltips(),
-            .. GeneratePetTooltips(),
+            .. GenerateCharacterTooltips(),
         ];
     }
 
@@ -87,7 +82,7 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
     private IEnumerable<Tooltip> GenerateTerrainFeatureTooltips()
     {
         return GenerateTooltips(_terrainFeatureManager, (mouseX, mouseY) =>
-            Game1.currentLocation.terrainFeatures.Values
+            Game1.player.currentLocation.terrainFeatures.Values
             .Where(t => t.Tile == GetTilePosition(mouseX, mouseY))
             .ToArray());
     }
@@ -95,24 +90,19 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
     private IEnumerable<Tooltip> GenerateObjectTooltips()
     {
         return GenerateTooltips(_objectInformant, (mouseX, mouseY) =>
-            Game1.currentLocation.netObjects.Values
+            Game1.player.currentLocation.netObjects.Values
                 .Where(o => o.TileLocation == GetTilePosition(mouseX, mouseY))
                 .ToArray());
     }
 
-    private IEnumerable<Tooltip> GenerateAnimalTooltips()
+    private IEnumerable<Tooltip> GenerateCharacterTooltips()
     {
-        return GenerateTooltips(_animalInformant, (mouseX, mouseY) =>
-            Game1.currentLocation.animals.Values
-                .Where(a => a.GetCursorPetBoundingBox().Contains(mouseX + Game1.viewport.X, mouseY + Game1.viewport.Y))
-                .ToArray());
-    }
-    private IEnumerable<Tooltip> GeneratePetTooltips()
-    {
-        return GenerateTooltips(_petInformant, (mouseX, mouseY) => {
-            Pet? pet = Game1.player.getPet();
-            return pet == null || !pet.GetBoundingBox().Contains(mouseX + Game1.viewport.X, mouseY + Game1.viewport.Y) ? [] : [pet];
-        });
+        return GenerateTooltips(_characterInformant, (mouseX, mouseY) => [
+            .. Game1.player.currentLocation.characters
+                .Where(n => n.GetBoundingBox().Contains(mouseX + Game1.viewport.X, mouseY + Game1.viewport.Y)),
+            .. Game1.player.currentLocation.animals.Values
+                .Where(a => a.GetCursorPetBoundingBox().Contains(mouseX + Game1.viewport.X, mouseY + Game1.viewport.Y)),
+            ]);
     }
 
     private void OnRendered(object? sender, RenderedEventArgs e)
@@ -309,16 +299,10 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
         _objectInformant.Add(generator);
     }
 
-    public void Add(ITooltipGenerator<FarmAnimal> generator)
+    public void Add(ITooltipGenerator<Character> generator)
     {
-        _animalInformant ??= new BaseTooltipGeneratorManager<FarmAnimal>();
-        _animalInformant.Add(generator);
-    }
-
-    public void Add(ITooltipGenerator<Pet> generator)
-    {
-        _petInformant ??= new BaseTooltipGeneratorManager<Pet>();
-        _petInformant.Add(generator);
+        _characterInformant ??= new BaseTooltipGeneratorManager<Character>();
+        _characterInformant.Add(generator);
     }
 
     public void Remove(string generatorId)
