@@ -8,8 +8,6 @@ namespace Slothsoft.Informant.Implementation.TooltipGenerator;
 
 internal class CropTooltipGenerator : ITooltipGenerator<TerrainFeature>
 {
-    public static bool DecorateFertilizer { get; set; }
-
     private readonly IModHelper _modHelper;
 
     public CropTooltipGenerator(IModHelper modHelper)
@@ -47,7 +45,7 @@ internal class CropTooltipGenerator : ITooltipGenerator<TerrainFeature>
                     IPosition.CenterRight,
                     new Vector2(Game1.tileSize / 2f, Game1.tileSize / 2f)
                 ),
-                dirt.HasFertilizer() && DecorateFertilizer ?
+                dirt.HasFertilizer() && (InformantMod.Instance?.Config.DecorateFertilizer ?? false) ?
                 Icon.ForParentSheetIndex(
                     dirt.fertilizer.Value,
                     IPosition.CenterRight,
