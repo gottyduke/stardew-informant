@@ -1,6 +1,10 @@
 {
   "BundleTooltipDecorator": "Marcador de Conjuntos",
   "BundleTooltipDecorator.Description": "Marca os itens que são necessários para os conjuntos",
+  "BundleTooltipDecorator.DecorateLockedBundles": "Marcador Conjuntos Fechados",
+  "BundleTooltipDecorator.DecorateLockedBundles.Description": "Exibe o Marcador de Conjuntos para Conjuntos ainda bloqueados",
+  "BundleTooltipDecorator.DecorateUnqualifiedBundles": "Decorate Unqualified Bundles",
+  "BundleTooltipDecorator.DecorateUnqualifiedBundles.Description": "Displays bundle decorator for item that doesn't meet quality requirement",
 
   "FieldOfficeDecorator": "Field Office Decorator",
   "FieldOfficeDecorator.Description": "Marks items that are needed for the island field office",
@@ -25,6 +29,8 @@
 
   "AnimalTooltipGenerator": "Animals Tooltip",
   "AnimalTooltipGenerator.Description": "Display additional information for farm animals",
+  "AnimalTooltipGenerator.DecoratePet": "Display Pet",
+  "AnimalTooltipGenerator.DecoratePet.Description": "Displays pet info",
 
   "CropTooltipGenerator": "Tooltip de Colheitas",
   "CropTooltipGenerator.Description": "Uma Tooltip que exibe o tipo de colheita e os dias restantes até a colheita",
@@ -32,6 +38,8 @@
   "CropTooltipGenerator.1DayLeft": "Falta 1 dia",
   "CropTooltipGenerator.XDaysLeft": "Faltam {{X}} dias",
   "CropTooltipGenerator.Dead": "Morto",
+  "CropTooltipGenerator.DecorateFertilizer": "Display Fertilizer",
+  "CropTooltipGenerator.DecorateFertilizer.Description": "Displays soil fertilizer on crop tooltip",
 
   "FruitTreeTooltipGenerator": "Tooltip de Árvores Frutíferas",
   "FruitTreeTooltipGenerator.Description": "Uma Tooltip que exibe o tipo de árvore frutífera e os dias restantes até a colheita",
@@ -63,12 +71,6 @@
   "Config.Decorators.Visibility": "Marcador - Visibilidade",
   "Config.TooltipGenerators.GeneralSection": "Tooltips - Em geral",
   "Config.TooltipGenerators.Visibility": "Tooltips - Visibilidade",
-
-  "Config.DecorateLockedBundles": "Marcador Conjuntos Fechados",
-  "Config.DecorateLockedBundles.Description": "Exibe o Marcador de Conjuntos para Conjuntos ainda bloqueados",
-
-  "Config.ShowCropFertilizer": "Display Fertilizer",
-  "Config.ShowCropFertilizer.Description": "Display soil fertilizer on crop tooltip",
 
   "Config.TooltipTrigger": "Acionador Tooltip",
   "Config.TooltipTrigger.Hover": "Passar o mouse",

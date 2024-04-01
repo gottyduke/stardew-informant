@@ -1,6 +1,10 @@
 ﻿{
   "BundleTooltipDecorator": "社区包",
   "BundleTooltipDecorator.Description": "标记还未献祭的物品",
+  "BundleTooltipDecorator.DecorateLockedBundles": "社区包: 锁定的社区包",
+  "BundleTooltipDecorator.DecorateLockedBundles.Description": "标记还未献祭的物品, 即使社区包还未解锁",
+  "BundleTooltipDecorator.DecorateUnqualifiedBundles": "社区包: 品质要求的社区包",
+  "BundleTooltipDecorator.DecorateUnqualifiedBundles.Description": "标记还未达到社区包品质要求的物品",
 
   "FieldOfficeDecorator": "岛屿办事处",
   "FieldOfficeDecorator.Description": "标记还未捐献至岛屿办事处的物品",
@@ -25,6 +29,8 @@
 
   "AnimalTooltipGenerator": "动物",
   "AnimalTooltipGenerator.Description": "显示农场动物的额外信息",
+  "AnimalTooltipGenerator.DecoratePet": "动物: 显示宠物",
+  "AnimalTooltipGenerator.DecoratePet.Description": "显示宠物的额外信息",
 
   "CropTooltipGenerator": "作物",
   "CropTooltipGenerator.Description": "作物相关的信息, 如种类, 收获日",
@@ -32,6 +38,8 @@
   "CropTooltipGenerator.1DayLeft": "明天成熟",
   "CropTooltipGenerator.XDaysLeft": "{{X}}天后成熟",
   "CropTooltipGenerator.Dead": "枯萎",
+  "CropTooltipGenerator.DecorateFertilizer": "作物: 显示肥料",
+  "CropTooltipGenerator.DecorateFertilizer.Description": "显示作物信息时同时显示土地肥料",
 
   "FruitTreeTooltipGenerator": "果树",
   "FruitTreeTooltipGenerator.Description": "果树相关的信息, 如种类, 结果日",
@@ -63,12 +71,6 @@
   "Config.Decorators.Visibility": "标记开关",
   "Config.TooltipGenerators.GeneralSection": "通用信息",
   "Config.TooltipGenerators.Visibility": "信息开关",
-
-  "Config.DecorateLockedBundles": "锁定的社区包",
-  "Config.DecorateLockedBundles.Description": "标记还未献祭的物品, 即使社区包还未解锁",
-
-  "Config.ShowCropFertilizer": "显示肥料",
-  "Config.ShowCropFertilizer.Description": "显示作物信息时同时显示土地肥料",
 
   "Config.TooltipTrigger": "信息显示模式",
   "Config.TooltipTrigger.Hover": "鼠标悬停",

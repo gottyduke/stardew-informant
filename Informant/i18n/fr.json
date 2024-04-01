@@ -1,6 +1,10 @@
 {
   "BundleTooltipDecorator": "Annotation des paquets",
   "BundleTooltipDecorator.Description": "Signale les objets qui sont nécessaires aux paquets",
+  "BundleTooltipDecorator.DecorateLockedBundles": "Annoter les paquets verrouillés",
+  "BundleTooltipDecorator.DecorateLockedBundles.Description": "Affiche les annotations de paquet pour les paquets encore verrouillés",
+  "BundleTooltipDecorator.DecorateUnqualifiedBundles": "Decorate Unqualified Bundles",
+  "BundleTooltipDecorator.DecorateUnqualifiedBundles.Description": "Displays bundle decorator for item that doesn't meet quality requirement",
 
   "FieldOfficeDecorator": "Annotation du Bureau local",
   "FieldOfficeDecorator.Description": "Signale les objets qui sont nécessaires pour le Bureau local de l'île",
@@ -25,6 +29,8 @@
 
   "AnimalTooltipGenerator": "Animals Tooltip",
   "AnimalTooltipGenerator.Description": "Display additional information for farm animals",
+  "AnimalTooltipGenerator.DecoratePet": "Display Pet",
+  "AnimalTooltipGenerator.DecoratePet.Description": "Displays pet info",
 
   "CropTooltipGenerator": "Infobulle des récoltes",
   "CropTooltipGenerator.Description": "Une infobulle qui affiche le type de culture et le temps restant avant la récolte",
@@ -32,6 +38,8 @@
   "CropTooltipGenerator.1DayLeft": "1 jour restant",
   "CropTooltipGenerator.XDaysLeft": "{{X}} jours restant",
   "CropTooltipGenerator.Dead": "Mort",
+  "CropTooltipGenerator.DecorateFertilizer": "Afficher les engrais",
+  "CropTooltipGenerator.DecorateFertilizer.Description": "Affiche les engrais de sol sur l'infobulle des plantations",
 
   "FruitTreeTooltipGenerator": "Infobulle des arbres fruitier",
   "FruitTreeTooltipGenerator.Description": "Une infobulle qui affiche le type d'arbre fruitier et le temps restant avant la récolte",
@@ -63,12 +71,6 @@
   "Config.Decorators.Visibility": "Infobulle - Visibilité",
   "Config.TooltipGenerators.GeneralSection": "Infobulles - Général",
   "Config.TooltipGenerators.Visibility": "Infobulles - Visibilité",
-
-  "Config.DecorateLockedBundles": "Annoter les paquets verrouillés",
-  "Config.DecorateLockedBundles.Description": "Affiche les annotations de paquet pour les paquets encore verrouillés",
-
-  "Config.ShowCropFertilizer": "Afficher les engrais",
-  "Config.ShowCropFertilizer.Description": "Affiche les engrais de sol sur l'infobulle des plantations",
 
   "Config.TooltipTrigger": "Déclencheur d'infobulle",
   "Config.TooltipTrigger.Hover": "Au survol",

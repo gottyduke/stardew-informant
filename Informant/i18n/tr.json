@@ -1,6 +1,10 @@
 {
   "BundleTooltipDecorator": "Yığın Belirteci",
   "BundleTooltipDecorator.Description": "Yığınlar için gerekli olan nesneleri belirtir.",
+  "BundleTooltipDecorator.DecorateLockedBundles": "Decorate Locked Bundles",
+  "BundleTooltipDecorator.DecorateLockedBundles.Description": "Displays Bundles Decorator for still locked bundles",
+  "BundleTooltipDecorator.DecorateUnqualifiedBundles": "Decorate Unqualified Bundles",
+  "BundleTooltipDecorator.DecorateUnqualifiedBundles.Description": "Displays bundle decorator for item that doesn't meet quality requirement",
 
   "FieldOfficeDecorator": "Field Office Decorator",
   "FieldOfficeDecorator.Description": "Marks items that are needed for the island field office",
@@ -25,6 +29,8 @@
 
   "AnimalTooltipGenerator": "Animals Tooltip",
   "AnimalTooltipGenerator.Description": "Display additional information for farm animals",
+  "AnimalTooltipGenerator.DecoratePet": "Display Pet",
+  "AnimalTooltipGenerator.DecoratePet.Description": "Displays pet info",
 
   "CropTooltipGenerator": "Ekin İpucu",
   "CropTooltipGenerator.Description": "Mahsul türünü ve hasata kalan gün sayısını gösteren bir ipucu",
@@ -32,6 +38,8 @@
   "CropTooltipGenerator.1DayLeft": "1 Gün Kaldı",
   "CropTooltipGenerator.XDaysLeft": "{{X}} Gün Kaldı",
   "CropTooltipGenerator.Dead": "Ölmüş",
+  "CropTooltipGenerator.DecorateFertilizer": "Display Fertilizer",
+  "CropTooltipGenerator.DecorateFertilizer.Description": "Displays soil fertilizer on crop tooltip",
 
   "FruitTreeTooltipGenerator": "Meyve Ağacı İpucu",
   "FruitTreeTooltipGenerator.Description": "Meyve ağacının türünü ve hasada kalan gün sayısını gösteren bir ipucu",
@@ -63,12 +71,6 @@
   "Config.Decorators.Visibility": "Belirteçler - Görünürlük",
   "Config.TooltipGenerators.GeneralSection": "İpuçları - Genel",
   "Config.TooltipGenerators.Visibility": "İpuçları - Görünürlük",
-
-  "Config.DecorateLockedBundles": "Decorate Locked Bundles",
-  "Config.DecorateLockedBundles.Description": "Displays Bundles Decorator for still locked bundles",
-
-  "Config.ShowCropFertilizer": "Display Fertilizer",
-  "Config.ShowCropFertilizer.Description": "Display soil fertilizer on crop tooltip",
 
   "Config.TooltipTrigger": "İpucu aktifleşmesi",
   "Config.TooltipTrigger.Hover": "Üzerinde imleç ile gezinildiğinde",

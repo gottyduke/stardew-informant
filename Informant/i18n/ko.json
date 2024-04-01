@@ -1,6 +1,10 @@
 {
   "BundleTooltipDecorator": "번들 표시",
   "BundleTooltipDecorator.Description": "번들에 필요한 아이템을 표시합니다",
+  "BundleTooltipDecorator.DecorateLockedBundles": "잠긴 번들 표시",
+  "BundleTooltipDecorator.DecorateLockedBundles.Description": "아직 잠겨있는 번들에 필요한 아이템도 표시합니다",
+  "BundleTooltipDecorator.DecorateUnqualifiedBundles": "Decorate Unqualified Bundles",
+  "BundleTooltipDecorator.DecorateUnqualifiedBundles.Description": "Displays bundle decorator for item that doesn't meet quality requirement",
 
   "FieldOfficeDecorator": "Field Office Decorator",
   "FieldOfficeDecorator.Description": "Marks items that are needed for the island field office",
@@ -25,6 +29,8 @@
 
   "AnimalTooltipGenerator": "Animals Tooltip",
   "AnimalTooltipGenerator.Description": "Display additional information for farm animals",
+  "AnimalTooltipGenerator.DecoratePet": "Display Pet",
+  "AnimalTooltipGenerator.DecoratePet.Description": "Displays pet info",
 
   "CropTooltipGenerator": "작물 정보",
   "CropTooltipGenerator.Description": "작물의 종류와 수확까지 남은 시간을 보여줍니다",
@@ -32,6 +38,8 @@
   "CropTooltipGenerator.1DayLeft": "하루 남음",
   "CropTooltipGenerator.XDaysLeft": "{{X}}일 남음",
   "CropTooltipGenerator.Dead": "시듦",
+  "CropTooltipGenerator.DecorateFertilizer": "Display Fertilizer",
+  "CropTooltipGenerator.DecorateFertilizer.Description": "Displays soil fertilizer on crop tooltip",
 
   "FruitTreeTooltipGenerator": "과일 나무 정보",
   "FruitTreeTooltipGenerator.Description": "과일 나무의 정보와 수확까지 남은 시간을 보여줍니다",
@@ -63,12 +71,6 @@
   "Config.Decorators.Visibility": "표시기 - 활성화",
   "Config.TooltipGenerators.GeneralSection": "정보 - 일반",
   "Config.TooltipGenerators.Visibility": "정보 - 활성화",
-
-  "Config.DecorateLockedBundles": "잠긴 번들 표시",
-  "Config.DecorateLockedBundles.Description": "아직 잠겨있는 번들에 필요한 아이템도 표시합니다",
-
-  "Config.ShowCropFertilizer": "Display Fertilizer",
-  "Config.ShowCropFertilizer.Description": "Display soil fertilizer on crop tooltip",
 
   "Config.TooltipTrigger": "정보 표시 조건",
   "Config.TooltipTrigger.Hover": "커서 가져다댈 때",

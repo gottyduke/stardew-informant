@@ -1,6 +1,10 @@
 ﻿{
   "BundleTooltipDecorator": "Bundles Decorator",
   "BundleTooltipDecorator.Description": "Marks items that are needed for the bundles",
+  "BundleTooltipDecorator.DecorateLockedBundles": "Decorate Locked Bundles",
+  "BundleTooltipDecorator.DecorateLockedBundles.Description": "Displays bundle decorator for still locked bundles",
+  "BundleTooltipDecorator.DecorateUnqualifiedBundles": "Decorate Unqualified Bundles",
+  "BundleTooltipDecorator.DecorateUnqualifiedBundles.Description": "Displays bundle decorator for item that doesn't meet quality requirement",
 
   "FieldOfficeDecorator": "Field Office Decorator",
   "FieldOfficeDecorator.Description": "Marks items that are needed for the island field office",
@@ -25,6 +29,8 @@
 
   "AnimalTooltipGenerator": "Animals Tooltip",
   "AnimalTooltipGenerator.Description": "Display additional information for farm animals",
+  "AnimalTooltipGenerator.DecoratePet": "Display Pet",
+  "AnimalTooltipGenerator.DecoratePet.Description": "Displays pet info",
 
   "CropTooltipGenerator": "Crops Tooltip",
   "CropTooltipGenerator.Description": "A tooltip that displays the type of crop and remaining days till harvest",
@@ -32,6 +38,8 @@
   "CropTooltipGenerator.1DayLeft": "1 day left",
   "CropTooltipGenerator.XDaysLeft": "{{X}} days left",
   "CropTooltipGenerator.Dead": "Dead",
+  "CropTooltipGenerator.DecorateFertilizer": "Display Fertilizer",
+  "CropTooltipGenerator.DecorateFertilizer.Description": "Displays soil fertilizer on crop tooltip",
 
   "FruitTreeTooltipGenerator": "Fruit Trees Tooltip",
   "FruitTreeTooltipGenerator.Description": "A tooltip that displays the type of fruit tree and remaining days till harvest",
@@ -63,12 +71,6 @@
   "Config.Decorators.Visibility": "Decorators - Visibility",
   "Config.TooltipGenerators.GeneralSection": "Tooltips - General",
   "Config.TooltipGenerators.Visibility": "Tooltips - Visibility",
-
-  "Config.DecorateLockedBundles": "Decorate Locked Bundles",
-  "Config.DecorateLockedBundles.Description": "Displays Bundles Decorator for still locked bundles",
-
-  "Config.ShowCropFertilizer": "Display Fertilizer",
-  "Config.ShowCropFertilizer.Description": "Display soil fertilizer on crop tooltip",
 
   "Config.TooltipTrigger": "Tooltip Trigger",
   "Config.TooltipTrigger.Hover": "On hover",
