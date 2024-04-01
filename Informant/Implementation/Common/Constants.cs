@@ -211,22 +211,14 @@ public static class BigCraftableIds
     ];
 }
 
-/// <summary>
-/// These constants can be used to compare to <code>Object.ParentSheetIndex</code>.
-/// See https://stardewcommunitywiki.com/Modding:Object_data
-/// </summary>
-public static class ObjectIds
-{
-    public const string Ginger = "829";
-}
-
-// Ship 15 of each crop
 public static class CropIds
 {
+    // Ship 15 of each crop
     public static readonly int[] Polyculture = [
         24, 188, 190, 192, 248, 250, 252, 254, 256, 258, 260, 262, 264, 266, 268, 270, 272, 274, 276, 278, 280, 282, 284, 300, 304, 398, 400, 433
     ];
 
+    public const string Ginger = "829";
     public const string MixedFlowers = "MixedFlowerSeeds";
     public const string MixedSeeds = "770";
     public const string GreenTeaBush = "251";

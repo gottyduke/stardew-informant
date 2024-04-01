@@ -1,4 +1,8 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using Slothsoft.Informant.Implementation.TooltipGenerator;
+using Slothsoft.Informant.Implementation;
+using StardewModdingAPI;
+using StardewValley.Characters;
 using StardewValley.TerrainFeatures;
 
 namespace Slothsoft.Informant.Api;
@@ -42,6 +46,18 @@ public interface IInformant
     /// <br/><b>Since Version:</b> 1.5.0
     /// </summary>
     void AddAnimalTooltipGenerator(string id, Func<string> displayName, Func<string> description, Func<FarmAnimal, string?> generator);
+
+    /// <summary>
+    /// Adds a tooltip generator for the <see cref="Pet"/>(s) under the mouse position.
+    /// </summary>
+    /// <br/><b>Since Version:</b> 1.7.0
+    public ITooltipGeneratorManager<Pet> PetTooltipGenerator { get; }
+
+    /// <summary>
+    /// Adds a tooltip generator for the <see cref="Pet"/>(s) under the mouse position.
+    /// </summary>
+    /// <br/><b>Since Version:</b> 1.7.0
+    void AddPetTooltipGenerator(string id, Func<string> displayName, Func<string> description, Func<Pet, string?> generator);
 
     /// <summary>
     /// A manager class for decorating a tooltip for an <see cref="Item"/>.

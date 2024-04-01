@@ -8,6 +8,7 @@ namespace Slothsoft.Informant.Implementation.TooltipGenerator;
 
 internal class CropTooltipGenerator : ITooltipGenerator<TerrainFeature>
 {
+    public static bool DecorateFertilizer { get; set; }
 
     private readonly IModHelper _modHelper;
 
@@ -34,7 +35,7 @@ internal class CropTooltipGenerator : ITooltipGenerator<TerrainFeature>
     {
         var crop = dirt.crop;
         // for some reason, ginger is displayed as weeds
-        var cropId = crop.whichForageCrop.Value == Crop.forageCrop_gingerID ? ObjectIds.Ginger : crop.indexOfHarvest.Value;
+        var cropId = crop.whichForageCrop.Value == Crop.forageCrop_gingerID ? CropIds.Ginger : crop.indexOfHarvest.Value;
         var produce = ItemRegistry.GetDataOrErrorItem(cropId);
         var displayName = TokenParser.ParseText(produce.DisplayName);
         var daysLeft = CalculateDaysLeftString(modHelper, crop);
@@ -46,7 +47,7 @@ internal class CropTooltipGenerator : ITooltipGenerator<TerrainFeature>
                     IPosition.CenterRight,
                     new Vector2(Game1.tileSize / 2f, Game1.tileSize / 2f)
                 ),
-                dirt.HasFertilizer() && (InformantMod.Instance?.Config.ShowCropFertilizer ?? false) ?
+                dirt.HasFertilizer() && DecorateFertilizer ?
                 Icon.ForParentSheetIndex(
                     dirt.fertilizer.Value,
                     IPosition.CenterRight,

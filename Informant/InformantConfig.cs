@@ -6,8 +6,6 @@ internal record InformantConfig
     public TooltipTrigger TooltipTrigger { get; set; } = TooltipTrigger.Hover;
     public SButton TooltipTriggerButton { get; set; } = SButton.MouseRight;
     public HideMachineTooltips HideMachineTooltips { get; set; } = HideMachineTooltips.ForNonMachines;
-    public bool DecorateLockedBundles { get; set; }
-    public bool ShowCropFertilizer = true;
 }
 
 internal enum TooltipTrigger

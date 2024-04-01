@@ -1,4 +1,6 @@
 ﻿using Slothsoft.Informant.Api;
+using Slothsoft.Informant.Implementation.Decorator;
+using Slothsoft.Informant.Implementation.TooltipGenerator;
 
 namespace Slothsoft.Informant.ThirdParty;
 
@@ -9,8 +11,9 @@ internal static class HookToGenericModConfigMenu
     {
         // get Generic Mod Config Menu's API (if it's installed)
         var configMenu = informantMod.Helper.ModRegistry.GetApi<IGenericModConfigMenuApi>("spacechase0.GenericModConfigMenu");
-        if (configMenu is null)
+        if (configMenu is null) {
             return;
+        }
 
         // register mod
         configMenu.Register(
@@ -42,38 +45,52 @@ internal static class HookToGenericModConfigMenu
             getDisplayName: value => informantMod.Helper.Translation.Get("Config.HideMachineTooltips." + value)
         );
 
+        // tooltips
         configMenu.AddSectionTitle(informantMod.ModManifest, () => informantMod.Helper.Translation.Get("Config.TooltipGenerators.Visibility"));
-        var configurables = new List<IDisplayable>();
-        configurables = [
+        List<IDisplayable> configurables = [
             .. api.ObjectTooltipGenerators.Generators,
             .. api.TerrainFeatureTooltipGenerators.Generators,
             .. api.AnimalTooltipGenerator.Generators
         ];
         CreateDisplayableOptions(configMenu, configurables, informantMod);
+        configMenu.AddSectionTitle(informantMod.ModManifest, () => informantMod.Helper.Translation.Get("Config.TooltipGenerators.GeneralSection"));
         configMenu.AddBoolOption(
             mod: informantMod.ModManifest,
-            name: () => informantMod.Helper.Translation.Get("Config.ShowCropFertilizer"),
-            tooltip: () => informantMod.Helper.Translation.Get("Config.ShowCropFertilizer.Description"),
-            getValue: () => informantMod.Config.ShowCropFertilizer,
-            setValue: value => informantMod.Config.ShowCropFertilizer = value
+            name: () => informantMod.Helper.Translation.Get("CropTooltipGenerator.DecorateFertilizer"),
+            tooltip: () => informantMod.Helper.Translation.Get("CropTooltipGenerator.DecorateFertilizer.Description"),
+            getValue: () => CropTooltipGenerator.DecorateFertilizer,
+            setValue: value => CropTooltipGenerator.DecorateFertilizer = value
         );
-
-        // add some config options for decorators
-        configMenu.AddSectionTitle(informantMod.ModManifest, () => informantMod.Helper.Translation.Get("Config.Decorators.GeneralSection"));
         configMenu.AddBoolOption(
             mod: informantMod.ModManifest,
-            name: () => informantMod.Helper.Translation.Get("Config.DecorateLockedBundles"),
-            tooltip: () => informantMod.Helper.Translation.Get("Config.DecorateLockedBundles.Description"),
-            getValue: () => informantMod.Config.DecorateLockedBundles,
-            setValue: value => informantMod.Config.DecorateLockedBundles = value
+            name: () => informantMod.Helper.Translation.Get("AnimalTooltipGenerator.DecoratePet"),
+            tooltip: () => informantMod.Helper.Translation.Get("AnimalTooltipGenerator.DecoratePet.Description"),
+            getValue: () => AnimalTooltipGenerator.DecoratePet,
+            setValue: value => AnimalTooltipGenerator.DecoratePet = value
         );
 
+        // decorators
         configMenu.AddSectionTitle(informantMod.ModManifest, () => informantMod.Helper.Translation.Get("Config.Decorators.Visibility"));
         configurables = [
             .. api.ItemDecorators.Decorators,
             .. api.GeneralDisplayables
         ];
         CreateDisplayableOptions(configMenu, configurables, informantMod);
+        configMenu.AddSectionTitle(informantMod.ModManifest, () => informantMod.Helper.Translation.Get("Config.Decorators.GeneralSection"));
+        configMenu.AddBoolOption(
+            mod: informantMod.ModManifest,
+            name: () => informantMod.Helper.Translation.Get("BundleTooltipDecorator.DecorateLockedBundles"),
+            tooltip: () => informantMod.Helper.Translation.Get("BundleTooltipDecorator.DecorateLockedBundles.Description"),
+            getValue: () => BundleDecorator.DecorateLockedBundles,
+            setValue: value => BundleDecorator.DecorateLockedBundles = value
+        );
+        configMenu.AddBoolOption(
+            mod: informantMod.ModManifest,
+            name: () => informantMod.Helper.Translation.Get("BundleTooltipDecorator.DecorateUnqualifiedBundles"),
+            tooltip: () => informantMod.Helper.Translation.Get("BundleTooltipDecorator.DecorateUnqualifiedBundles.Description"),
+            getValue: () => BundleDecorator.DecorateUnqualifiedBundles,
+            setValue: value => BundleDecorator.DecorateUnqualifiedBundles = value
+        );
     }
 
     private static void AddEnumOption<TEnum>(this IGenericModConfigMenuApi configMenu, IManifest mod, Func<TEnum> getValue, Action<TEnum> setValue,

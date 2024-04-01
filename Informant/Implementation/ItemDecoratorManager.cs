@@ -14,7 +14,6 @@ internal class ItemDecoratorManager : IDecoratorManager<Item>
 
     private static readonly List<IDecorator<Item>> DecoratorsList = [];
     private static Rectangle? _lastToolTipCoordinates;
-    private static Item? _lastItemHovered;
 
     private readonly Harmony _harmony;
 

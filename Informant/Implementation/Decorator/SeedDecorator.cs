@@ -50,8 +50,7 @@ internal class SeedDecorator : IDecorator<Item>
         if (crops.Any()) {
             CachedCropData[input.ItemId] = new ParsedSimpleSeed(
                 input.ItemId,
-                crops
-                .ToArray()
+                crops.ToArray()
             );
         }
         return crops.Any();

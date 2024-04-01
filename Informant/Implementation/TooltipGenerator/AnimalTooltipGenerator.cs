@@ -1,40 +1,49 @@
 ﻿using Microsoft.Xna.Framework;
 using Slothsoft.Informant.Api;
+using StardewValley.Characters;
 
 namespace Slothsoft.Informant.Implementation.TooltipGenerator;
 
-internal class AnimalTooltipGenerator : ITooltipGenerator<FarmAnimal>
+internal class AnimalTooltipGenerator(IModHelper modHelper) : ITooltipGenerator<FarmAnimal>, ITooltipGenerator<Pet>
 {
+    public static bool DecoratePet { get; set; }
 
-    private readonly IModHelper _modHelper;
+    private const int _friendship_max = Pet.maxFriendship;
+    private const int _friendship_per_heart = 200;
+    private const int _friendship_max_level = _friendship_max / _friendship_per_heart;
     private static readonly Vector2 _friendship_scale = new(3, 3);
     private static readonly Rectangle _friendship_full = new(211, 428, 7, 6);
     private static readonly Rectangle _friendship_left_half = new(211, 428, 4, 6);
     private static readonly Rectangle _friendship_right_half = new(222, 428, 3, 6);
     private static readonly Rectangle _friendship_hollow = new(218, 428, 7, 6);
 
-    public AnimalTooltipGenerator(IModHelper modHelper)
-    {
-        _modHelper = modHelper;
-    }
-
     public string Id => "animal";
-    public string DisplayName => _modHelper.Translation.Get("AnimalTooltipGenerator");
-    public string Description => _modHelper.Translation.Get("AnimalTooltipGenerator.Description");
+    public string DisplayName => modHelper.Translation.Get("AnimalTooltipGenerator");
+    public string Description => modHelper.Translation.Get("AnimalTooltipGenerator.Description");
 
     public bool HasTooltip(FarmAnimal input)
     {
         return true; // always display for now, until more features added
     }
 
-    public Tooltip Generate(FarmAnimal input)
+    public bool HasTooltip(Pet input)
     {
-        return CreateTooltip(_modHelper, input);
+        return DecoratePet;
     }
 
-    internal static Tooltip CreateTooltip(IModHelper modHelper, FarmAnimal animal)
+    public Tooltip Generate(FarmAnimal animal)
     {
-        var displayName = animal.displayName;
+        return CreateTooltip(modHelper, animal.displayName, animal.friendshipTowardFarmer.Value);
+    }
+
+    public Tooltip Generate(Pet pet)
+    {
+        return CreateTooltip(modHelper, pet.displayName, pet.friendshipTowardFarmer.Value);
+    }
+
+    internal static Tooltip CreateTooltip(IModHelper modHelper, string name, int friendship)
+    {
+        var displayName = name;
         var textLength = Game1.smallFont.MeasureString(displayName).X;
         var charLength = Game1.smallFont.MeasureString(" ").X;
         // with a 15 pixels padding in total
@@ -46,12 +55,12 @@ internal class AnimalTooltipGenerator : ITooltipGenerator<FarmAnimal>
         // extra line for icons
         displayName += "\n";
 
-        var love = animal.friendshipTowardFarmer.Value;
+        var love = friendship;
         var hearts = Enumerable
-            .Range(1, 5)
-            .Select(i => love >= i * 200
+            .Range(1, _friendship_max_level)
+            .Select(i => love >= i * _friendship_per_heart
                 ? new Rectangle[] { _friendship_full }
-                : (love >= (i - 1) * 200 + 100
+                : (love >= (i - 1) * _friendship_per_heart + _friendship_per_heart / 2
                     ? [_friendship_left_half, _friendship_right_half]
                     : [_friendship_hollow]))
             .SelectMany(rects => rects
