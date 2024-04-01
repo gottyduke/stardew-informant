@@ -10,6 +10,10 @@ namespace Slothsoft.Informant.Implementation.Decorator;
 
 internal class BundleDecorator : IDecorator<Item>
 {
+    public static bool DecorateLockedBundles { get; set; }
+    public static bool DecorateUnqualifiedBundles { get; set; }
+    public static readonly Color[] QualityColor = [Color.White, Color.White, Color.Gold, Color.MediumPurple];
+
     internal record ParsedSimpleBundle(string UnqualifiedItemId, int Quantity, int Quality, int Color);
 
     public const int DefaultBundleColor = -1;
@@ -17,7 +21,6 @@ internal class BundleDecorator : IDecorator<Item>
     private static Texture2D? BundleTexture;
     private static readonly Dictionary<int, Texture2D> Bundles = [];
     private static IEnumerable<ParsedSimpleBundle>? LastCachedBundle;
-    public static readonly Color[] QualityColor = [Color.White, Color.White, Color.Gold, Color.MediumPurple];
 
     private readonly IModHelper _modHelper;
 
@@ -54,8 +57,8 @@ internal class BundleDecorator : IDecorator<Item>
                     .ToArray();
             }
 
-            LastCachedBundle = GetNeededItems(allowedAreas, InformantMod.Instance?.Config.DecorateLockedBundles ?? false)
-                .Where(item => input.ItemId == item.UnqualifiedItemId);
+            LastCachedBundle = GetNeededItems(allowedAreas, DecorateLockedBundles)
+                .Where(item => input.ItemId == item.UnqualifiedItemId && (DecorateUnqualifiedBundles || input.Quality >= item.Quality));
             return LastCachedBundle.Any();
         }
         return false;
