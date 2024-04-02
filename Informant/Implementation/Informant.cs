@@ -3,7 +3,6 @@ using Slothsoft.Informant.Api;
 using Slothsoft.Informant.Implementation.Decorator;
 using Slothsoft.Informant.Implementation.Displayable;
 using Slothsoft.Informant.Implementation.TooltipGenerator;
-using StardewValley.Characters;
 using StardewValley.TerrainFeatures;
 
 namespace Slothsoft.Informant.Implementation;
@@ -64,11 +63,6 @@ public class Informant(IModHelper modHelper) : IInformant
             _itemDecoratorInformant ??= new ItemDecoratorManager(modHelper);
             return _itemDecoratorInformant;
         }
-    }
-
-    public void AddItemDecorator(string id, string displayName, string description, Func<Item, Texture2D?> decorator)
-    {
-        ItemDecorators.Add(new Decorator<Item>(id, () => displayName, () => description, decorator));
     }
 
     public void AddItemDecorator(string id, Func<string> displayName, Func<string> description, Func<Item, Texture2D?> decorator)

@@ -1,8 +1,4 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using Slothsoft.Informant.Implementation.TooltipGenerator;
-using Slothsoft.Informant.Implementation;
-using StardewModdingAPI;
-using StardewValley.Characters;
 using StardewValley.TerrainFeatures;
 
 namespace Slothsoft.Informant.Api;
@@ -37,13 +33,13 @@ public interface IInformant
 
     /// <summary>
     /// A manager class for the <see cref="Character"/>(s) under the mouse position.
-    /// <br/><b>Since Version:</b> 1.5.0
+    /// <br/><b>Since Version:</b> 1.7.2
     /// </summary>
     ITooltipGeneratorManager<Character> CharacterTooltipGenerators { get; }
 
     /// <summary>
     /// Adds a tooltip generator for the <see cref="Character"/>(s) under the mouse position.
-    /// <br/><b>Since Version:</b> 1.5.0
+    /// <br/><b>Since Version:</b> 1.7.2
     /// </summary>
     void AddCharacterTooltipGenerator(string id, Func<string> displayName, Func<string> description, Func<Character, string?> generator);
 

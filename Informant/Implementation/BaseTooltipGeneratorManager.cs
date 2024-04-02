@@ -16,6 +16,7 @@ internal class BaseTooltipGeneratorManager<TInput> : ITooltipGeneratorManager<TI
         return _generators
             .Where(g => config.DisplayIds.GetValueOrDefault(g.Id, true))
             .SelectMany(g => inputs
+                .OfType<TInput>()
                 .Where(g.HasTooltip)
                 .Select(g.Generate)
             );

@@ -1,6 +1,4 @@
 ﻿using Slothsoft.Informant.Api;
-using Slothsoft.Informant.Implementation.Decorator;
-using Slothsoft.Informant.Implementation.TooltipGenerator;
 
 namespace Slothsoft.Informant.ThirdParty;
 

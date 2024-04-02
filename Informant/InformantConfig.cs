@@ -1,6 +1,4 @@
-﻿using Slothsoft.Informant.Implementation.TooltipGenerator;
-
-namespace Slothsoft.Informant;
+﻿namespace Slothsoft.Informant;
 
 internal record InformantConfig
 {
