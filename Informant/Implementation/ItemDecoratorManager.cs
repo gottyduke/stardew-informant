@@ -129,7 +129,7 @@ internal class ItemDecoratorManager : IDecoratorManager<Item>
             // give numbers more than 2 digits a little more spacing
             var counter = decoration.Counter;
             if (counter != null) {
-                destinationRectangle.X += NumberSprite.getWidth(counter.Value) - 2 * NumberSprite.digitWidth;
+                destinationRectangle.X += Math.Max(0, NumberSprite.getWidth(counter.Value) - 2 * NumberSprite.digitWidth);
             }
 
             b.Draw(decoration.Texture, destinationRectangle, null, Color.White);
