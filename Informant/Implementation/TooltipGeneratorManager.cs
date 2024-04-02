@@ -24,6 +24,7 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
     private BaseTooltipGeneratorManager<TerrainFeature>? _terrainFeatureManager;
     private BaseTooltipGeneratorManager<SObject>? _objectInformant;
     private BaseTooltipGeneratorManager<Character>? _characterInformant;
+    private BaseTooltipGeneratorManager<Pet>? _petInformant;
 
     private readonly PerScreen<IEnumerable<Tooltip>?> _tooltips = new();
 
@@ -83,8 +84,9 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
     {
         return GenerateTooltips(_terrainFeatureManager, (mouseX, mouseY) =>
             Game1.player.currentLocation.terrainFeatures.Values
-            .Where(t => t.Tile == GetTilePosition(mouseX, mouseY))
-            .ToArray());
+                .Where(t => t.Tile == GetTilePosition(mouseX, mouseY))
+                .ToArray()
+        );
     }
 
     private IEnumerable<Tooltip> GenerateObjectTooltips()
@@ -92,17 +94,18 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
         return GenerateTooltips(_objectInformant, (mouseX, mouseY) =>
             Game1.player.currentLocation.netObjects.Values
                 .Where(o => o.TileLocation == GetTilePosition(mouseX, mouseY))
-                .ToArray());
+                .ToArray()
+        );
     }
 
     private IEnumerable<Tooltip> GenerateCharacterTooltips()
     {
         return GenerateTooltips(_characterInformant, (mouseX, mouseY) => [
             .. Game1.player.currentLocation.characters
-                .Where(n => n.GetBoundingBox().Contains(mouseX + Game1.viewport.X, mouseY + Game1.viewport.Y)),
+                .Where(c => c.GetBoundingBox().Contains(mouseX + Game1.viewport.X, mouseY + Game1.viewport.Y)),
             .. Game1.player.currentLocation.animals.Values
                 .Where(a => a.GetCursorPetBoundingBox().Contains(mouseX + Game1.viewport.X, mouseY + Game1.viewport.Y)),
-            ]);
+        ]);
     }
 
     private void OnRendered(object? sender, RenderedEventArgs e)
@@ -228,8 +231,7 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
             };
 
             var icons = tooltip.Icon
-                .Where(i => i != null)
-                .Select(i => i!)
+                .OfType<Icon>()
                 .GroupBy(i => i.Position ?? IPosition.TopLeft);
             foreach (var subsets in icons) {
                 var offset = new Point();

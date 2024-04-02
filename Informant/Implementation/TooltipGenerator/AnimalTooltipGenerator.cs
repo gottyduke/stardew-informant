@@ -6,8 +6,6 @@ namespace Slothsoft.Informant.Implementation.TooltipGenerator;
 
 internal class AnimalTooltipGenerator(IModHelper modHelper) : ITooltipGenerator<Character>
 {
-    public static bool DecoratePet { get; set; }
-
     private const int _friendship_max = Pet.maxFriendship;
     private const int _friendship_per_heart = 200;
     private const int _friendship_max_level = _friendship_max / _friendship_per_heart;
@@ -21,18 +19,18 @@ internal class AnimalTooltipGenerator(IModHelper modHelper) : ITooltipGenerator<
     public string DisplayName => modHelper.Translation.Get("AnimalTooltipGenerator");
     public string Description => modHelper.Translation.Get("AnimalTooltipGenerator.Description");
 
-    public bool HasTooltip(Character input)
+    public bool HasTooltip(Character character)
     {
-        return DecoratePet && input is Pet || input is FarmAnimal;
+        return character is FarmAnimal || (character is Pet && (InformantMod.Instance?.Config.DecoratePet ?? false));
     }
 
-    public Tooltip Generate(Character input)
+    public Tooltip Generate(Character character)
     {
-        if (input is FarmAnimal animal) {
+        if (character is FarmAnimal animal) {
             return CreateTooltip(modHelper, animal.displayName, animal.friendshipTowardFarmer.Value);
         }
 
-        if (input is Pet pet) {
+        if (character is Pet pet) {
             return CreateTooltip(modHelper, pet.displayName, pet.friendshipTowardFarmer.Value);
         }
 
