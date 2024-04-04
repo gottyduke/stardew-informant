@@ -12,7 +12,8 @@ internal class NewRecipeDisplayable : IDisplayable
 {
 
     private static string DisplayableId => "new-recipe";
-    private static readonly Rectangle NewSourceRectangle = new(144, 440, 16, 7);
+    private static readonly Rectangle NewSourceRectangle = new(141, 438, 20, 9);
+    private static Texture2D? cursor;
 
     private readonly IModHelper _modHelper;
     private readonly Harmony _harmony;
@@ -21,6 +22,8 @@ internal class NewRecipeDisplayable : IDisplayable
 
     public NewRecipeDisplayable(IModHelper modHelper, string? uniqueId = null)
     {
+        cursor ??= Game1.content.Load<Texture2D>(Game1.mouseCursorsName);
+
         _modHelper = modHelper;
         _harmony = new Harmony(uniqueId ?? InformantMod.Instance!.ModManifest.UniqueID);
         _harmony.Patch(
@@ -83,7 +86,7 @@ internal class NewRecipeDisplayable : IDisplayable
         }
 
         var scale = recipe.isCookingRecipe ? 1.5f : 2.5f;
-        b.Draw(Game1.mouseCursors, __instance.bounds with {
+        b.Draw(cursor, __instance.bounds with {
             Width = (int)(NewSourceRectangle.Width * scale),
             Height = (int)(NewSourceRectangle.Height * scale),
         }, NewSourceRectangle, Color.White, 0, new Vector2(0, 0), SpriteEffects.None, 1);

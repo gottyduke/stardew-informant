@@ -21,12 +21,17 @@ internal class CropTooltipGenerator : ITooltipGenerator<TerrainFeature>
 
     public bool HasTooltip(TerrainFeature input)
     {
-        return input is HoeDirt { crop: { } };
+        return input is HoeDirt { crop: { } } && IsInContext(input.Location);
     }
 
     public Tooltip Generate(TerrainFeature input)
     {
         return CreateTooltip(_modHelper, (HoeDirt)input);
+    }
+
+    internal static bool IsInContext(GameLocation location)
+    {
+        return location.IsFarm || location.IsGreenhouse || location.InIslandContext();
     }
 
     internal static Tooltip CreateTooltip(IModHelper modHelper, HoeDirt dirt)
