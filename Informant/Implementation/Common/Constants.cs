@@ -10,184 +10,184 @@ namespace Slothsoft.Informant.Implementation.Common;
 /// </summary>
 public static class BigCraftableIds
 {
-    public const int BeeHouse = 10;
-    public const int Cask = 163;
-    public const int CheesePress = 16;
-    public const int Keg = 12;
-    public const int Loom = 17;
-    public const int MayonnaiseMachine = 24;
-    public const int OilMaker = 19;
-    public const int PreservesJar = 15;
-    public const int BoneMill = 90;
-    public const int CharcoalKiln = 114;
-    public const int Crystalarium = 21;
-    public const int Furnace = 13;
-    public const int GeodeCrusher = 182;
-    public const int HeavyTapper = 264;
-    public const int LightningRod = 9;
-    public const int OstrichIncubator = 254;
-    public const int RecyclingMachine = 20;
-    public const int SeedMaker = 25;
-    public const int SlimeEggPress = 158;
-    public const int SlimeIncubator = 156;
-    public const int SlimeIncubator2 = 157; // game has both of these IDs?
-    public const int SolarPanel = 231;
-    public const int Tapper = 105;
-    public const int WoodChipper = 211;
-    public const int WormBin = 154;
-    public const int Incubator = 101;
-    public const int Incubator2 = 102; // the Wiki above shows Incubator as 101, but the game as 102?
-    public const int Incubator3 = 103; // maybe it's the egg color?
-    public const int CoffeeMaker = 246;
-    public const int Deconstructor = 265;
-    public const int StatueOfPerfection = 160;
-    public const int StatueOfTruePerfection = 280;
+    public const string BeeHouse = "10";
+    public const string Cask = "163";
+    public const string CheesePress = "16";
+    public const string Keg = "12";
+    public const string Loom = "17";
+    public const string MayonnaiseMachine = "24";
+    public const string OilMaker = "19";
+    public const string PreservesJar = "15";
+    public const string BoneMill = "90";
+    public const string CharcoalKiln = "114";
+    public const string Crystalarium = "21";
+    public const string Furnace = "13";
+    public const string GeodeCrusher = "182";
+    public const string HeavyTapper = "264";
+    public const string LightningRod = "9";
+    public const string OstrichIncubator = "254";
+    public const string RecyclingMachine = "20";
+    public const string SeedMaker = "25";
+    public const string SlimeEggPress = "158";
+    public const string SlimeIncubator = "156";
+    public const string SlimeIncubator2 = "157"; // game has both of these IDs?
+    public const string SolarPanel = "231";
+    public const string Tapper = "105";
+    public const string WoodChipper = "211";
+    public const string WormBin = "154";
+    public const string Incubator = "101";
+    public const string Incubator2 = "102"; // the Wiki above shows Incubator as 101, but the game as 102?
+    public const string Incubator3 = "103"; // maybe it's the egg color?
+    public const string CoffeeMaker = "246";
+    public const string Deconstructor = "265";
+    public const string StatueOfPerfection = "160";
+    public const string StatueOfTruePerfection = "280";
     // 1.6
-    public const int BaitMaker = 285;
-    public const int MushroomLog = 283;
-    public const int Dehydrator = 286;
-    public const int HeavyFurnace = 288;
-    public const int StatueOfBlessings = 290;
-    public const int StatueOfTheDwarfKing = 292;
-    public const int FishSmoker = 296;
-    public const int DeluxeWormbin = 298;
+    public const string MushroomLog = "MushroomLog";
+    public const string BaitMaker = "BaitMaker";
+    public const string Dehydrator = "Dehydrator";
+    public const string HeavyFurnace = "HeavyFurnace";
+    public const string StatueOfBlessings = "StatueOfBlessings";
+    public const string StatueOfTheDwarfKing = "StatueOfTheDwarfKing";
+    public const string FishSmoker = "FishSmoker";
+    public const string DeluxeWormbin = "DeluxeWormBin";
 
-    public static readonly int[] AllMachines = [
+    public static readonly string[] AllMachines = [
         BeeHouse, Cask, CheesePress, Keg, Loom, MayonnaiseMachine, OilMaker, PreservesJar,
         BoneMill, CharcoalKiln, Crystalarium, Furnace, GeodeCrusher, HeavyTapper, LightningRod, OstrichIncubator, RecyclingMachine, SeedMaker, SlimeEggPress,
         SlimeIncubator, SlimeIncubator2, SolarPanel, Tapper, WoodChipper, WormBin, Incubator, Incubator2, Incubator3, CoffeeMaker, Deconstructor,
-        StatueOfPerfection, StatueOfTruePerfection, BaitMaker, MushroomLog, Dehydrator, HeavyFurnace, StatueOfBlessings, StatueOfTheDwarfKing, FishSmoker, DeluxeWormbin,
+        StatueOfPerfection, StatueOfTruePerfection, MushroomLog, BaitMaker, Dehydrator, HeavyFurnace, StatueOfBlessings, StatueOfTheDwarfKing, FishSmoker, DeluxeWormbin,
     ];
 
-    public const int Chest = 130;
-    public const int JunimoChest = 256;
-    public const int MiniFridge = 216;
-    public const int StoneChest = 232;
-    public const int MiniShippingBin = 248;
+    public const string Chest = "130";
+    public const string JunimoChest = "256";
+    public const string MiniFridge = "216";
+    public const string StoneChest = "232";
+    public const string MiniShippingBin = "248";
     // 1.6
-    public const int BigChest = 304;
-    public const int BigStoneChest = 328;
+    public const string BigChest = "BigChest";
+    public const string BigStoneChest = "BigStoneChest";
 
-    public static readonly int[] AllChests = [
+    public static readonly string[] AllChests = [
         Chest, JunimoChest, MiniFridge, StoneChest, MiniShippingBin, BigChest, BigStoneChest,
     ];
 
-    public static readonly int[] HousePlants = Enumerable.Range(0, 7 + 1).ToArray();
-    public const int Scarecrow = 8;
-    public const int TablePieceL = 22;
-    public const int TablePieceR = 23;
-    public const int WoodChair = 26;
-    public const int WoodChair2 = 27;
-    public const int SkeletonModel = 28;
-    public const int Obelisk = 29;
-    public const int ChickenStatue = 31;
-    public const int StoneCairn = 32;
-    public const int SuitOfArmor = 33;
-    public const int SignOfTheVessel = 34;
-    public const int BasicLog = 35;
-    public const int LawnFlamingo = 36;
-    public const int WoodSign = 37;
-    public const int StoneSign = 38;
-    public const int DarkSign = 39;
-    public const int BigGreenCane = 40;
-    public const int GreenCanes = 41;
-    public const int MixedCane = 42;
-    public const int RedCanes = 43;
-    public const int BigRedCane = 44;
-    public const int OrnamentalHayBale = 45;
-    public const int LogSection = 46;
-    public const int GraveStone = 47;
-    public const int SeasonalDecor = 48;
-    public const int StoneFrog = 52;
-    public const int StoneParrot = 53;
-    public const int StoneOwl = 54;
-    public const int StoneJunimo = 55;
-    public const int SlimeBall = 56;
-    public const int GardenPot = 62;
-    public const int Bookcase = 64;
-    public const int FancyTable = 65;
-    public const int AncientTable = 66;
-    public const int AncientStool = 67;
-    public const int GrandfatherClock = 68;
-    public const int TeddyTimer = 69;
-    public const int DeadTree = 70;
-    public const int Staircase = 71;
-    public const int TallTorch = 72;
-    public const int RitualMask = 73;
-    public const int Bonfire = 74;
-    public const int Bongo = 75;
-    public const int DecorativeSpears = 76;
-    public const int Boulder = 78;
-    public const int Door = 79;
-    public const int Door2 = 80;
-    public const int LockedDoor = 81;
-    public const int LockedDoor2 = 82;
-    public const int WickedStatue = 83;
-    public const int WickedStatue2 = 84;
-    public const int SlothSkeletonL = 85;
-    public const int SlothSkeletonM = 86;
-    public const int SlothSkeletonR = 87;
-    public const int StandingGeode = 88;
-    public const int ObsidianVase = 89;
-    public const int SingingStone = 94;
-    public const int StoneOwl2 = 95;
-    public const int StrangeCapsule = 96;
-    public const int EmptyCapsule = 98;
-    public const int FeedHopper = 99;
-    public const int Heater = 104;
-    public const int Camera = 106;
-    public const int PlushBunny = 107;
-    public const int TubOFlowers = 108;
-    public const int TubOFlowers2 = 109;
-    public const int Rarecrow = 110;
-    public const int DecorativePitcher = 111;
-    public const int DriedSunflowers = 112;
-    public const int Rarecrow2 = 113;
-    public const int StardewHeroTrophy = 116;
-    public const int SodaMachine = 117;
-    public static readonly int[] BarrelsAndCrates = Enumerable.Range(118, 125 - 118 + 1).ToArray();
-    public const int Rarecrow3 = 126;
-    public const int StatueOfEndlessFortune = 127;
-    public const int MushroomBox = 128;
-    public const int Rarecrow4 = 136;
-    public const int Rarecrow5 = 137;
-    public const int Rarecrow6 = 138;
-    public const int Rarecrow7 = 139;
-    public const int Rarecrow8 = 140;
-    public const int PrairieKingArcadeSystem = 141;
-    public const int WoodenBrazier = 143;
-    public const int StoneBrazier = 144;
-    public const int GoldBrazier = 145;
-    public const int Campfire = 146;
-    public const int StumpBrazier = 147;
-    public const int CarvedBrazier = 148;
-    public const int SkullBrazier = 149;
-    public const int BarrelBrazier = 150;
-    public const int MarbleBrazier = 151;
-    public const int WoodLamppost = 152;
-    public const int IronLamppost = 153;
-    public const int Hmtgf = 155;
-    public const int JunimoKartArcadeSystem = 159;
-    public const int PinkyLemon = 161;
-    public const int Foroguemo = 162;
-    public const int SolidGoldLewis = 164;
-    public const int AutoGrabber = 165;
-    public const int DeluxeScarecrow = 167;
-    public const int Barrel = 174;
-    public const int Crate = 175;
-    public static readonly int[] SeasonalPlants = Enumerable.Range(184, 207 - 184 + 1).ToArray();
-    public const int Workbench = 208;
-    public const int MiniJukebox = 209;
-    public const int Telephone = 214;
-    public const int CursedPkArcadeSystem = 219;
-    public const int MiniObelisk = 238;
-    public const int FarmComputer = 239;
-    public const int SewingMachine = 247;
-    public const int AutoPetter = 272;
-    public const int Hopper = 275;
-    public const int Campfire2 = 278;
+    public static readonly string[] HousePlants = Enumerable.Range(0, 7 + 1).Select(id => id.ToString()).ToArray();
+    public const string Scarecrow = "8";
+    public const string TablePieceL = "22";
+    public const string TablePieceR = "23";
+    public const string WoodChair = "26";
+    public const string WoodChair2 = "27";
+    public const string SkeletonModel = "28";
+    public const string Obelisk = "29";
+    public const string ChickenStatue = "31";
+    public const string StoneCairn = "32";
+    public const string SuitOfArmor = "33";
+    public const string SignOfTheVessel = "34";
+    public const string BasicLog = "35";
+    public const string LawnFlamingo = "36";
+    public const string WoodSign = "37";
+    public const string StoneSign = "38";
+    public const string DarkSign = "39";
+    public const string BigGreenCane = "40";
+    public const string GreenCanes = "41";
+    public const string MixedCane = "42";
+    public const string RedCanes = "43";
+    public const string BigRedCane = "44";
+    public const string OrnamentalHayBale = "45";
+    public const string LogSection = "46";
+    public const string GraveStone = "47";
+    public const string SeasonalDecor = "48";
+    public const string StoneFrog = "52";
+    public const string StoneParrot = "53";
+    public const string StoneOwl = "54";
+    public const string StoneJunimo = "55";
+    public const string SlimeBall = "56";
+    public const string GardenPot = "62";
+    public const string Bookcase = "64";
+    public const string FancyTable = "65";
+    public const string AncientTable = "66";
+    public const string AncientStool = "67";
+    public const string GrandfatherClock = "68";
+    public const string TeddyTimer = "69";
+    public const string DeadTree = "70";
+    public const string Staircase = "71";
+    public const string TallTorch = "72";
+    public const string RitualMask = "73";
+    public const string Bonfire = "74";
+    public const string Bongo = "75";
+    public const string DecorativeSpears = "76";
+    public const string Boulder = "78";
+    public const string Door = "79";
+    public const string Door2 = "80";
+    public const string LockedDoor = "81";
+    public const string LockedDoor2 = "82";
+    public const string WickedStatue = "83";
+    public const string WickedStatue2 = "84";
+    public const string SlothSkeletonL = "85";
+    public const string SlothSkeletonM = "86";
+    public const string SlothSkeletonR = "87";
+    public const string StandingGeode = "88";
+    public const string ObsidianVase = "89";
+    public const string SingingStone = "94";
+    public const string StoneOwl2 = "95";
+    public const string StrangeCapsule = "96";
+    public const string EmptyCapsule = "98";
+    public const string FeedHopper = "99";
+    public const string Heater = "104";
+    public const string Camera = "106";
+    public const string PlushBunny = "107";
+    public const string TubOFlowers = "108";
+    public const string TubOFlowers2 = "109";
+    public const string Rarecrow = "110";
+    public const string DecorativePitcher = "111";
+    public const string DriedSunflowers = "112";
+    public const string Rarecrow2 = "113";
+    public const string StardewHeroTrophy = "116";
+    public const string SodaMachine = "117";
+    public static readonly string[] BarrelsAndCrates = Enumerable.Range(118, 125 - 118 + 1).Select(id => id.ToString()).ToArray();
+    public const string Rarecrow3 = "126";
+    public const string StatueOfEndlessFortune = "127";
+    public const string MushroomBox = "128";
+    public const string Rarecrow4 = "136";
+    public const string Rarecrow5 = "137";
+    public const string Rarecrow6 = "138";
+    public const string Rarecrow7 = "139";
+    public const string Rarecrow8 = "140";
+    public const string PrairieKingArcadeSystem = "141";
+    public const string WoodenBrazier = "143";
+    public const string StoneBrazier = "144";
+    public const string GoldBrazier = "145";
+    public const string Campfire = "146";
+    public const string StumpBrazier = "147";
+    public const string CarvedBrazier = "148";
+    public const string SkullBrazier = "149";
+    public const string BarrelBrazier = "150";
+    public const string MarbleBrazier = "151";
+    public const string WoodLamppost = "152";
+    public const string IronLamppost = "153";
+    public const string Hmtgf = "155";
+    public const string JunimoKartArcadeSystem = "159";
+    public const string PinkyLemon = "161";
+    public const string Foroguemo = "162";
+    public const string SolidGoldLewis = "164";
+    public const string AutoGrabber = "165";
+    public const string DeluxeScarecrow = "167";
+    public const string Barrel = "174";
+    public const string Crate = "175";
+    public static readonly string[] SeasonalPlants = Enumerable.Range(184, 207 - 184 + 1).Select(id => id.ToString()).ToArray();
+    public const string Workbench = "208";
+    public const string MiniJukebox = "209";
+    public const string Telephone = "214";
+    public const string CursedPkArcadeSystem = "219";
+    public const string MiniObelisk = "238";
+    public const string FarmComputer = "239";
+    public const string SewingMachine = "247";
+    public const string AutoPetter = "272";
+    public const string Hopper = "275";
+    public const string Campfire2 = "278";
 
-    public static readonly int[] AllStaticCraftables =
+    public static readonly string[] AllStaticCraftables =
     [
         .. HousePlants,
         .. BarrelsAndCrates,
@@ -206,7 +206,7 @@ public static class BigCraftableIds
         },
     ];
 
-    public static readonly int[] AllRarecrows = [
+    public static readonly string[] AllRarecrows = [
         Rarecrow, Rarecrow2, Rarecrow3, Rarecrow4, Rarecrow5, Rarecrow6, Rarecrow7, Rarecrow8
     ];
 }
@@ -214,9 +214,9 @@ public static class BigCraftableIds
 public static class CropIds
 {
     // Ship 15 of each crop
-    public static readonly int[] Polyculture = [
+    public static readonly string[] Polyculture = new[] {
         24, 188, 190, 192, 248, 250, 252, 254, 256, 258, 260, 262, 264, 266, 268, 270, 272, 274, 276, 278, 280, 282, 284, 300, 304, 398, 400, 433
-    ];
+    }.Select(id => id.ToString()).ToArray();
 
     public const string Ginger = "829";
     public const string MixedFlowers = "MixedFlowerSeeds";

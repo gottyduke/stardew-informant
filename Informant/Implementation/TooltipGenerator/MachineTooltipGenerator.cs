@@ -26,9 +26,11 @@ internal class MachineTooltipGenerator : ITooltipGenerator<SObject>
 
     internal static bool HasTooltip(SObject input, HideMachineTooltips hideMachineTooltips)
     {
-        if (!input.bigCraftable.Value) return false;
-        _ = int.TryParse(input.ItemId, out var unqualifiedItemId);
-        if (unqualifiedItemId == BigCraftableIds.GardenPot) {
+        if (!input.bigCraftable.Value) {
+            return false;
+        }
+
+        if (input.ItemId == BigCraftableIds.GardenPot) {
             var gardenPot = input as IndoorPot;
             var crop = gardenPot?.hoeDirt.Value.crop;
             return crop != null;
@@ -36,16 +38,15 @@ internal class MachineTooltipGenerator : ITooltipGenerator<SObject>
 
         return hideMachineTooltips switch {
             HideMachineTooltips.Never => true,
-            HideMachineTooltips.ForChests => !BigCraftableIds.AllChests.Contains(unqualifiedItemId),
-            _ => !BigCraftableIds.AllChests.Contains(unqualifiedItemId) &&
-                 !BigCraftableIds.AllStaticCraftables.Contains(unqualifiedItemId)
+            HideMachineTooltips.ForChests => !BigCraftableIds.AllChests.Contains(input.ItemId),
+            _ => !BigCraftableIds.AllChests.Contains(input.ItemId) &&
+                 !BigCraftableIds.AllStaticCraftables.Contains(input.ItemId)
         };
     }
 
     public Tooltip Generate(SObject input)
     {
-        _ = int.TryParse(input.ItemId, out var unqualifiedItemId);
-        if (unqualifiedItemId == BigCraftableIds.GardenPot) {
+        if (input.ItemId == BigCraftableIds.GardenPot) {
             return input is not IndoorPot gardenPot || gardenPot.hoeDirt.Value.crop == null
                 ? new Tooltip("???")
                 : CropTooltipGenerator.CreateTooltip(_modHelper, gardenPot.hoeDirt.Value);
@@ -56,10 +57,9 @@ internal class MachineTooltipGenerator : ITooltipGenerator<SObject>
     private Tooltip CreateTooltip(SObject input)
     {
         var displayName = input.DisplayName;
-        _ = int.TryParse(input.ItemId, out var unqualifiedItemId);
 
         var heldObject = input.heldObject.Value;
-        if (heldObject == null || BigCraftableIds.AutoGrabber == unqualifiedItemId) {
+        if (heldObject == null || BigCraftableIds.AutoGrabber == input.ItemId) {
             return new Tooltip(displayName); // we don't show any icon for AutoGrabber
         }
         var heldObjectName = heldObject.DisplayName;

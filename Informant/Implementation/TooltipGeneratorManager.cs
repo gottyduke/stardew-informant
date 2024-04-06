@@ -24,7 +24,6 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
     private BaseTooltipGeneratorManager<TerrainFeature>? _terrainFeatureManager;
     private BaseTooltipGeneratorManager<SObject>? _objectInformant;
     private BaseTooltipGeneratorManager<Character>? _characterInformant;
-    private BaseTooltipGeneratorManager<Pet>? _petInformant;
 
     private readonly PerScreen<IEnumerable<Tooltip>?> _tooltips = new();
 

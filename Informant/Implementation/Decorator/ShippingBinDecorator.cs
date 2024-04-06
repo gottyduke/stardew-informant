@@ -29,8 +29,7 @@ internal class ShippingBinDecorator : IDecorator<Item>
             }
             var alreadyShipped = Game1.player.basicShipped.ContainsKey(input.ItemId) ? Game1.player.basicShipped[input.ItemId] : 0;
 
-            _ = int.TryParse(input.ItemId, out var unqualifiedItemId);
-            if (!CropIds.Polyculture.Contains(unqualifiedItemId)) {
+            if (!CropIds.Polyculture.Contains(input.ItemId)) {
                 // we only need to ship this item once
                 return alreadyShipped == 0;
             }
@@ -50,7 +49,7 @@ internal class ShippingBinDecorator : IDecorator<Item>
 
     public int? CalculateStillNeeded(Item input)
     {
-        if (!CropIds.Polyculture.Contains(input.ParentSheetIndex)) {
+        if (!CropIds.Polyculture.Contains(input.ItemId)) {
             // we don't need to show any number because we don't need to ship 15
             return null;
         }
