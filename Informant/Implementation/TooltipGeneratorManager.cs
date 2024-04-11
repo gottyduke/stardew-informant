@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Slothsoft.Informant.Api;
 using StardewModdingAPI.Events;
 using StardewModdingAPI.Utilities;
-using StardewValley.Characters;
 using StardewValley.Menus;
 using StardewValley.TerrainFeatures;
 using System.Collections.Immutable;

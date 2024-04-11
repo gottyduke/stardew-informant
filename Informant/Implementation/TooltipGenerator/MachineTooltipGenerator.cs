@@ -63,8 +63,9 @@ internal class MachineTooltipGenerator : ITooltipGenerator<SObject>
             return new Tooltip(displayName); // we don't show any icon for AutoGrabber
         }
         var heldObjectName = heldObject.DisplayName;
+        var heldObjectStack = heldObject.Stack > 1 ? $"x{heldObject.Stack}" : "";
         var daysLeft = CalculateMinutesLeftString(input);
-        return new Tooltip($"{displayName}\n> {heldObjectName}\n{daysLeft}") {
+        return new Tooltip($"{displayName}\n> {heldObjectName} {heldObjectStack}\n{daysLeft}") {
             Icon = [
                 Icon.ForObject(
                     heldObject,

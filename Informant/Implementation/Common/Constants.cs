@@ -25,6 +25,7 @@ public static class BigCraftableIds
     public const string GeodeCrusher = "182";
     public const string HeavyTapper = "264";
     public const string LightningRod = "9";
+    public const string MushroomBox = "128";
     public const string OstrichIncubator = "254";
     public const string RecyclingMachine = "20";
     public const string SeedMaker = "25";
@@ -54,7 +55,7 @@ public static class BigCraftableIds
 
     public static readonly string[] AllMachines = [
         BeeHouse, Cask, CheesePress, Keg, Loom, MayonnaiseMachine, OilMaker, PreservesJar,
-        BoneMill, CharcoalKiln, Crystalarium, Furnace, GeodeCrusher, HeavyTapper, LightningRod, OstrichIncubator, RecyclingMachine, SeedMaker, SlimeEggPress,
+        BoneMill, CharcoalKiln, Crystalarium, Furnace, GeodeCrusher, HeavyTapper, LightningRod, MushroomBox, OstrichIncubator, RecyclingMachine, SeedMaker, SlimeEggPress,
         SlimeIncubator, SlimeIncubator2, SolarPanel, Tapper, WoodChipper, WormBin, Incubator, Incubator2, Incubator3, CoffeeMaker, Deconstructor,
         StatueOfPerfection, StatueOfTruePerfection, MushroomLog, BaitMaker, Dehydrator, HeavyFurnace, StatueOfBlessings, StatueOfTheDwarfKing, FishSmoker, DeluxeWormbin,
     ];
@@ -148,7 +149,6 @@ public static class BigCraftableIds
     public static readonly string[] BarrelsAndCrates = Enumerable.Range(118, 125 - 118 + 1).Select(id => id.ToString()).ToArray();
     public const string Rarecrow3 = "126";
     public const string StatueOfEndlessFortune = "127";
-    public const string MushroomBox = "128";
     public const string Rarecrow4 = "136";
     public const string Rarecrow5 = "137";
     public const string Rarecrow6 = "138";
@@ -186,6 +186,9 @@ public static class BigCraftableIds
     public const string AutoPetter = "272";
     public const string Hopper = "275";
     public const string Campfire2 = "278";
+    // 1.6
+    public const string TextSign = "TextSign";
+    public const string Anvil = "Anvil";
 
     public static readonly string[] AllStaticCraftables =
     [
@@ -199,15 +202,15 @@ public static class BigCraftableIds
             TeddyTimer, DeadTree, Staircase, TallTorch, RitualMask, Bonfire, Bongo, DecorativeSpears, Boulder, Door, Door2, LockedDoor, LockedDoor2, WickedStatue,
             WickedStatue2, SlothSkeletonL, SlothSkeletonM, SlothSkeletonR, StandingGeode, ObsidianVase, SingingStone, StoneOwl2, StrangeCapsule, EmptyCapsule,
             FeedHopper, Heater, Camera, PlushBunny, TubOFlowers, TubOFlowers2, Rarecrow, DecorativePitcher, DriedSunflowers, Rarecrow2, StardewHeroTrophy,
-            SodaMachine, Rarecrow3, StatueOfEndlessFortune, MushroomBox, Rarecrow4, Rarecrow5, Rarecrow6, Rarecrow7, Rarecrow8,
+            SodaMachine, Rarecrow3, StatueOfEndlessFortune, Rarecrow4, Rarecrow5, Rarecrow6, Rarecrow7, Rarecrow8,
             PrairieKingArcadeSystem, WoodenBrazier, StoneBrazier, GoldBrazier, Campfire, StumpBrazier, CarvedBrazier, SkullBrazier, BarrelBrazier, MarbleBrazier,
             WoodLamppost, IronLamppost, Hmtgf, JunimoKartArcadeSystem, PinkyLemon, Foroguemo, SolidGoldLewis, AutoGrabber, DeluxeScarecrow, Barrel, Crate,
-            Workbench, MiniJukebox, Telephone, CursedPkArcadeSystem, MiniObelisk, FarmComputer, SewingMachine, AutoPetter, Hopper, Campfire2,
+            Workbench, MiniJukebox, Telephone, CursedPkArcadeSystem, MiniObelisk, FarmComputer, SewingMachine, AutoPetter, Hopper, Campfire2, TextSign, Anvil,
         },
     ];
 
     public static readonly string[] AllRarecrows = [
-        Rarecrow, Rarecrow2, Rarecrow3, Rarecrow4, Rarecrow5, Rarecrow6, Rarecrow7, Rarecrow8
+        Rarecrow, Rarecrow2, Rarecrow3, Rarecrow4, Rarecrow5, Rarecrow6, Rarecrow7, Rarecrow8,
     ];
 }
 
