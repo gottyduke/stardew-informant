@@ -53,25 +53,34 @@ internal class TreeTooltipGenerator : ITooltipGenerator<TerrainFeature>
                 break;
         }
 
-        if (InformantMod.Instance?.Config.ShowTreeGrowthStage ?? false) {
-            treeString += $" {GetTreeGrowthStage(_modHelper, tree)}";
-        }
+        
 
+        if (InformantMod.Instance?.Config.ShowTreeGrowthStage ?? false) {
+            treeString += GetTreeGrowthStage(_modHelper, tree);
+        }
+        
         return treeString;
     }
 
     internal static string GetTreeGrowthStage(IModHelper modHelper, TerrainFeature treeFeature)
     {
         var growthStage = -1;
+        var treeStage = Tree.treeStage;
         if (treeFeature is Tree tree) {
-            growthStage = tree.growthStage.Value == Tree.treeStage ? FruitTree.treeStage : tree.growthStage.Value;
+            growthStage = tree.growthStage.Value;
         }
         if (treeFeature is FruitTree fruitTree) {
             growthStage = fruitTree.growthStage.Value;
+            treeStage = FruitTree.treeStage;
         }
+        var stageString = growthStage < treeStage
+            ? modHelper.Translation.Get("TreeTooltipGenerator.ShowGrowthStage.GrowthStage", new
+            {
+                N = growthStage,
+                T = treeStage,
+            })
+            : modHelper.Translation.Get("TreeTooltipGenerator.ShowGrowthStage.MatureStage");
 
-        return growthStage != -1
-            ? modHelper.Translation.Get($"TreeTooltipGenerator.ShowGrowthStage.{growthStage}")
-            : "???";
+        return $"\n({stageString})";
     }
 }

@@ -40,7 +40,7 @@ internal class FruitTreeTooltipGenerator : ITooltipGenerator<TerrainFeature>
                 );
         
         if (InformantMod.Instance?.Config.ShowTreeGrowthStage ?? false) {
-            displayName += $" {TreeTooltipGenerator.GetTreeGrowthStage(_modHelper, fruitTree)}";
+            displayName += TreeTooltipGenerator.GetTreeGrowthStage(_modHelper, fruitTree);
         }
 
         return new Tooltip($"{displayName}\n{daysLeft}") { Icon = [icon] };
