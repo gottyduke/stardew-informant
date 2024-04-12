@@ -66,6 +66,13 @@
   "TreeTooltipGenerator.Type10": "Árbol Silvestre Musgoso",
   "TreeTooltipGenerator.Type13": "Árbol Místico",
   "TreeTooltipGenerator.MossCovered": "{{X}} Cubierto de Musgo",
+  "TreeTooltipGenerator.ShowGrowthStage": "Display Tree Stage",
+  "TreeTooltipGenerator.ShowGrowthStage.Description": "Displays tree growth stage(Seed, Sprout, Sapling, Bush, Mature)",
+  "TreeTooltipGenerator.ShowGrowthStage.0": "Seed",
+  "TreeTooltipGenerator.ShowGrowthStage.1": "Sprout",
+  "TreeTooltipGenerator.ShowGrowthStage.2": "Sapling",
+  "TreeTooltipGenerator.ShowGrowthStage.3": "Bush",
+  "TreeTooltipGenerator.ShowGrowthStage.4": "Mature",
 
   "Config.Decorators.GeneralSection": "Decoradores - General",
   "Config.Decorators.Visibility": "Decoradores - Visibilidad",

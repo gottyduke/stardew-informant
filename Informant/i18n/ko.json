@@ -28,7 +28,7 @@
   "ShippingBinDecorator.Description": "출하한적 없는 아이템을 표시합니다",
 
   "AnimalTooltipGenerator": "Animals Tooltip",
-  "AnimalTooltipGenerator.Description": "Display additional information for farm animals",
+  "AnimalTooltipGenerator.Description": "Displays additional information for farm animals",
   "AnimalTooltipGenerator.DecoratePet": "Display Pet",
   "AnimalTooltipGenerator.DecoratePet.Description": "Displays pet info",
 
@@ -66,6 +66,13 @@
   "TreeTooltipGenerator.Type10": "Mossy Wild Tree",
   "TreeTooltipGenerator.Type13": "Mystic Tree",
   "TreeTooltipGenerator.MossCovered": "Mossy {{X}}",
+  "TreeTooltipGenerator.ShowGrowthStage": "Display Tree Stage",
+  "TreeTooltipGenerator.ShowGrowthStage.Description": "Displays tree growth stage(Seed, Sprout, Sapling, Bush, Mature)",
+  "TreeTooltipGenerator.ShowGrowthStage.0": "Seed",
+  "TreeTooltipGenerator.ShowGrowthStage.1": "Sprout",
+  "TreeTooltipGenerator.ShowGrowthStage.2": "Sapling",
+  "TreeTooltipGenerator.ShowGrowthStage.3": "Bush",
+  "TreeTooltipGenerator.ShowGrowthStage.4": "Mature",
 
   "Config.Decorators.GeneralSection": "표시기 - 일반",
   "Config.Decorators.Visibility": "표시기 - 활성화",

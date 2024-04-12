@@ -66,6 +66,13 @@
   "TreeTooltipGenerator.Type10": "野树",
   "TreeTooltipGenerator.Type13": "神秘树",
   "TreeTooltipGenerator.MossCovered": "长满苔藓的{{X}}",
+  "TreeTooltipGenerator.ShowGrowthStage": "显示树木成长阶段",
+  "TreeTooltipGenerator.ShowGrowthStage.Description": "同时显示树木/果树的成长阶段(种子, 嫩芽, 树苗, 灌木, 成熟)",
+  "TreeTooltipGenerator.ShowGrowthStage.0": "种子",
+  "TreeTooltipGenerator.ShowGrowthStage.1": "嫩芽",
+  "TreeTooltipGenerator.ShowGrowthStage.2": "树苗",
+  "TreeTooltipGenerator.ShowGrowthStage.3": "灌木",
+  "TreeTooltipGenerator.ShowGrowthStage.4": "成熟",
 
   "Config.Decorators.GeneralSection": "通用标记",
   "Config.Decorators.Visibility": "标记开关",
