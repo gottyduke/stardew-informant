@@ -10,6 +10,7 @@ internal record InformantConfig
     public bool DecoratePet { get; set; } = true;
     public bool DecorateLockedBundles { get; set; } = true;
     public bool DecorateUnqualifiedBundles { get; set; } = true;
+    public bool ShowTreeGrowthStage { get; set; } = false;
 }
 
 internal enum TooltipTrigger

@@ -66,6 +66,13 @@ internal static class HookToGenericModConfigMenu
             getValue: () => informantMod.Config.DecoratePet,
             setValue: value => informantMod.Config.DecoratePet = value
         );
+        configMenu.AddBoolOption(
+            mod: informantMod.ModManifest,
+            name: () => informantMod.Helper.Translation.Get("TreeTooltipGenerator.ShowGrowthStage"),
+            tooltip: () => informantMod.Helper.Translation.Get("TreeTooltipGenerator.ShowGrowthStage.Description"),
+            getValue: () => informantMod.Config.ShowTreeGrowthStage,
+            setValue: value => informantMod.Config.ShowTreeGrowthStage = value
+        );
 
         // decorators
         configMenu.AddSectionTitle(informantMod.ModManifest, () => informantMod.Helper.Translation.Get("Config.Decorators.Visibility"));

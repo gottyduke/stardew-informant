@@ -29,6 +29,7 @@ internal class TreeTooltipGenerator : ITooltipGenerator<TerrainFeature>
 
     private string CreateText(Tree tree)
     {
+        var treeString = "???";
         switch (tree.treeType.Value) {
             case Tree.bushyTree:
             case Tree.leafyTree:
@@ -38,17 +39,39 @@ internal class TreeTooltipGenerator : ITooltipGenerator<TerrainFeature>
             case Tree.mahoganyTree:
             case Tree.palmTree2:
             case Tree.mysticTree:
-                var treeString = _modHelper.Translation.Get("TreeTooltipGenerator.Type" + tree.treeType.Value);
+                treeString = _modHelper.Translation.Get("TreeTooltipGenerator.Type" + tree.treeType.Value);
                 if (tree.hasMoss.Value) {
                     treeString = _modHelper.Translation.Get("TreeTooltipGenerator.MossCovered", new { X = treeString });
                 }
-                return treeString;
+                break;
             case Tree.greenRainTreeBushy:
             case Tree.greenRainTreeLeafy:
             case Tree.greenRainTreeFern:
-                return _modHelper.Translation.Get("TreeTooltipGenerator.Type10");
+                treeString = _modHelper.Translation.Get("TreeTooltipGenerator.Type10");
+                break;
             default:
-                return "???";
+                break;
         }
+
+        if (InformantMod.Instance?.Config.ShowTreeGrowthStage ?? false) {
+            treeString += $" {GetTreeGrowthStage(_modHelper, tree)}";
+        }
+
+        return treeString;
+    }
+
+    internal static string GetTreeGrowthStage(IModHelper modHelper, TerrainFeature treeFeature)
+    {
+        var growthStage = -1;
+        if (treeFeature is Tree tree) {
+            growthStage = tree.growthStage.Value == Tree.treeStage ? FruitTree.treeStage : tree.growthStage.Value;
+        }
+        if (treeFeature is FruitTree fruitTree) {
+            growthStage = fruitTree.growthStage.Value;
+        }
+
+        return growthStage != -1
+            ? modHelper.Translation.Get($"TreeTooltipGenerator.ShowGrowthStage.{growthStage}")
+            : "???";
     }
 }
