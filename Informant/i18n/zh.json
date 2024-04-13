@@ -24,8 +24,11 @@
   "NewRecipeDisplayable": "新配方",
   "NewRecipeDisplayable.Description": "标记还未使用过的新配方",
 
-  "ShippingBinDecorator": "售卖箱",
-  "ShippingBinDecorator.Description": "标记还未放入过售卖箱的物品",
+  "ShippingBinDecorator": "出货箱",
+  "ShippingBinDecorator.Description": "标记还未放入过出货箱的物品",
+  "ShippingBinDecorator.TrackingType": "出货箱: 追踪类型",
+  "ShippingBinDecorator.TrackingType.All": "所有可出货物品",
+  "ShippingBinDecorator.TrackingType.Collection": "仅收集品",
 
   "AnimalTooltipGenerator": "动物",
   "AnimalTooltipGenerator.Description": "显示农场动物的额外信息",

@@ -26,6 +26,9 @@
 
   "ShippingBinDecorator": "출하 표시",
   "ShippingBinDecorator.Description": "출하한적 없는 아이템을 표시합니다",
+  "ShippingBinDecorator.TrackingType": "Shipping Tracking Type",
+  "ShippingBinDecorator.TrackingType.All": "All Shippable",
+  "ShippingBinDecorator.TrackingType.Collection": "Collection Only",
 
   "AnimalTooltipGenerator": "Animals Tooltip",
   "AnimalTooltipGenerator.Description": "Displays additional information for farm animals",

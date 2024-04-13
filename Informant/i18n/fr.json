@@ -26,6 +26,9 @@
 
   "ShippingBinDecorator": "Annotation d'expédition",
   "ShippingBinDecorator.Description": "Signale les objets qui n'ont pas encore été expédiés",
+  "ShippingBinDecorator.TrackingType": "Shipping Tracking Type",
+  "ShippingBinDecorator.TrackingType.All": "All Shippable",
+  "ShippingBinDecorator.TrackingType.Collection": "Collection Only",
 
   "AnimalTooltipGenerator": "Animals Tooltip",
   "AnimalTooltipGenerator.Description": "Displays additional information for farm animals",

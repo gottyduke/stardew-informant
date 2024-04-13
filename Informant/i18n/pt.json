@@ -26,6 +26,9 @@
 
   "ShippingBinDecorator": "Marcador de Remessas",
   "ShippingBinDecorator.Description": "Marca os itens que ainda não foram enviados",
+  "ShippingBinDecorator.TrackingType": "Shipping Tracking Type",
+  "ShippingBinDecorator.TrackingType.All": "All Shippable",
+  "ShippingBinDecorator.TrackingType.Collection": "Collection Only",
 
   "AnimalTooltipGenerator": "Animals Tooltip",
   "AnimalTooltipGenerator.Description": "Displays additional information for farm animals",
