@@ -9,7 +9,7 @@ internal static class HookToGenericModConfigMenu
     {
         // get Generic Mod Config Menu's API (if it's installed)
         var configMenu = informantMod.Helper.ModRegistry.GetApi<IGenericModConfigMenuApi>("spacechase0.GenericModConfigMenu");
-        if (configMenu is null) {
+        if (configMenu == null) {
             return;
         }
 
@@ -95,6 +95,13 @@ internal static class HookToGenericModConfigMenu
             tooltip: () => informantMod.Helper.Translation.Get("BundleTooltipDecorator.DecorateUnqualifiedBundles.Description"),
             getValue: () => informantMod.Config.DecorateUnqualifiedBundles,
             setValue: value => informantMod.Config.DecorateUnqualifiedBundles = value
+        );
+        configMenu.AddEnumOption(
+            mod: informantMod.ModManifest,
+            name: () => informantMod.Helper.Translation.Get("ShippingBinDecorator.TrackingType"),
+            getValue: () => informantMod.Config.ShippingBinTracking,
+            setValue: value => informantMod.Config.ShippingBinTracking = value,
+            getDisplayName: value => informantMod.Helper.Translation.Get("ShippingBinDecorator.TrackingType." + value)
         );
     }
 

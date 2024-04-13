@@ -6,6 +6,7 @@ internal record InformantConfig
     public TooltipTrigger TooltipTrigger { get; set; } = TooltipTrigger.Hover;
     public SButton TooltipTriggerButton { get; set; } = SButton.MouseRight;
     public HideMachineTooltips HideMachineTooltips { get; set; } = HideMachineTooltips.ForNonMachines;
+    public ShippingBinTrackingType ShippingBinTracking { get; set; } = ShippingBinTrackingType.Collection;
     public bool DecorateFertilizer { get; set; } = true;
     public bool DecoratePet { get; set; } = true;
     public bool DecorateLockedBundles { get; set; } = true;
@@ -24,4 +25,10 @@ internal enum HideMachineTooltips
     ForNonMachines,
     ForChests,
     Never,
+}
+
+internal enum ShippingBinTrackingType
+{
+    All,
+    Collection,
 }
