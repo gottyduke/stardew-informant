@@ -38,7 +38,7 @@ internal class FruitTreeTooltipGenerator : ITooltipGenerator<TerrainFeature>
                     IPosition.CenterRight,
                     new Vector2(Game1.tileSize / 2, Game1.tileSize / 2)
                 );
-        
+
         if (InformantMod.Instance?.Config.ShowTreeGrowthStage ?? false) {
             displayName += TreeTooltipGenerator.GetTreeGrowthStage(_modHelper, fruitTree);
         }

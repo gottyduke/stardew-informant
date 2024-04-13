@@ -53,12 +53,12 @@ internal class TreeTooltipGenerator : ITooltipGenerator<TerrainFeature>
                 break;
         }
 
-        
+
 
         if (InformantMod.Instance?.Config.ShowTreeGrowthStage ?? false) {
             treeString += GetTreeGrowthStage(_modHelper, tree);
         }
-        
+
         return treeString;
     }
 
