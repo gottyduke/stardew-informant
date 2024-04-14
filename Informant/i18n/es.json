@@ -27,8 +27,8 @@
   "ShippingBinDecorator": "Decorador de Envío",
   "ShippingBinDecorator.Description": "Marca los objetos que aún no se han enviado",
   "ShippingBinDecorator.TrackingType": "Shipping Tracking Type",
-  "ShippingBinDecorator.TrackingType.All": "All Shippable",
-  "ShippingBinDecorator.TrackingType.Collection": "Collection Only",
+  "ShippingBinDecorator.TrackingType.All": "All Collection",
+  "ShippingBinDecorator.TrackingType.Collection": "Shipping Only",
 
   "AnimalTooltipGenerator": "Descripción Emergente de Animales",
   "AnimalTooltipGenerator.Description": "Muestra información adicional sobre los animales de granja",
