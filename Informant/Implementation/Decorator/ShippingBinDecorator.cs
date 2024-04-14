@@ -13,6 +13,7 @@ internal class ShippingBinDecorator : IDecorator<Item>
 
     private static Texture2D? _shippingBin;
     private static HashSet<string>? _collections;
+    private static HashSet<string>? _shippingCollections;
 
     private readonly IModHelper _modHelper;
     private readonly Harmony _harmony;
@@ -60,9 +61,9 @@ internal class ShippingBinDecorator : IDecorator<Item>
             return null;
         }
 
-        // track all shippables or collection page only
-        if ((trackingType == ShippingBinTrackingType.All && input is SObject obj && obj.countsForShippedCollection()) ||
-            (trackingType == ShippingBinTrackingType.Collection && _collections != null && _collections.Contains(itemId))) {
+        // track all collections or shipping page only
+        if ((trackingType == ShippingBinTrackingType.All && _collections != null && _collections.Contains(itemId)) ||
+            (trackingType == ShippingBinTrackingType.Collection && _shippingCollections != null && _shippingCollections.Contains(itemId))) {
             return amountStillNeeded;
         }
 
@@ -71,7 +72,7 @@ internal class ShippingBinDecorator : IDecorator<Item>
 
     private static void GetFlattenedCollections(GameMenu __instance)
     {
-        if (_collections != null || __instance == null) {
+        if ((_collections != null && _shippingCollections != null) || __instance == null) {
             // already acquired
             return;
         }
@@ -79,6 +80,10 @@ internal class ShippingBinDecorator : IDecorator<Item>
         if (__instance.pages[GameMenu.collectionsTab] is CollectionsPage collectionsPage) {
             _collections = collectionsPage.collections.Values
                 .SelectMany(tab => tab)
+                .SelectMany(page => page)
+                .Select(item => item.name.Split(' ')[0])
+                .ToHashSet();
+            _shippingCollections = collectionsPage.collections[CollectionsPage.organicsTab]
                 .SelectMany(page => page)
                 .Select(item => item.name.Split(' ')[0])
                 .ToHashSet();
