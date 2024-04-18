@@ -35,7 +35,7 @@ internal class TeaBushTooltipGenerator : ITooltipGenerator<TerrainFeature>
         var displayName = item.DisplayName;
         var daysLeft = CropTooltipGenerator.ToDaysLeftString(_modHelper, CalculateDaysLeft(bush));
         return new Tooltip($"{displayName}\n{daysLeft}") {
-            Icon = [Icon.ForParentSheetIndex(
+            Icon = [Icon.ForUnqualifiedItemId(
                     item.QualifiedItemId,
                     IPosition.CenterRight,
                     new Vector2(Game1.tileSize / 2, Game1.tileSize / 2)

@@ -14,13 +14,13 @@ public record Icon(Texture2D Texture)
     /// </summary>
     public static Icon? ForObject(SObject obj, IPosition? position = null, Vector2? iconSize = null)
     {
-        return ForParentSheetIndex(obj.QualifiedItemId, position, iconSize);
+        return ForUnqualifiedItemId(obj.QualifiedItemId, position, iconSize);
     }
 
     /// <summary>
     /// Create an icon for a parentSheetIndex and bigCraftable.
     /// </summary>
-    public static Icon? ForParentSheetIndex(string qualified, IPosition? position = null, Vector2? iconSize = null)
+    public static Icon? ForUnqualifiedItemId(string qualified, IPosition? position = null, Vector2? iconSize = null)
     {
         var item = ItemRegistry.GetDataOrErrorItem(qualified);
         position ??= IPosition.TopRight;

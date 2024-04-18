@@ -45,13 +45,13 @@ internal class CropTooltipGenerator : ITooltipGenerator<TerrainFeature>
 
         return new Tooltip($"{displayName}\n{daysLeft}") {
             Icon = [
-                Icon.ForParentSheetIndex(
+                Icon.ForUnqualifiedItemId(
                     cropId,
                     IPosition.CenterRight,
                     new Vector2(Game1.tileSize / 2f, Game1.tileSize / 2f)
                 ),
                 dirt.HasFertilizer() && (InformantMod.Instance?.Config.DecorateFertilizer ?? false) ?
-                Icon.ForParentSheetIndex(
+                Icon.ForUnqualifiedItemId(
                     dirt.fertilizer.Value,
                     IPosition.CenterRight,
                     new Vector2(Game1.tileSize / 2f, Game1.tileSize / 2f)
