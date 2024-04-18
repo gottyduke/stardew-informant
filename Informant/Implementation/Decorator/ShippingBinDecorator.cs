@@ -50,6 +50,10 @@ internal class ShippingBinDecorator : IDecorator<Item>
 
     private static int? CalculateStillNeeded(Item input)
     {
+        if (input is not SObject obj || !SObject.isPotentialBasicShipped(input.ItemId, input.Category, obj.Type)) {
+            return null;
+        }
+
         var itemId = input.ItemId;
         var trackingType = InformantMod.Instance?.Config.ShippingBinTracking ?? ShippingBinTrackingType.Collection;
         // 15 of each crop

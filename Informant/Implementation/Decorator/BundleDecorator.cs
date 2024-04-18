@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Slothsoft.Informant.Api;
 using Slothsoft.Informant.Helper;
+using StardewValley.Extensions;
 using StardewValley.Locations;
 using Color = Microsoft.Xna.Framework.Color;
 using Rectangle = Microsoft.Xna.Framework.Rectangle;
@@ -35,6 +36,11 @@ internal class BundleDecorator : IDecorator<Item>
 
     public bool HasDecoration(Item input)
     {
+        if (!input.HasTypeObject()) {
+            // gotta be an object
+            return false;
+        }
+
         if (Game1.MasterPlayer.hasOrWillReceiveMail("JojaMember")) {
             return false;
         }
