@@ -36,6 +36,7 @@ internal class NewRecipeDisplayable : IDisplayable
                     typeof(float),
                     typeof(int),
                     typeof(int),
+                    typeof(int),
                 ]
             ),
             postfix: new HarmonyMethod(typeof(NewRecipeDisplayable), nameof(DrawOverlayIfNecessary))
