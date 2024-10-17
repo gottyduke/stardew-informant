@@ -68,6 +68,8 @@
   "TreeTooltipGenerator.Type9": "야자수",
   "TreeTooltipGenerator.Type10": "Mossy Wild Tree",
   "TreeTooltipGenerator.Type13": "Mystic Tree",
+  "TreeTooltipGenerator.TypeFlashShifter.StardewValleyExpandedCP_Birch_Tree": "자작나무",
+  "TreeTooltipGenerator.TypeFlashShifter.StardewValleyExpandedCP_Fir_Tree": "전나무",
   "TreeTooltipGenerator.MossCovered": "Mossy {{X}}",
   "TreeTooltipGenerator.ShowGrowthStage": "Display Tree Stage",
   "TreeTooltipGenerator.ShowGrowthStage.Description": "Displays tree growth stage(in numeric form)",

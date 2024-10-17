@@ -68,6 +68,8 @@
   "TreeTooltipGenerator.Type9": "Palmier",
   "TreeTooltipGenerator.Type10": "Arbre sauvage moussu",
   "TreeTooltipGenerator.Type13": "Arbre Mystique",
+  "TreeTooltipGenerator.TypeFlashShifter.StardewValleyExpandedCP_Birch_Tree": "Bouleau",
+  "TreeTooltipGenerator.TypeFlashShifter.StardewValleyExpandedCP_Fir_Tree": "Sapin",
   "TreeTooltipGenerator.MossCovered": "{{X}} moussu",
   "TreeTooltipGenerator.ShowGrowthStage": "Afficher l’étape de l’arbre",
   "TreeTooltipGenerator.ShowGrowthStage.Description": "Affiche l’étape de croissance de l’arbre (sous format numérique).",

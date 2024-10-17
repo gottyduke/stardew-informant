@@ -68,6 +68,8 @@
   "TreeTooltipGenerator.Type9": "Palme",
   "TreeTooltipGenerator.Type10": "Mossy Wild Tree",
   "TreeTooltipGenerator.Type13": "Mystic Tree",
+  "TreeTooltipGenerator.TypeFlashShifter.StardewValleyExpandedCP_Birch_Tree": "Birkenbaum",
+  "TreeTooltipGenerator.TypeFlashShifter.StardewValleyExpandedCP_Fir_Tree": "Tannenbaum",
   "TreeTooltipGenerator.MossCovered": "Mossy {{X}}",
   "TreeTooltipGenerator.ShowGrowthStage": "Display Tree Stage",
   "TreeTooltipGenerator.ShowGrowthStage.Description": "Displays tree growth stage(in numeric form)",

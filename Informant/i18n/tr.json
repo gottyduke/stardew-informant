@@ -68,6 +68,8 @@
   "TreeTooltipGenerator.Type9": "Palmiye Ağacı",
   "TreeTooltipGenerator.Type10": "Mossy Wild Tree",
   "TreeTooltipGenerator.Type13": "Mystic Tree",
+  "TreeTooltipGenerator.TypeFlashShifter.StardewValleyExpandedCP_Birch_Tree": "Huş Ağacı",
+  "TreeTooltipGenerator.TypeFlashShifter.StardewValleyExpandedCP_Fir_Tree": "Köknar Ağacı",
   "TreeTooltipGenerator.MossCovered": "Mossy {{X}}",
   "TreeTooltipGenerator.ShowGrowthStage": "Display Tree Stage",
   "TreeTooltipGenerator.ShowGrowthStage.Description": "Displays tree growth stage(in numeric form)",

@@ -68,6 +68,8 @@
   "TreeTooltipGenerator.Type9": "Palmera",
   "TreeTooltipGenerator.Type10": "Árbol Silvestre Musgoso",
   "TreeTooltipGenerator.Type13": "Árbol Místico",
+  "TreeTooltipGenerator.TypeFlashShifter.StardewValleyExpandedCP_Birch_Tree": "Árbol de Abedul",
+  "TreeTooltipGenerator.TypeFlashShifter.StardewValleyExpandedCP_Fir_Tree": "Árbol de Abeto",
   "TreeTooltipGenerator.MossCovered": "{{X}} Cubierto de Musgo",
   "TreeTooltipGenerator.ShowGrowthStage": "Display Tree Stage",
   "TreeTooltipGenerator.ShowGrowthStage.Description": "Displays tree growth stage(in numeric form)",

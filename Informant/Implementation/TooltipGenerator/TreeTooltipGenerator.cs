@@ -39,6 +39,8 @@ internal class TreeTooltipGenerator : ITooltipGenerator<TerrainFeature>
             case Tree.mahoganyTree:
             case Tree.palmTree2:
             case Tree.mysticTree:
+            case "FlashShifter.StardewValleyExpandedCP_Birch_Tree":
+            case "FlashShifter.StardewValleyExpandedCP_Fir_Tree":
                 treeString = _modHelper.Translation.Get("TreeTooltipGenerator.Type" + tree.treeType.Value);
                 if (tree.hasMoss.Value) {
                     treeString = _modHelper.Translation.Get("TreeTooltipGenerator.MossCovered", new { X = treeString });
