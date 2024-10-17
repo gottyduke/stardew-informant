@@ -1,4 +1,5 @@
 ﻿using Slothsoft.Informant.Api;
+using Slothsoft.Informant.Implementation.Common;
 using StardewValley.TerrainFeatures;
 
 namespace Slothsoft.Informant.Implementation.TooltipGenerator;
@@ -39,8 +40,8 @@ internal class TreeTooltipGenerator : ITooltipGenerator<TerrainFeature>
             case Tree.mahoganyTree:
             case Tree.palmTree2:
             case Tree.mysticTree:
-            case "FlashShifter.StardewValleyExpandedCP_Birch_Tree":
-            case "FlashShifter.StardewValleyExpandedCP_Fir_Tree":
+            case SveTreeIds.BirchTree:
+            case SveTreeIds.FirTree:
                 treeString = _modHelper.Translation.Get("TreeTooltipGenerator.Type" + tree.treeType.Value);
                 if (tree.hasMoss.Value) {
                     treeString = _modHelper.Translation.Get("TreeTooltipGenerator.MossCovered", new { X = treeString });
@@ -54,9 +55,7 @@ internal class TreeTooltipGenerator : ITooltipGenerator<TerrainFeature>
             default:
                 break;
         }
-
-
-
+        
         if (InformantMod.Instance?.Config.ShowTreeGrowthStage ?? false) {
             treeString += GetTreeGrowthStage(_modHelper, tree);
         }

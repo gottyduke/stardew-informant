@@ -229,3 +229,10 @@ public static class CropIds
     public const string MossySeed = "MossySeed";
     public const string Moss = "Moss";
 }
+
+// for new SVE wild trees
+public static class SveTreeIds
+{
+    public const string BirchTree = "FlashShifter.StardewValleyExpandedCP_Birch_Tree";
+    public const string FirTree = "FlashShifter.StardewValleyExpandedCP_Fir_Tree";
+}
