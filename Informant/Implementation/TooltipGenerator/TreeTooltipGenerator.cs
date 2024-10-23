@@ -42,6 +42,17 @@ internal class TreeTooltipGenerator : ITooltipGenerator<TerrainFeature>
             case Tree.mysticTree:
             case SveTreeIds.BirchTree:
             case SveTreeIds.FirTree:
+            case VmvTreeIds.BirchTree:
+            case VmvTreeIds.AmberTree:
+            case VmvTreeIds.HazelnutTree:
+            case VmvTreeIds.BlackChanterelleTree:
+            case VmvTreeIds.SkyshardPineTree:
+            case WagTreeIds.MysticTrumpetTree:
+            case WagTreeIds.StrangeInkCapTree:
+            case WagTreeIds.WitchwoodTree:
+            case PcTreeIds.ReuuTree:
+            case PcTreeIds.MeekTree:
+            case PcTreeIds.HeaviousTree:
                 treeString = _modHelper.Translation.Get("TreeTooltipGenerator.Type" + tree.treeType.Value);
                 if (tree.hasMoss.Value) {
                     treeString = _modHelper.Translation.Get("TreeTooltipGenerator.MossCovered", new { X = treeString });

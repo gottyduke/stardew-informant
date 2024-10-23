@@ -236,3 +236,26 @@ public static class SveTreeIds
     public const string BirchTree = "FlashShifter.StardewValleyExpandedCP_Birch_Tree";
     public const string FirTree = "FlashShifter.StardewValleyExpandedCP_Fir_Tree";
 }
+
+public static class VmvTreeIds
+{
+    public const string BirchTree = "Lumisteria.MtVapius.Birchtree";
+    public const string AmberTree = "Lumisteria.MtVapius.AmberTree";
+    public const string HazelnutTree = "Lumisteria.MtVapius.HazelnutTree";
+    public const string BlackChanterelleTree = "Lumisteria.MtVapius.BlackChanterelleTree";
+    public const string SkyshardPineTree = "Lumisteria.MtVapius.SkyshardPineTree";
+}
+
+public static class WagTreeIds
+{
+    public const string MysticTrumpetTree = "wildflour.ateliercrops_MysticTrumpet_tree";
+    public const string StrangeInkCapTree = "wildflour.ateliercrops_StrangeCap_tree";
+    public const string WitchwoodTree = "wildflour.ateliercrops_Witchwood_tree";
+}
+
+public static class PcTreeIds
+{
+    public const string ReuuTree = "Fellowclown.PC_ReuuTree";
+    public const string MeekTree = "Fellowclown.PC_MeekTree";
+    public const string HeaviousTree = "Fellowclown.PC_HeaviousTree";
+}
