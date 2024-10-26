@@ -50,6 +50,11 @@
   "TeaBushTooltipGenerator": "Tea Bush Tooltip",
   "TeaBushTooltipGenerator.Description": "A tooltip that displays the remaining days of tea bush",
 
+  "CustomBushToolTipGenerator.NotThisSeason": "Does not produce this season",
+  "CustomBushToolTipGenerator.NotThisSeasonAnymore": "Does not produce this season anymore",
+  "CropTooltipGenerator.1DayLeftMature": "1 day left to mature",
+  "CropTooltipGenerator.XDaysLeftMature": "{{X}} days left to mature",
+  
   "MachineTooltipGenerator": "기계 정보",
   "MachineTooltipGenerator.Description": "기계의 결과물과 남은 시간을 보여줍니다",
   "MachineTooltipGenerator.Finished": "완료",

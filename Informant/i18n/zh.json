@@ -50,6 +50,11 @@
 	"TeaBushTooltipGenerator": "茶树",
 	"TeaBushTooltipGenerator.Description": "茶树相关的信息, 如下次收获日",
 
+	"CustomBushToolTipGenerator.NotThisSeason": "Does not produce this season",
+	"CustomBushToolTipGenerator.NotThisSeasonAnymore": "Does not produce this season anymore",
+	"CropTooltipGenerator.1DayLeftMature": "1 day left to mature",
+	"CropTooltipGenerator.XDaysLeftMature": "{{X}} days left to mature",
+
 	"MachineTooltipGenerator": "机器",
 	"MachineTooltipGenerator.Description": "机器相关的信息, 如产物, 剩余时间",
 	"MachineTooltipGenerator.Finished": "已完成",

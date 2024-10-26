@@ -50,6 +50,11 @@
   "TeaBushTooltipGenerator": "Infobulle du plant de thé",
   "TeaBushTooltipGenerator.Description": "Une infobulle qui affiche le temps restant avant la récolte d'un plant de thé.",
 
+  "CustomBushToolTipGenerator.NotThisSeason": "Does not produce this season",
+  "CustomBushToolTipGenerator.NotThisSeasonAnymore": "Does not produce this season anymore",
+  "CropTooltipGenerator.1DayLeftMature": "1 day left to mature",
+  "CropTooltipGenerator.XDaysLeftMature": "{{X}} days left to mature",
+  
   "MachineTooltipGenerator": "Infobulle des machines",
   "MachineTooltipGenerator.Description": "Une infobulle qui affiche le type de résultat et le temps restant.",
   "MachineTooltipGenerator.Finished": "Fini",

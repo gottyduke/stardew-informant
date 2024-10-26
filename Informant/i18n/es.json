@@ -50,6 +50,11 @@
   "TeaBushTooltipGenerator": "Descripción Emergente de Arbustos de Té",
   "TeaBushTooltipGenerator.Description": "Una descripción emergente que muestra los días restantes del arbusto de té",
 
+  "CustomBushToolTipGenerator.NotThisSeason": "Does not produce this season",
+  "CustomBushToolTipGenerator.NotThisSeasonAnymore": "Does not produce this season anymore",
+  "CropTooltipGenerator.1DayLeftMature": "1 day left to mature",
+  "CropTooltipGenerator.XDaysLeftMature": "{{X}} days left to mature",
+  
   "MachineTooltipGenerator": "Descripción Emergente de Máquinas",
   "MachineTooltipGenerator.Description": "Una descripción emergente que muestra el tipo de resultado y el tiempo restante",
   "MachineTooltipGenerator.Finished": "Finalizado",
