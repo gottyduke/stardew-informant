@@ -1,4 +1,5 @@
-﻿using Slothsoft.Informant.Api;
+﻿using Informant.ThirdParty;
+using Slothsoft.Informant.Api;
 using Slothsoft.Informant.Implementation.Decorator;
 using Slothsoft.Informant.Implementation.TooltipGenerator;
 using Slothsoft.Informant.ThirdParty;
@@ -45,6 +46,7 @@ public class InformantMod : Mod
     private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
     {
         HookToGenericModConfigMenu.Apply(this, _api!);
+        HookToCustomBush.Apply(this);
     }
 
     public override IInformant? GetApi()
