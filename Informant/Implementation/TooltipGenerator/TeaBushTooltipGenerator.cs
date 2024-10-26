@@ -3,11 +3,7 @@ using Microsoft.Xna.Framework;
 using Slothsoft.Informant.Api;
 using StardewValley.TerrainFeatures;
 using Informant.ThirdParty;
-using StardewValley;
 using StardewValley.ItemTypeDefinitions;
-using System.Diagnostics.CodeAnalysis;
-using StardewModdingAPI.Utilities;
-using StardewValley.Extensions;
 
 namespace Slothsoft.Informant.Implementation.TooltipGenerator;
 
@@ -26,8 +22,8 @@ internal class TeaBushTooltipGenerator : ITooltipGenerator<TerrainFeature>
     public string Id => "tea-bush";
     public string DisplayName => _modHelper.Translation.Get("TeaBushTooltipGenerator");
     public string Description => _modHelper.Translation.Get("TeaBushTooltipGenerator.Description");
-
     public string NotThisSeason => _modHelper.Translation.Get("CustomBushTooltipGenerator.NotThisSeason");
+    public string NotThisSeasonAnymore => _modHelper.Translation.Get("CustomBushToolTipGenerator.NotThisSeasonAnymore");
 
     public bool HasTooltip(TerrainFeature input)
     {
@@ -90,7 +86,7 @@ internal class TeaBushTooltipGenerator : ITooltipGenerator<TerrainFeature>
         else
         {
             // Bush is mature; show days until the next production or Out of season
-            tooltipText += $"\n{(willProduceThisSeason ? daysLeftText : NotThisSeason)}";
+            tooltipText += $"\n{(willProduceThisSeason ? daysLeft == -1 ? NotThisSeasonAnymore : daysLeftText : NotThisSeason)}";
         }
 
         return new Tooltip(tooltipText)
@@ -157,15 +153,15 @@ internal class TeaBushTooltipGenerator : ITooltipGenerator<TerrainFeature>
         }
 
         // If in production period and ready
-        if (GetShakeOffItemIfReady(customBushData, bush, out ParsedItemData? shakeOffItemData))
+        if (customBushData.GetShakeOffItemIfReady(bush, out ParsedItemData? shakeOffItemData))
         {
-            var item = new PossibleDroppedItem(Game1.dayOfMonth, shakeOffItemData, 1.0f, id);
+            var item = new CustomBushExtensions.PossibleDroppedItem(Game1.dayOfMonth, shakeOffItemData, 1.0f, id);
             if (item.ReadyToPick) return 0;
         }
         else
         {
             // Get the list of possible drops to check production schedule
-            var drops = GetCustomBushDropItems(customBushApi, customBushData, id);
+            var drops = customBushApi.GetCustomBushDropItems(customBushData, id);
             if (drops.Any())
             {
                 // Find the next production day from the drops
@@ -186,214 +182,14 @@ internal class TeaBushTooltipGenerator : ITooltipGenerator<TerrainFeature>
         {
             // Check if production conditions are met (season, location, etc)
             if (!customBushData.Seasons.Contains(Game1.season) ||
-                (bush.IsSheltered()) ||
-                (!bush.IsSheltered()))
+                !bush.IsSheltered())
             {
                 // Cannot produce under current conditions, try next season
-                return WorldDate.DaysPerMonth - Game1.dayOfMonth + customBushData.DayToBeginProducing;
+                return -1;
             }
         }
 
         // Not yet in production period
         return Math.Max(0, customBushData.DayToBeginProducing - Game1.dayOfMonth);
-    }
-
-    internal static bool GetShakeOffItemIfReady(
-    ICustomBush customBush,
-    Bush bush,
-    [NotNullWhen(true)] out ParsedItemData? item
-  )
-    {
-        item = null;
-        if (bush.size.Value != Bush.greenTeaBush)
-        {
-            return false;
-        }
-
-        if (!bush.modData.TryGetValue("furyx639.CustomBush/ShakeOff", out string itemId))
-        {
-            return false;
-        }
-
-        item = ItemRegistry.GetData(itemId);
-        return true;
-    }
-
-    internal static List<PossibleDroppedItem> GetCustomBushDropItems(
-        ICustomBushApi api,
-        ICustomBush bush,
-        string? id,
-        bool includeToday = false
-      )
-    {
-        if (id == null || string.IsNullOrEmpty(id))
-        {
-            return new List<PossibleDroppedItem>();
-        }
-
-        api.TryGetDrops(id, out IList<ICustomBushDrop>? drops);
-        return drops == null
-          ? new List<PossibleDroppedItem>()
-          : GetGenericDropItems(drops, id, includeToday, bush.DisplayName, BushDropConverter);
-
-        DropInfo BushDropConverter(ICustomBushDrop input)
-        {
-            return new DropInfo(input.Condition, input.Chance, input.ItemId);
-        }
-    }
-
-    public static List<PossibleDroppedItem> GetGenericDropItems<T>(
-    IEnumerable<T> drops,
-    string? customId,
-    bool includeToday,
-    string displayName,
-    Func<T, DropInfo> extractDropInfo
-  )
-    {
-        List<PossibleDroppedItem> items = new();
-
-        foreach (T drop in drops)
-        {
-            DropInfo dropInfo = extractDropInfo(drop);
-            int? nextDay = GetNextDay(dropInfo.Condition, includeToday);
-            int? lastDay = GetLastDay(dropInfo.Condition);
-
-            if (!nextDay.HasValue)
-            {
-                if (!lastDay.HasValue)
-                {
-                }
-
-                continue;
-            }
-
-            ParsedItemData? itemData = ItemRegistry.GetData(dropInfo.ItemId);
-            if (itemData == null)
-            {
-                continue;
-            }
-
-            if (Game1.dayOfMonth == nextDay.Value && !includeToday)
-            {
-                continue;
-            }
-
-            items.Add(new PossibleDroppedItem(nextDay.Value, itemData, dropInfo.Chance, customId));
-        }
-
-        return items;
-    }
-
-    public static int? GetNextDay(string? condition, bool includeToday)
-    {
-        return string.IsNullOrEmpty(condition)
-          ? Game1.dayOfMonth + (includeToday ? 0 : 1)
-          : GetNextDayFromCondition(condition, includeToday);
-    }
-
-    public static int? GetLastDay(string? condition)
-    {
-        return GetLastDayFromCondition(condition);
-    }
-
-    public record PossibleDroppedItem(int NextDayToProduce, ParsedItemData Item, float Chance, string? CustomId = null)
-    {
-        public bool ReadyToPick => Game1.dayOfMonth == NextDayToProduce;
-    }
-
-    public record DropInfo(string? Condition, float Chance, string ItemId)
-    {
-        public int? GetNextDay(bool includeToday)
-        {
-            return LocalGetNextDay(Condition, includeToday);
-        }
-    }
-
-    public static int? LocalGetNextDay(string? condition, bool includeToday)
-    {
-        return string.IsNullOrEmpty(condition)
-          ? Game1.dayOfMonth + (includeToday ? 0 : 1)
-          : GetNextDayFromCondition(condition, includeToday);
-    }
-
-    public static int? GetNextDayFromCondition(string? condition, bool includeToday = true)
-    {
-        HashSet<int> days = new();
-        if (condition == null)
-        {
-            return null;
-        }
-
-        GameStateQuery.ParsedGameStateQuery[]? conditionEntries = GameStateQuery.Parse(condition);
-
-        foreach (GameStateQuery.ParsedGameStateQuery parsedGameStateQuery in conditionEntries)
-        {
-            days.AddRange(GetDaysFromCondition(parsedGameStateQuery));
-        }
-
-        days.RemoveWhere(day => day < Game1.dayOfMonth || (!includeToday && day == Game1.dayOfMonth));
-
-        return days.Count == 0 ? null : days.Min();
-    }
-
-    public static IEnumerable<int> GetDaysFromCondition(GameStateQuery.ParsedGameStateQuery parsedGameStateQuery)
-    {
-        HashSet<int> days = new();
-        if (parsedGameStateQuery.Query.Length < 2)
-        {
-            return days;
-        }
-
-        string queryStr = parsedGameStateQuery.Query[0];
-        if (!"day_of_month".Equals(queryStr, StringComparison.OrdinalIgnoreCase))
-        {
-            return days;
-        }
-
-        for (var i = 1; i < parsedGameStateQuery.Query.Length; i++)
-        {
-            string dayStr = parsedGameStateQuery.Query[i];
-            if ("even".Equals(dayStr, StringComparison.OrdinalIgnoreCase))
-            {
-                days.AddRange(Enumerable.Range(1, 28).Where(x => x % 2 == 0));
-                continue;
-            }
-
-            if ("odd".Equals(dayStr, StringComparison.OrdinalIgnoreCase))
-            {
-                days.AddRange(Enumerable.Range(1, 28).Where(x => x % 2 != 0));
-                continue;
-            }
-
-            try
-            {
-                int parsedInt = int.Parse(dayStr);
-                days.Add(parsedInt);
-            }
-            catch (Exception)
-            {
-                // ignored
-            }
-        }
-
-        return parsedGameStateQuery.Negated ? Enumerable.Range(1, 28).Where(x => !days.Contains(x)).ToHashSet() : days;
-    }
-
-    public static int? GetLastDayFromCondition(string? condition)
-    {
-        HashSet<int> days = new();
-        if (condition == null)
-        {
-            return null;
-        }
-
-        GameStateQuery.ParsedGameStateQuery[]? conditionEntries = GameStateQuery.Parse(condition);
-
-        foreach (GameStateQuery.ParsedGameStateQuery parsedGameStateQuery in conditionEntries)
-        {
-            days.AddRange(GetDaysFromCondition(parsedGameStateQuery));
-        }
-
-        return days.Count == 0 ? null : days.Max();
     }
 }
