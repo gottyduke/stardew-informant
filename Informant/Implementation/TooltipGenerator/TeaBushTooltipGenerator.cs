@@ -7,8 +7,10 @@ using StardewValley;
 using StardewValley.ItemTypeDefinitions;
 using System.Diagnostics.CodeAnalysis;
 using StardewModdingAPI.Utilities;
+using StardewValley.Extensions;
 
 namespace Slothsoft.Informant.Implementation.TooltipGenerator;
+
 
 internal class TeaBushTooltipGenerator : ITooltipGenerator<TerrainFeature>
 {
@@ -62,7 +64,7 @@ internal class TeaBushTooltipGenerator : ITooltipGenerator<TerrainFeature>
                     item = ItemRegistry.GetDataOrErrorItem(drops[0].ItemId);
                 }
 
-                daysLeft = CalculateCustomBushDaysLeft(bush, customBushData, id);
+                daysLeft = CalculateCustomBushDaysLeft(bush, customBushData, id, customBushApi);
             }
         }
 
@@ -139,88 +141,259 @@ internal class TeaBushTooltipGenerator : ITooltipGenerator<TerrainFeature>
         return daysLeft;
     }
 
-    internal static int CalculateCustomBushDaysLeft(Bush bush, ICustomBush customBushData, string id)
+    internal static int CalculateCustomBushDaysLeft(Bush bush, ICustomBush customBushData, string id, ICustomBushApi customBushApi)
     {
-        var today = SDate.Now();
-        var nextHarvestDate = GetNextHarvestDate(bush, customBushData);
-
-        // If bush isn't mature yet, calculate days until maturity
+        // If not mature yet, calculate days until maturity
         var bushAge = bush.getAge();
         if (bushAge < customBushData.AgeToProduce)
         {
             return Math.Max(0, customBushData.AgeToProduce - bushAge + 1);
         }
 
-        // For mature bushes, return days until next harvest
-        int daysUntilHarvest = GetDaysBetween(today, nextHarvestDate);
-        return Math.Max(0, daysUntilHarvest);
-    }
-
-    internal static SDate GetNextHarvestDate(Bush bush, ICustomBush customBush)
-    {
-        SDate today = SDate.Now();
-        var tomorrow = today.AddDays(1);
-
-        // currently has produce
+        // If already has items ready
         if (bush.tileSheetOffset.Value == 1)
-            return today;
-
-        // tea bush and custom bush
-        int dayToBegin = customBush.DayToBeginProducing;
-        if (dayToBegin >= 0)
         {
-            SDate readyDate = GetDateFullyGrown(bush, customBush);
-            if (readyDate < tomorrow)
-                readyDate = tomorrow;
-
-            if (!bush.IsSheltered())
-            {
-                // bush not sheltered, must check producing seasons
-                List<Season> producingSeasons = customBush.Seasons;
-                SDate seasonDate = new(Math.Max(1, dayToBegin), readyDate.Season, readyDate.Year);
-                while (!producingSeasons.Contains(seasonDate.Season))
-                    seasonDate = seasonDate.AddDays(28);
-
-                if (readyDate < seasonDate)
-                    return seasonDate;
-            }
-
-            if (readyDate.Day < dayToBegin)
-                readyDate = new(dayToBegin, readyDate.Season, readyDate.Year);
-
-            return readyDate;
+            return 0;
         }
 
-        // wild bushes produce salmonberries in spring 15-18, and blackberries in fall 8-11
-        SDate springStart = new(15, Season.Spring);
-        SDate springEnd = new(18, Season.Spring);
-        SDate fallStart = new(8, Season.Fall);
-        SDate fallEnd = new(11, Season.Fall);
+        // If in production period and ready
+        if (GetShakeOffItemIfReady(customBushData, bush, out ParsedItemData? shakeOffItemData))
+        {
+            var item = new PossibleDroppedItem(Game1.dayOfMonth, shakeOffItemData, 1.0f, id);
+            if (item.ReadyToPick) return 0;
+        }
+        else
+        {
+            // Get the list of possible drops to check production schedule
+            var drops = GetCustomBushDropItems(customBushApi, customBushData, id);
+            if (drops.Any())
+            {
+                // Find the next production day from the drops
+                var nextProductionDay = drops
+                    .Select(drop => drop.NextDayToProduce)
+                    .Where(day => day > Game1.dayOfMonth)
+                    .DefaultIfEmpty(customBushData.DayToBeginProducing + WorldDate.DaysPerMonth) // If no days found, use next month
+                    .Min();
 
-        if (tomorrow < springStart)
-            return springStart;
-        if (tomorrow > springEnd && tomorrow < fallStart)
-            return fallStart;
-        if (tomorrow > fallEnd)
-            return new(springStart.Day, springStart.Season, springStart.Year + 1);
-        return tomorrow;
+                return nextProductionDay - Game1.dayOfMonth;
+            }
+        }
+
+        // If no production schedule found but in production period,
+        // check if it's a valid production day
+        bool inProductionPeriod = Game1.dayOfMonth >= customBushData.DayToBeginProducing;
+        if (inProductionPeriod)
+        {
+            // Check if production conditions are met (season, location, etc)
+            if (!customBushData.Seasons.Contains(Game1.season) ||
+                (bush.IsSheltered()) ||
+                (!bush.IsSheltered()))
+            {
+                // Cannot produce under current conditions, try next season
+                return WorldDate.DaysPerMonth - Game1.dayOfMonth + customBushData.DayToBeginProducing;
+            }
+        }
+
+        // Not yet in production period
+        return Math.Max(0, customBushData.DayToBeginProducing - Game1.dayOfMonth);
     }
 
-    internal static SDate GetDateFullyGrown(Bush bush, ICustomBush customBush)
+    internal static bool GetShakeOffItemIfReady(
+    ICustomBush customBush,
+    Bush bush,
+    [NotNullWhen(true)] out ParsedItemData? item
+  )
     {
-        SDate date = new(1, Season.Spring, 1);
-        date = date.AddDays(bush.datePlanted.Value);
-        date = date.AddDays(customBush.AgeToProduce);
+        item = null;
+        if (bush.size.Value != Bush.greenTeaBush)
+        {
+            return false;
+        }
 
-        return date;
+        if (!bush.modData.TryGetValue("furyx639.CustomBush/ShakeOff", out string itemId))
+        {
+            return false;
+        }
+
+        item = ItemRegistry.GetData(itemId);
+        return true;
     }
 
-    internal static int GetDaysBetween(SDate start, SDate end)
+    internal static List<PossibleDroppedItem> GetCustomBushDropItems(
+        ICustomBushApi api,
+        ICustomBush bush,
+        string? id,
+        bool includeToday = false
+      )
     {
-        // Convert both dates to total days since game start
-        int startDays = start.DaysSinceStart;
-        int endDays = end.DaysSinceStart;
+        if (id == null || string.IsNullOrEmpty(id))
+        {
+            return new List<PossibleDroppedItem>();
+        }
 
-        return endDays - startDays;
+        api.TryGetDrops(id, out IList<ICustomBushDrop>? drops);
+        return drops == null
+          ? new List<PossibleDroppedItem>()
+          : GetGenericDropItems(drops, id, includeToday, bush.DisplayName, BushDropConverter);
+
+        DropInfo BushDropConverter(ICustomBushDrop input)
+        {
+            return new DropInfo(input.Condition, input.Chance, input.ItemId);
+        }
+    }
+
+    public static List<PossibleDroppedItem> GetGenericDropItems<T>(
+    IEnumerable<T> drops,
+    string? customId,
+    bool includeToday,
+    string displayName,
+    Func<T, DropInfo> extractDropInfo
+  )
+    {
+        List<PossibleDroppedItem> items = new();
+
+        foreach (T drop in drops)
+        {
+            DropInfo dropInfo = extractDropInfo(drop);
+            int? nextDay = GetNextDay(dropInfo.Condition, includeToday);
+            int? lastDay = GetLastDay(dropInfo.Condition);
+
+            if (!nextDay.HasValue)
+            {
+                if (!lastDay.HasValue)
+                {
+                }
+
+                continue;
+            }
+
+            ParsedItemData? itemData = ItemRegistry.GetData(dropInfo.ItemId);
+            if (itemData == null)
+            {
+                continue;
+            }
+
+            if (Game1.dayOfMonth == nextDay.Value && !includeToday)
+            {
+                continue;
+            }
+
+            items.Add(new PossibleDroppedItem(nextDay.Value, itemData, dropInfo.Chance, customId));
+        }
+
+        return items;
+    }
+
+    public static int? GetNextDay(string? condition, bool includeToday)
+    {
+        return string.IsNullOrEmpty(condition)
+          ? Game1.dayOfMonth + (includeToday ? 0 : 1)
+          : GetNextDayFromCondition(condition, includeToday);
+    }
+
+    public static int? GetLastDay(string? condition)
+    {
+        return GetLastDayFromCondition(condition);
+    }
+
+    public record PossibleDroppedItem(int NextDayToProduce, ParsedItemData Item, float Chance, string? CustomId = null)
+    {
+        public bool ReadyToPick => Game1.dayOfMonth == NextDayToProduce;
+    }
+
+    public record DropInfo(string? Condition, float Chance, string ItemId)
+    {
+        public int? GetNextDay(bool includeToday)
+        {
+            return LocalGetNextDay(Condition, includeToday);
+        }
+    }
+
+    public static int? LocalGetNextDay(string? condition, bool includeToday)
+    {
+        return string.IsNullOrEmpty(condition)
+          ? Game1.dayOfMonth + (includeToday ? 0 : 1)
+          : GetNextDayFromCondition(condition, includeToday);
+    }
+
+    public static int? GetNextDayFromCondition(string? condition, bool includeToday = true)
+    {
+        HashSet<int> days = new();
+        if (condition == null)
+        {
+            return null;
+        }
+
+        GameStateQuery.ParsedGameStateQuery[]? conditionEntries = GameStateQuery.Parse(condition);
+
+        foreach (GameStateQuery.ParsedGameStateQuery parsedGameStateQuery in conditionEntries)
+        {
+            days.AddRange(GetDaysFromCondition(parsedGameStateQuery));
+        }
+
+        days.RemoveWhere(day => day < Game1.dayOfMonth || (!includeToday && day == Game1.dayOfMonth));
+
+        return days.Count == 0 ? null : days.Min();
+    }
+
+    public static IEnumerable<int> GetDaysFromCondition(GameStateQuery.ParsedGameStateQuery parsedGameStateQuery)
+    {
+        HashSet<int> days = new();
+        if (parsedGameStateQuery.Query.Length < 2)
+        {
+            return days;
+        }
+
+        string queryStr = parsedGameStateQuery.Query[0];
+        if (!"day_of_month".Equals(queryStr, StringComparison.OrdinalIgnoreCase))
+        {
+            return days;
+        }
+
+        for (var i = 1; i < parsedGameStateQuery.Query.Length; i++)
+        {
+            string dayStr = parsedGameStateQuery.Query[i];
+            if ("even".Equals(dayStr, StringComparison.OrdinalIgnoreCase))
+            {
+                days.AddRange(Enumerable.Range(1, 28).Where(x => x % 2 == 0));
+                continue;
+            }
+
+            if ("odd".Equals(dayStr, StringComparison.OrdinalIgnoreCase))
+            {
+                days.AddRange(Enumerable.Range(1, 28).Where(x => x % 2 != 0));
+                continue;
+            }
+
+            try
+            {
+                int parsedInt = int.Parse(dayStr);
+                days.Add(parsedInt);
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
+        }
+
+        return parsedGameStateQuery.Negated ? Enumerable.Range(1, 28).Where(x => !days.Contains(x)).ToHashSet() : days;
+    }
+
+    public static int? GetLastDayFromCondition(string? condition)
+    {
+        HashSet<int> days = new();
+        if (condition == null)
+        {
+            return null;
+        }
+
+        GameStateQuery.ParsedGameStateQuery[]? conditionEntries = GameStateQuery.Parse(condition);
+
+        foreach (GameStateQuery.ParsedGameStateQuery parsedGameStateQuery in conditionEntries)
+        {
+            days.AddRange(GetDaysFromCondition(parsedGameStateQuery));
+        }
+
+        return days.Count == 0 ? null : days.Max();
     }
 }
