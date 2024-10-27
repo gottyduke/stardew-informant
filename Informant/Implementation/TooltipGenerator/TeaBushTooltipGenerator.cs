@@ -145,7 +145,7 @@ internal class TeaBushTooltipGenerator : ITooltipGenerator<TerrainFeature>
         var bushAge = bush.getAge();
         if (bushAge < customBushData.AgeToProduce)
         {
-            return Math.Max(0, customBushData.AgeToProduce - bushAge + 1);
+            return Math.Max(0, customBushData.AgeToProduce - bushAge);
         }
 
         // If already has items ready
