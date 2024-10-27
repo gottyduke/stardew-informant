@@ -1,11 +1,6 @@
 ﻿using Informant.ThirdParty.CustomBush;
 using Slothsoft.Informant;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Informant.ThirdParty;
 
@@ -17,8 +12,7 @@ public static class HookToCustomBush
     public static void Apply(InformantMod informantMod)
     {
         var customBush = informantMod.Helper.ModRegistry.GetApi<ICustomBushApi>(ModId);
-        if (customBush == null)
-        {
+        if (customBush == null) {
             return;
         }
         RegisteredApis[ModId] = customBush;
@@ -27,13 +21,11 @@ public static class HookToCustomBush
     public static bool GetApi<T>([NotNullWhen(true)] out T? apiInstance) where T : class
     {
         apiInstance = null;
-        if (!RegisteredApis.TryGetValue(ModId, out object? api))
-        {
+        if (!RegisteredApis.TryGetValue(ModId, out object? api)) {
             return false;
         }
 
-        if (api is T apiVal)
-        {
+        if (api is T apiVal) {
             apiInstance = apiVal;
             return true;
         }

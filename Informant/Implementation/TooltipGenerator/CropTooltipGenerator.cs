@@ -68,7 +68,7 @@ internal class CropTooltipGenerator : ITooltipGenerator<TerrainFeature>
         return ToDaysLeftString(modHelper, CalculateDaysLeft(crop));
     }
 
-    internal static string ToDaysLeftString(IModHelper modHelper, int daysLeft, bool bush=false)
+    internal static string ToDaysLeftString(IModHelper modHelper, int daysLeft, bool bush = false)
     {
         return daysLeft switch {
             -1 => "", // something went very wrong, but we don't want to break the game

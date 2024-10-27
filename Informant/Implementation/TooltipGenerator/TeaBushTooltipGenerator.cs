@@ -1,10 +1,10 @@
-﻿using Informant.ThirdParty.CustomBush;
+﻿using Informant.ThirdParty;
+using Informant.ThirdParty.CustomBush;
 using Microsoft.Xna.Framework;
 using Slothsoft.Informant.Api;
+using StardewValley.ItemTypeDefinitions;
 using StardewValley.TerrainFeatures;
 using StardewValley.TokenizableStrings;
-using Informant.ThirdParty;
-using StardewValley.ItemTypeDefinitions;
 
 namespace Slothsoft.Informant.Implementation.TooltipGenerator;
 
@@ -46,19 +46,19 @@ internal class TeaBushTooltipGenerator : ITooltipGenerator<TerrainFeature>
         var willProduceThisSeason = true;
 
         // Handle custom bush logic
-        if (HookToCustomBush.GetApi(out ICustomBushApi? customBushApi))
-        {
-            if (customBushApi.TryGetCustomBush(bush, out ICustomBush? customBushData, out string? id))
-            {
+        if (HookToCustomBush.GetApi(out ICustomBushApi? customBushApi)) {
+            if (customBushApi.TryGetCustomBush(bush, out ICustomBush? customBushData, out string? id)) {
                 displayName = customBushData.DisplayName;
-                if(displayName.Contains("LocalizedText")) displayName = TokenParser.ParseText(displayName);
+                if (displayName.Contains("LocalizedText")) {
+                    displayName = TokenParser.ParseText(displayName);
+                }
+
                 willProduceThisSeason = customBushData.Seasons.Contains(Game1.season);
                 ageToMature = customBushData.AgeToProduce;
 
                 // Handle custom drops
                 if (customBushApi.TryGetDrops(id, out IList<ICustomBushDrop>? drops) &&
-                    drops != null && drops.Count > 0)
-                {
+                    drops != null && drops.Count > 0) {
                     item = ItemRegistry.GetDataOrErrorItem(drops[0].ItemId);
                 }
 
@@ -74,25 +74,20 @@ internal class TeaBushTooltipGenerator : ITooltipGenerator<TerrainFeature>
         // Construct tooltip text
         string tooltipText = displayName;
 
-        if (isMaturing)
-        {
+        if (isMaturing) {
             // Bush is still growing; show days until maturity
             tooltipText += $"\n{daysLeftText}";
 
             // If it's not in season, show additional note
-            if (!willProduceThisSeason)
-            {
+            if (!willProduceThisSeason) {
                 tooltipText += $"\n{NotThisSeason}";
             }
-        }
-        else
-        {
+        } else {
             // Bush is mature; show days until the next production or Out of season
             tooltipText += $"\n{(willProduceThisSeason ? daysLeft == -1 ? NotThisSeasonAnymore : daysLeftText : NotThisSeason)}";
         }
 
-        return new Tooltip(tooltipText)
-        {
+        return new Tooltip(tooltipText) {
             Icon = [Icon.ForUnqualifiedItemId(
             item.QualifiedItemId,
             IPosition.CenterRight,
@@ -108,8 +103,7 @@ internal class TeaBushTooltipGenerator : ITooltipGenerator<TerrainFeature>
     /// </summary>
     internal int CalculateDaysLeft(Bush bush)
     {
-        if (bush.tileSheetOffset.Value == 1)
-        {
+        if (bush.tileSheetOffset.Value == 1) {
             // has tea leaves
             return 0;
         }
@@ -123,16 +117,14 @@ internal class TeaBushTooltipGenerator : ITooltipGenerator<TerrainFeature>
         // add up the next closest bloom day
         daysLeft += _bloomWeek.Contains(bloomDay) ? 1 : _bloomWeek.First() - bloomDay;
 
-        if (daysLeft < 0)
-        {
+        if (daysLeft < 0) {
             // fully grown
             daysLeft += WorldDate.DaysPerMonth;
         }
 
         int nextSeason = (daysLeft + today) / WorldDate.DaysPerMonth;
         // outdoor tea bush cannot shake in winter
-        if (!bush.IsSheltered() && Game1.Date.SeasonIndex + nextSeason == (int)Season.Winter)
-        {
+        if (!bush.IsSheltered() && Game1.Date.SeasonIndex + nextSeason == (int)Season.Winter) {
             daysLeft += WorldDate.DaysPerMonth;
         }
 
@@ -143,29 +135,25 @@ internal class TeaBushTooltipGenerator : ITooltipGenerator<TerrainFeature>
     {
         // If not mature yet, calculate days until maturity
         var bushAge = bush.getAge();
-        if (bushAge < customBushData.AgeToProduce)
-        {
+        if (bushAge < customBushData.AgeToProduce) {
             return Math.Max(0, customBushData.AgeToProduce - bushAge);
         }
 
         // If already has items ready
-        if (bush.tileSheetOffset.Value == 1)
-        {
+        if (bush.tileSheetOffset.Value == 1) {
             return 0;
         }
 
         // If in production period and ready
-        if (customBushData.GetShakeOffItemIfReady(bush, out ParsedItemData? shakeOffItemData))
-        {
+        if (customBushData.GetShakeOffItemIfReady(bush, out ParsedItemData? shakeOffItemData)) {
             var item = new CustomBushExtensions.PossibleDroppedItem(Game1.dayOfMonth, shakeOffItemData, 1.0f, id);
-            if (item.ReadyToPick) return 0;
-        }
-        else
-        {
+            if (item.ReadyToPick) {
+                return 0;
+            }
+        } else {
             // Get the list of possible drops to check production schedule
             var drops = customBushApi.GetCustomBushDropItems(customBushData, id);
-            if (drops.Any())
-            {
+            if (drops.Any()) {
                 // Find the next production day from the drops
                 var nextProductionDay = drops
                     .Select(drop => drop.NextDayToProduce)
@@ -180,12 +168,10 @@ internal class TeaBushTooltipGenerator : ITooltipGenerator<TerrainFeature>
         // If no production schedule found but in production period,
         // check if it's a valid production day
         bool inProductionPeriod = Game1.dayOfMonth >= customBushData.DayToBeginProducing;
-        if (inProductionPeriod)
-        {
+        if (inProductionPeriod) {
             // Check if production conditions are met (season, location, etc)
             if (!customBushData.Seasons.Contains(Game1.season) ||
-                !bush.IsSheltered())
-            {
+                !bush.IsSheltered()) {
                 // Cannot produce under current conditions, try next season
                 return -1;
             }

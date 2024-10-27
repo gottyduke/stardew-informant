@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using StardewValley.TerrainFeatures;
 using System.Diagnostics.CodeAnalysis;
-using StardewValley.TerrainFeatures;
 
 namespace Informant.ThirdParty.CustomBush;
 

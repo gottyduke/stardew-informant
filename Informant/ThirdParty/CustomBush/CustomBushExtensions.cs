@@ -15,13 +15,11 @@ internal static class CustomBushExtensions
       )
     {
         item = null;
-        if (bush.size.Value != Bush.greenTeaBush)
-        {
+        if (bush.size.Value != Bush.greenTeaBush) {
             return false;
         }
 
-        if (!bush.modData.TryGetValue(ShakeOffItem, out string itemId))
-        {
+        if (!bush.modData.TryGetValue(ShakeOffItem, out string itemId)) {
             return false;
         }
 
@@ -36,8 +34,7 @@ internal static class CustomBushExtensions
         bool includeToday = false
       )
     {
-        if (id == null || string.IsNullOrEmpty(id))
-        {
+        if (id == null || string.IsNullOrEmpty(id)) {
             return new List<PossibleDroppedItem>();
         }
 
@@ -62,29 +59,24 @@ internal static class CustomBushExtensions
     {
         List<PossibleDroppedItem> items = new();
 
-        foreach (T drop in drops)
-        {
+        foreach (T drop in drops) {
             DropInfo dropInfo = extractDropInfo(drop);
             int? nextDay = GetNextDay(dropInfo.Condition, includeToday);
             int? lastDay = GetLastDay(dropInfo.Condition);
 
-            if (!nextDay.HasValue)
-            {
-                if (!lastDay.HasValue)
-                {
+            if (!nextDay.HasValue) {
+                if (!lastDay.HasValue) {
                 }
 
                 continue;
             }
 
             ParsedItemData? itemData = ItemRegistry.GetData(dropInfo.ItemId);
-            if (itemData == null)
-            {
+            if (itemData == null) {
                 continue;
             }
 
-            if (Game1.dayOfMonth == nextDay.Value && !includeToday)
-            {
+            if (Game1.dayOfMonth == nextDay.Value && !includeToday) {
                 continue;
             }
 
@@ -129,15 +121,13 @@ internal static class CustomBushExtensions
     public static int? GetNextDayFromCondition(string? condition, bool includeToday = true)
     {
         HashSet<int> days = new();
-        if (condition == null)
-        {
+        if (condition == null) {
             return null;
         }
 
         GameStateQuery.ParsedGameStateQuery[]? conditionEntries = GameStateQuery.Parse(condition);
 
-        foreach (GameStateQuery.ParsedGameStateQuery parsedGameStateQuery in conditionEntries)
-        {
+        foreach (GameStateQuery.ParsedGameStateQuery parsedGameStateQuery in conditionEntries) {
             days.AddRange(GetDaysFromCondition(parsedGameStateQuery));
         }
 
@@ -149,39 +139,31 @@ internal static class CustomBushExtensions
     public static IEnumerable<int> GetDaysFromCondition(GameStateQuery.ParsedGameStateQuery parsedGameStateQuery)
     {
         HashSet<int> days = new();
-        if (parsedGameStateQuery.Query.Length < 2)
-        {
+        if (parsedGameStateQuery.Query.Length < 2) {
             return days;
         }
 
         string queryStr = parsedGameStateQuery.Query[0];
-        if (!"day_of_month".Equals(queryStr, StringComparison.OrdinalIgnoreCase))
-        {
+        if (!"day_of_month".Equals(queryStr, StringComparison.OrdinalIgnoreCase)) {
             return days;
         }
 
-        for (var i = 1; i < parsedGameStateQuery.Query.Length; i++)
-        {
+        for (var i = 1; i < parsedGameStateQuery.Query.Length; i++) {
             string dayStr = parsedGameStateQuery.Query[i];
-            if ("even".Equals(dayStr, StringComparison.OrdinalIgnoreCase))
-            {
+            if ("even".Equals(dayStr, StringComparison.OrdinalIgnoreCase)) {
                 days.AddRange(Enumerable.Range(1, 28).Where(x => x % 2 == 0));
                 continue;
             }
 
-            if ("odd".Equals(dayStr, StringComparison.OrdinalIgnoreCase))
-            {
+            if ("odd".Equals(dayStr, StringComparison.OrdinalIgnoreCase)) {
                 days.AddRange(Enumerable.Range(1, 28).Where(x => x % 2 != 0));
                 continue;
             }
 
-            try
-            {
+            try {
                 int parsedInt = int.Parse(dayStr);
                 days.Add(parsedInt);
-            }
-            catch (Exception)
-            {
+            } catch (Exception) {
                 // ignored
             }
         }
@@ -192,15 +174,13 @@ internal static class CustomBushExtensions
     public static int? GetLastDayFromCondition(string? condition)
     {
         HashSet<int> days = new();
-        if (condition == null)
-        {
+        if (condition == null) {
             return null;
         }
 
         GameStateQuery.ParsedGameStateQuery[]? conditionEntries = GameStateQuery.Parse(condition);
 
-        foreach (GameStateQuery.ParsedGameStateQuery parsedGameStateQuery in conditionEntries)
-        {
+        foreach (GameStateQuery.ParsedGameStateQuery parsedGameStateQuery in conditionEntries) {
             days.AddRange(GetDaysFromCondition(parsedGameStateQuery));
         }
 

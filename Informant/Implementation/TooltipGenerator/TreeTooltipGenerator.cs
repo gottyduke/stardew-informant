@@ -66,7 +66,7 @@ internal class TreeTooltipGenerator : ITooltipGenerator<TerrainFeature>
             default:
                 break;
         }
-        
+
         if (InformantMod.Instance?.Config.ShowTreeGrowthStage ?? false) {
             treeString += GetTreeGrowthStage(_modHelper, tree);
         }
@@ -86,8 +86,7 @@ internal class TreeTooltipGenerator : ITooltipGenerator<TerrainFeature>
             treeStage = FruitTree.treeStage;
         }
         var stageString = growthStage < treeStage
-            ? modHelper.Translation.Get("TreeTooltipGenerator.ShowGrowthStage.GrowthStage", new
-            {
+            ? modHelper.Translation.Get("TreeTooltipGenerator.ShowGrowthStage.GrowthStage", new {
                 N = growthStage,
                 T = treeStage,
             })
