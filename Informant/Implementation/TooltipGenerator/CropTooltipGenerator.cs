@@ -73,7 +73,7 @@ internal class CropTooltipGenerator : ITooltipGenerator<TerrainFeature>
         return daysLeft switch {
             -1 => "", // something went very wrong, but we don't want to break the game
             0 => modHelper.Translation.Get("CropTooltipGenerator.0DaysLeft"),
-            1 => modHelper.Translation.Get(bush ? "CropTooltipGenerator.1DaysLeftMature" : "CropTooltipGenerator.1DayLeft"),
+            1 => modHelper.Translation.Get(bush ? "CropTooltipGenerator.1DayLeftMature" : "CropTooltipGenerator.1DayLeft"),
             _ => modHelper.Translation.Get(bush ? "CropTooltipGenerator.XDaysLeftMature" : "CropTooltipGenerator.XDaysLeft", new { X = daysLeft })
         };
     }
