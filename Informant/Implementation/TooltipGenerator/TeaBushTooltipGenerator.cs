@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Slothsoft.Informant.Api;
 using StardewValley.TerrainFeatures;
+using StardewValley.TokenizableStrings;
 using Informant.ThirdParty;
 using StardewValley.ItemTypeDefinitions;
 
@@ -50,6 +51,7 @@ internal class TeaBushTooltipGenerator : ITooltipGenerator<TerrainFeature>
             if (customBushApi.TryGetCustomBush(bush, out ICustomBush? customBushData, out string? id))
             {
                 displayName = customBushData.DisplayName;
+                if(displayName.Contains("LocalizedText")) displayName = TokenParser.ParseText(displayName);
                 willProduceThisSeason = customBushData.Seasons.Contains(Game1.season);
                 ageToMature = customBushData.AgeToProduce;
 
