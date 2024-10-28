@@ -1,4 +1,5 @@
-﻿using Slothsoft.Informant.Api;
+﻿using Microsoft.Xna.Framework;
+using Slothsoft.Informant.Api;
 using Slothsoft.Informant.Implementation.Common;
 using StardewValley.TerrainFeatures;
 
@@ -17,7 +18,8 @@ internal class TreeTooltipGenerator : ITooltipGenerator<TerrainFeature>
     public string Id => "tree";
     public string DisplayName => _modHelper.Translation.Get("TreeTooltipGenerator");
     public string Description => _modHelper.Translation.Get("TreeTooltipGenerator.Description");
-
+    public string FertilizerId = "805";
+    
     public bool HasTooltip(TerrainFeature input)
     {
         return input is Tree;
@@ -25,10 +27,24 @@ internal class TreeTooltipGenerator : ITooltipGenerator<TerrainFeature>
 
     public Tooltip Generate(TerrainFeature input)
     {
-        return new Tooltip(CreateText((Tree)input));
+        return CreateTooltip(_modHelper, (Tree)input);
     }
 
-    private string CreateText(Tree tree)
+    internal Tooltip CreateTooltip(IModHelper modHelper, Tree tree) {
+        var text = CreateText(modHelper, tree);
+        return new Tooltip(text) {
+            Icon = [
+                tree.fertilized.Value && (InformantMod.Instance?.Config.DecorateTreeFertilizer ?? false) ?
+                Icon.ForUnqualifiedItemId(
+                    FertilizerId,
+                    IPosition.CenterRight,
+                    new Vector2(Game1.tileSize / 2f, Game1.tileSize / 2f)
+                ) : null,
+            ]
+        };
+    }
+
+    private string CreateText(IModHelper modHelper, Tree tree)
     {
         var treeString = "???";
         switch (tree.treeType.Value) {
@@ -53,22 +69,22 @@ internal class TreeTooltipGenerator : ITooltipGenerator<TerrainFeature>
             case PcTreeIds.ReuuTree:
             case PcTreeIds.MeekTree:
             case PcTreeIds.HeaviousTree:
-                treeString = _modHelper.Translation.Get("TreeTooltipGenerator.Type" + tree.treeType.Value);
+                treeString = modHelper.Translation.Get("TreeTooltipGenerator.Type" + tree.treeType.Value);
                 if (tree.hasMoss.Value) {
-                    treeString = _modHelper.Translation.Get("TreeTooltipGenerator.MossCovered", new { X = treeString });
+                    treeString = modHelper.Translation.Get("TreeTooltipGenerator.MossCovered", new { X = treeString });
                 }
                 break;
             case Tree.greenRainTreeBushy:
             case Tree.greenRainTreeLeafy:
             case Tree.greenRainTreeFern:
-                treeString = _modHelper.Translation.Get("TreeTooltipGenerator.Type10");
+                treeString = modHelper.Translation.Get("TreeTooltipGenerator.Type10");
                 break;
             default:
                 break;
         }
 
         if (InformantMod.Instance?.Config.ShowTreeGrowthStage ?? false) {
-            treeString += GetTreeGrowthStage(_modHelper, tree);
+            treeString += GetTreeGrowthStage(modHelper, tree);
         }
 
         return treeString;

@@ -8,6 +8,7 @@ internal record InformantConfig
     public HideMachineTooltips HideMachineTooltips { get; set; } = HideMachineTooltips.ForNonMachines;
     public ShippingBinTrackingType ShippingBinTracking { get; set; } = ShippingBinTrackingType.Collection;
     public bool DecorateFertilizer { get; set; } = true;
+    public bool DecorateTreeFertilizer { get; set; } = true;
     public bool DecoratePet { get; set; } = true;
     public bool DecorateLockedBundles { get; set; } = true;
     public bool DecorateUnqualifiedBundles { get; set; } = true;
