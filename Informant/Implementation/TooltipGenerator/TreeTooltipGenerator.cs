@@ -32,14 +32,15 @@ internal class TreeTooltipGenerator : ITooltipGenerator<TerrainFeature>
 
     internal Tooltip CreateTooltip(IModHelper modHelper, Tree tree) {
         var text = CreateText(modHelper, tree);
-        return new Tooltip(text) {
-            Icon = [
-                tree.fertilized.Value && (InformantMod.Instance?.Config.DecorateTreeFertilizer ?? false) ?
+        var fertilizerIcon = tree.growthStage.Value < Tree.treeStage && tree.fertilized.Value && (InformantMod.Instance?.Config.DecorateTreeFertilizer ?? false) ?
                 Icon.ForUnqualifiedItemId(
                     FertilizerId,
                     IPosition.CenterRight,
                     new Vector2(Game1.tileSize / 2f, Game1.tileSize / 2f)
-                ) : null,
+                ) : null;
+        return new Tooltip(text) {
+            Icon = [
+                fertilizerIcon,
             ]
         };
     }
