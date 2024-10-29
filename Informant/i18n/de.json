@@ -41,8 +41,11 @@
   "CropTooltipGenerator.1DayLeft": "Noch 1 Tag",
   "CropTooltipGenerator.XDaysLeft": "Noch {{X}} Tage",
   "CropTooltipGenerator.Dead": "Tot",
-  "CropTooltipGenerator.ShowFertilizer": "Display Fertilizer",
-  "CropTooltipGenerator.ShowFertilizer.Description": "Displays soil fertilizer on crop tooltip",
+  "CropTooltipGenerator.ShowFertilizer": "Dünger anzeigen",
+  "CropTooltipGenerator.ShowFertilizer.Description": "Zeigt Bodendünger im Tooltip der Pflanze an",
+
+  "TreeTooltipGenerator.DecorateFertilizer": "Baumdünger anzeigen",
+  "TreeTooltipGenerator.DecorateFertilizer.Description": "Zeigt Dünger auf Baum Tooltip",
 
   "FruitTreeTooltipGenerator": "Fruchtbäume-Tooltip",
   "FruitTreeTooltipGenerator.Description": "Ein Tooltip, der die Art des Fruchtbaums und die Tage bis zur Ernte zeigt",
@@ -54,7 +57,7 @@
   "CustomBushToolTipGenerator.NotThisSeasonAnymore": "Does not produce this season anymore",
   "CropTooltipGenerator.1DayLeftMature": "1 day left to mature",
   "CropTooltipGenerator.XDaysLeftMature": "{{X}} days left to mature",
-  
+
   "MachineTooltipGenerator": "Machinen-Tooltip",
   "MachineTooltipGenerator.Description": "Ein Tooltip, der die Art des Erzeugnisses und die verbleibende Zeit zeigt",
   "MachineTooltipGenerator.Finished": "Fertig",

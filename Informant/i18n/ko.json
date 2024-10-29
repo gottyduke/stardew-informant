@@ -44,6 +44,9 @@
   "CropTooltipGenerator.DecorateFertilizer": "Display Fertilizer",
   "CropTooltipGenerator.DecorateFertilizer.Description": "Displays soil fertilizer on crop tooltip",
 
+  "TreeTooltipGenerator.DecorateFertilizer": "Display Tree Fertilizer",
+  "TreeTooltipGenerator.DecorateFertilizer.Description": "Displays fertilizer on tree tooltip",
+
   "FruitTreeTooltipGenerator": "과일 나무 정보",
   "FruitTreeTooltipGenerator.Description": "과일 나무의 정보와 수확까지 남은 시간을 보여줍니다",
 
@@ -54,7 +57,7 @@
   "CustomBushToolTipGenerator.NotThisSeasonAnymore": "Does not produce this season anymore",
   "CropTooltipGenerator.1DayLeftMature": "1 day left to mature",
   "CropTooltipGenerator.XDaysLeftMature": "{{X}} days left to mature",
-  
+
   "MachineTooltipGenerator": "기계 정보",
   "MachineTooltipGenerator.Description": "기계의 결과물과 남은 시간을 보여줍니다",
   "MachineTooltipGenerator.Finished": "완료",

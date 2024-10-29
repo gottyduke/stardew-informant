@@ -61,6 +61,13 @@ internal static class HookToGenericModConfigMenu
         );
         configMenu.AddBoolOption(
             mod: informantMod.ModManifest,
+            name: () => informantMod.Helper.Translation.Get("TreeTooltipGenerator.DecorateFertilizer"),
+            tooltip: () => informantMod.Helper.Translation.Get("TreeTooltipGenerator.DecorateFertilizer.Description"),
+            getValue: () => informantMod.Config.DecorateTreeFertilizer,
+            setValue: value => informantMod.Config.DecorateTreeFertilizer = value
+        );
+        configMenu.AddBoolOption(
+            mod: informantMod.ModManifest,
             name: () => informantMod.Helper.Translation.Get("AnimalTooltipGenerator.DecoratePet"),
             tooltip: () => informantMod.Helper.Translation.Get("AnimalTooltipGenerator.DecoratePet.Description"),
             getValue: () => informantMod.Config.DecoratePet,

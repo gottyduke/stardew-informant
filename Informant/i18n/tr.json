@@ -44,6 +44,9 @@
   "CropTooltipGenerator.DecorateFertilizer": "Display Fertilizer",
   "CropTooltipGenerator.DecorateFertilizer.Description": "Displays soil fertilizer on crop tooltip",
 
+  "TreeTooltipGenerator.DecorateFertilizer": "Display Tree Fertilizer",
+  "TreeTooltipGenerator.DecorateFertilizer.Description": "Displays fertilizer on tree tooltip",
+
   "FruitTreeTooltipGenerator": "Meyve Ağacı İpucu",
   "FruitTreeTooltipGenerator.Description": "Meyve ağacının türünü ve hasada kalan gün sayısını gösteren bir ipucu",
 
@@ -54,7 +57,7 @@
   "CustomBushToolTipGenerator.NotThisSeasonAnymore": "Does not produce this season anymore",
   "CropTooltipGenerator.1DayLeftMature": "1 day left to mature",
   "CropTooltipGenerator.XDaysLeftMature": "{{X}} days left to mature",
-  
+
   "MachineTooltipGenerator": "Makine İpucu",
   "MachineTooltipGenerator.Description": "Üretilen nesnenin türünü ve kalan süreyi gösteren bir ipucu",
   "MachineTooltipGenerator.Finished": "Tamamlandı",

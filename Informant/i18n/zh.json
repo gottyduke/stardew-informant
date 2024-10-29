@@ -44,6 +44,9 @@
 	"CropTooltipGenerator.DecorateFertilizer": "作物: 显示肥料",
 	"CropTooltipGenerator.DecorateFertilizer.Description": "显示作物信息时同时显示土地肥料",
 
+	"TreeTooltipGenerator.DecorateFertilizer": "Display Tree Fertilizer",
+	"TreeTooltipGenerator.DecorateFertilizer.Description": "Displays fertilizer on tree tooltip",
+
 	"FruitTreeTooltipGenerator": "果树",
 	"FruitTreeTooltipGenerator.Description": "果树相关的信息, 如种类, 结果日",
 

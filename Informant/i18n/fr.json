@@ -44,6 +44,9 @@
   "CropTooltipGenerator.DecorateFertilizer": "Afficher les engrais",
   "CropTooltipGenerator.DecorateFertilizer.Description": "Affiche les engrais de sol sur l'infobulle des plantations.",
 
+  "TreeTooltipGenerator.DecorateFertilizer": "Afficher l'engrais de l'arbre",
+  "TreeTooltipGenerator.DecorateFertilizer.Description": "Afficher l'engrais de l'arbre",
+
   "FruitTreeTooltipGenerator": "Infobulle des arbres fruitier",
   "FruitTreeTooltipGenerator.Description": "Une infobulle qui affiche le type d'arbre fruitier et le temps restant avant la récolte.",
 
@@ -54,7 +57,7 @@
   "CustomBushToolTipGenerator.NotThisSeasonAnymore": "Does not produce this season anymore",
   "CropTooltipGenerator.1DayLeftMature": "1 day left to mature",
   "CropTooltipGenerator.XDaysLeftMature": "{{X}} days left to mature",
-  
+
   "MachineTooltipGenerator": "Infobulle des machines",
   "MachineTooltipGenerator.Description": "Une infobulle qui affiche le type de résultat et le temps restant.",
   "MachineTooltipGenerator.Finished": "Fini",
@@ -97,12 +100,12 @@
   "Config.TooltipGenerators.GeneralSection": "Infobulles - Général",
   "Config.TooltipGenerators.Visibility": "Infobulles - Visibilité",
   "Config.TooltipGenerators.ShowModSource": "Infobulles - Montrer la source du mod",
-  
+
   "Config.TooltipTrigger": "Déclencheur d'infobulle",
   "Config.TooltipTrigger.Hover": "Au survol",
   "Config.TooltipTrigger.ButtonHeld": "Au maintien de bouton",
   "Config.TooltipTriggerButton": "Au clic de bouton",
- 
+
   "Config.HideMachineTooltips": "Masquer les bulles des machines",
   "Config.HideMachineTooltips.ForNonMachines": "Pour les non machines",
   "Config.HideMachineTooltips.ForChests": "Pour les coffres",

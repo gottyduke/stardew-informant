@@ -44,6 +44,9 @@
   "CropTooltipGenerator.DecorateFertilizer": "Display Fertilizer",
   "CropTooltipGenerator.DecorateFertilizer.Description": "Displays soil fertilizer on crop tooltip",
 
+  "TreeTooltipGenerator.DecorateFertilizer": "Display Tree Fertilizer",
+  "TreeTooltipGenerator.DecorateFertilizer.Description": "Displays fertilizer on tree tooltip",
+
   "FruitTreeTooltipGenerator": "Fruit Trees Tooltip",
   "FruitTreeTooltipGenerator.Description": "A tooltip that displays the type of fruit tree and remaining days till harvest",
 
