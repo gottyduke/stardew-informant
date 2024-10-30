@@ -41,8 +41,11 @@
   "CropTooltipGenerator.1DayLeft": "1 jour restant",
   "CropTooltipGenerator.XDaysLeft": "{{X}} jours restant",
   "CropTooltipGenerator.Dead": "Mort",
+  "CropTooltipGenerator.NotWatered": "Non arrosé",
   "CropTooltipGenerator.DecorateFertilizer": "Afficher les engrais",
   "CropTooltipGenerator.DecorateFertilizer.Description": "Affiche les engrais de sol sur l'infobulle des plantations.",
+  "CropTooltipGenerator.DecorateNotWatered": "Afficher la culture non arrosée",
+  "CropTooltipGenerator.DecorateNotWatered.Description": "Affiche l'infobulle de la culture non arrosée",
 
   "TreeTooltipGenerator.DecorateFertilizer": "Afficher l'engrais de l'arbre",
   "TreeTooltipGenerator.DecorateFertilizer.Description": "Afficher l'engrais de l'arbre",

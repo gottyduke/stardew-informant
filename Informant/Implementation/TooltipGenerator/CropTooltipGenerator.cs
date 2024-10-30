@@ -43,19 +43,40 @@ internal class CropTooltipGenerator : ITooltipGenerator<TerrainFeature>
         var displayName = TokenParser.ParseText(produce.DisplayName);
         var daysLeft = CalculateDaysLeftString(modHelper, crop);
 
-        return new Tooltip($"{displayName}\n{daysLeft}") {
+        bool hasCrop = dirt.crop is not null;
+        bool cropDead = crop.dead.Value;
+        bool notWatered = dirt.state.Value != 1 && hasCrop && !cropDead;
+        bool hasFertilizer = dirt.HasFertilizer();
+
+        string tooltipText = $"{displayName}\n{daysLeft}";
+        // NotWatered text
+        if (notWatered) {
+            var notWateredText = modHelper.Translation.Get("CropTooltipGenerator.NotWatered");
+            tooltipText += $"\n{notWateredText}";
+        }
+
+        if (hasFertilizer && dirt.fertilizer.Value.Contains('|')) {
+            tooltipText += "\n\n";
+        }
+
+        return new Tooltip(tooltipText) {
             Icon = [
+                hasCrop ?
                 Icon.ForUnqualifiedItemId(
-                    cropId,
-                    IPosition.CenterRight,
-                    new Vector2(Game1.tileSize / 2f, Game1.tileSize / 2f)
-                ),
-                dirt.HasFertilizer() && (InformantMod.Instance?.Config.DecorateFertilizer ?? false) ?
-                Icon.ForUnqualifiedItemId(
-                    dirt.fertilizer.Value,
+                    // dead crop icon
+                    !cropDead ? cropId : "748",
                     IPosition.CenterRight,
                     new Vector2(Game1.tileSize / 2f, Game1.tileSize / 2f)
                 ) : null,
+                // Adds compatibility to fertilizer mods
+                .. GetFertilizerIconList(dirt),
+                // Not watered soil
+                notWatered ?
+                Icon.ForUnqualifiedItemId(
+                    GetWateringCanId(),
+                    IPosition.CenterRight,
+                    new Vector2(Game1.tileSize / 2f, Game1.tileSize / 2f)
+                ) : null
             ]
         };
     }
@@ -105,5 +126,43 @@ internal class CropTooltipGenerator : ITooltipGenerator<TerrainFeature>
         }
 
         return result;
+    }
+    // Upgrades icon with farming level
+    internal static string GetWateringCanId() {
+        int level = Game1.player.farmingLevel.Value;
+        string quality = level switch {
+            > 8 => "Iridium",
+            > 5 => "Gold",
+            > 4 => "Steel",
+            > 2 => "Copper",
+            _ => "",
+        };
+        return $"(T){quality}WateringCan";
+    }
+
+    // Adds compatibility to fertilizer mods
+    internal static Icon?[] GetFertilizerIconList(HoeDirt dirt) {
+        if ((InformantMod.Instance?.Config.DecorateNotWatered ?? false) && dirt.HasFertilizer()) {
+            if (dirt.fertilizer.Value.Contains('|')) {
+                return [.. dirt.fertilizer.Value.Split("|")
+                    .GroupBy(id => ItemRegistry.GetData(id)?.DisplayName ?? "Unknown Fertilizer")
+                    .OrderBy(g => g.Key)
+                    .SelectMany(g => g)
+                    .Select(f =>
+                        Icon.ForUnqualifiedItemId(
+                            f,
+                            IPosition.BottomCenter,
+                            new Vector2(Game1.tileSize / 2f, Game1.tileSize / 2f)
+                        )
+                    )];
+            } else {
+                return [Icon.ForUnqualifiedItemId(
+                    dirt.fertilizer.Value,
+                    IPosition.CenterRight,
+                    new Vector2(Game1.tileSize / 2f, Game1.tileSize / 2f)
+                )];
+            };
+        }
+        return [];
     }
 }

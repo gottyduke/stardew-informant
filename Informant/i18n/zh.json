@@ -41,8 +41,11 @@
 	"CropTooltipGenerator.1DayLeft": "明天成熟",
 	"CropTooltipGenerator.XDaysLeft": "{{X}}天后成熟",
 	"CropTooltipGenerator.Dead": "枯萎",
+	"CropTooltipGenerator.NotWatered": "Not Watered",
 	"CropTooltipGenerator.DecorateFertilizer": "作物: 显示肥料",
 	"CropTooltipGenerator.DecorateFertilizer.Description": "显示作物信息时同时显示土地肥料",
+	"CropTooltipGenerator.DecorateNotWatered": "Display Crop Not Watered",
+	"CropTooltipGenerator.DecorateNotWatered.Description": "Displays crop not watered tooltip",
 
 	"TreeTooltipGenerator.DecorateFertilizer": "Display Tree Fertilizer",
 	"TreeTooltipGenerator.DecorateFertilizer.Description": "Displays fertilizer on tree tooltip",

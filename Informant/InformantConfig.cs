@@ -7,6 +7,7 @@ internal record InformantConfig
     public SButton TooltipTriggerButton { get; set; } = SButton.MouseRight;
     public HideMachineTooltips HideMachineTooltips { get; set; } = HideMachineTooltips.ForNonMachines;
     public ShippingBinTrackingType ShippingBinTracking { get; set; } = ShippingBinTrackingType.Collection;
+    public bool DecorateNotWatered { get; set; } = true;
     public bool DecorateFertilizer { get; set; } = true;
     public bool DecorateTreeFertilizer { get; set; } = true;
     public bool DecoratePet { get; set; } = true;

@@ -41,8 +41,11 @@
   "CropTooltipGenerator.1DayLeft": "Noch 1 Tag",
   "CropTooltipGenerator.XDaysLeft": "Noch {{X}} Tage",
   "CropTooltipGenerator.Dead": "Tot",
+  "CropTooltipGenerator.NotWatered": "Nicht bewässert",
   "CropTooltipGenerator.ShowFertilizer": "Dünger anzeigen",
   "CropTooltipGenerator.ShowFertilizer.Description": "Zeigt Bodendünger im Tooltip der Pflanze an",
+  "CropTooltipGenerator.DecorateNotWatered": "Erntegut nicht bewässert anzeigen",
+  "CropTooltipGenerator.DecorateNotWatered.Description": "Zeigt den Tooltip Ernte nicht bewässert an",
 
   "TreeTooltipGenerator.DecorateFertilizer": "Baumdünger anzeigen",
   "TreeTooltipGenerator.DecorateFertilizer.Description": "Zeigt Dünger auf Baum Tooltip",

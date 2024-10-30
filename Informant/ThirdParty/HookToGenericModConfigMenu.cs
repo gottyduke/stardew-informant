@@ -54,6 +54,13 @@ internal static class HookToGenericModConfigMenu
         configMenu.AddSectionTitle(informantMod.ModManifest, () => informantMod.Helper.Translation.Get("Config.TooltipGenerators.GeneralSection"));
         configMenu.AddBoolOption(
             mod: informantMod.ModManifest,
+            name: () => informantMod.Helper.Translation.Get("CropTooltipGenerator.DecorateNotWatered"),
+            tooltip: () => informantMod.Helper.Translation.Get("CropTooltipGenerator.DecorateNotWatered.Description"),
+            getValue: () => informantMod.Config.DecorateNotWatered,
+            setValue: value => informantMod.Config.DecorateNotWatered = value
+        );
+        configMenu.AddBoolOption(
+            mod: informantMod.ModManifest,
             name: () => informantMod.Helper.Translation.Get("CropTooltipGenerator.DecorateFertilizer"),
             tooltip: () => informantMod.Helper.Translation.Get("CropTooltipGenerator.DecorateFertilizer.Description"),
             getValue: () => informantMod.Config.DecorateFertilizer,

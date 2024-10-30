@@ -41,8 +41,11 @@
   "CropTooltipGenerator.1DayLeft": "Falta 1 dia",
   "CropTooltipGenerator.XDaysLeft": "Faltam {{X}} dias",
   "CropTooltipGenerator.Dead": "Morto",
+  "CropTooltipGenerator.NotWatered": "Not Watered",
   "CropTooltipGenerator.DecorateFertilizer": "Display Fertilizer",
   "CropTooltipGenerator.DecorateFertilizer.Description": "Displays soil fertilizer on crop tooltip",
+  "CropTooltipGenerator.DecorateNotWatered": "Display Crop Not Watered",
+  "CropTooltipGenerator.DecorateNotWatered.Description": "Displays crop not watered tooltip",
 
   "TreeTooltipGenerator.DecorateFertilizer": "Display Tree Fertilizer",
   "TreeTooltipGenerator.DecorateFertilizer.Description": "Displays fertilizer on tree tooltip",

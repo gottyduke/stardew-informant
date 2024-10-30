@@ -41,8 +41,11 @@
   "CropTooltipGenerator.1DayLeft": "하루 남음",
   "CropTooltipGenerator.XDaysLeft": "{{X}}일 남음",
   "CropTooltipGenerator.Dead": "시듦",
+  "CropTooltipGenerator.NotWatered": "Not Watered",
   "CropTooltipGenerator.DecorateFertilizer": "Display Fertilizer",
   "CropTooltipGenerator.DecorateFertilizer.Description": "Displays soil fertilizer on crop tooltip",
+  "CropTooltipGenerator.DecorateNotWatered": "Display Crop Not Watered",
+  "CropTooltipGenerator.DecorateNotWatered.Description": "Displays crop not watered tooltip",
 
   "TreeTooltipGenerator.DecorateFertilizer": "Display Tree Fertilizer",
   "TreeTooltipGenerator.DecorateFertilizer.Description": "Displays fertilizer on tree tooltip",
