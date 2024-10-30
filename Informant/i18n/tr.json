@@ -50,9 +50,6 @@
   "TreeTooltipGenerator.DecorateFertilizer": "Display Tree Fertilizer",
   "TreeTooltipGenerator.DecorateFertilizer.Description": "Displays fertilizer on tree tooltip",
 
-  "TreeTooltipGenerator.DecorateFertilizer": "Display Tree Fertilizer",
-  "TreeTooltipGenerator.DecorateFertilizer.Description": "Displays fertilizer on tree tooltip",
-
   "FruitTreeTooltipGenerator": "Meyve Ağacı İpucu",
   "FruitTreeTooltipGenerator.Description": "Meyve ağacının türünü ve hasada kalan gün sayısını gösteren bir ipucu",
 

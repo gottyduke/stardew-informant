@@ -50,9 +50,6 @@
   "TreeTooltipGenerator.DecorateFertilizer": "Display Tree Fertilizer",
   "TreeTooltipGenerator.DecorateFertilizer.Description": "Displays fertilizer on tree tooltip",
 
-  "TreeTooltipGenerator.DecorateFertilizer": "Display Tree Fertilizer",
-  "TreeTooltipGenerator.DecorateFertilizer.Description": "Displays fertilizer on tree tooltip",
-
   "FruitTreeTooltipGenerator": "Tooltip de Árvores Frutíferas",
   "FruitTreeTooltipGenerator.Description": "Uma Tooltip que exibe o tipo de árvore frutífera e os dias restantes até a colheita",
 
