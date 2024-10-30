@@ -50,6 +50,9 @@
 	"TreeTooltipGenerator.DecorateFertilizer": "Display Tree Fertilizer",
 	"TreeTooltipGenerator.DecorateFertilizer.Description": "Displays fertilizer on tree tooltip",
 
+	"TreeTooltipGenerator.DecorateFertilizer": "Display Tree Fertilizer",
+	"TreeTooltipGenerator.DecorateFertilizer.Description": "Displays fertilizer on tree tooltip",
+
 	"FruitTreeTooltipGenerator": "果树",
 	"FruitTreeTooltipGenerator.Description": "果树相关的信息, 如种类, 结果日",
 

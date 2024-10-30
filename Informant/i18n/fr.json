@@ -50,6 +50,9 @@
   "TreeTooltipGenerator.DecorateFertilizer": "Afficher l'engrais de l'arbre",
   "TreeTooltipGenerator.DecorateFertilizer.Description": "Afficher l'engrais de l'arbre",
 
+  "TreeTooltipGenerator.DecorateFertilizer": "Afficher l'engrais de l'arbre",
+  "TreeTooltipGenerator.DecorateFertilizer.Description": "Afficher l'engrais de l'arbre",
+
   "FruitTreeTooltipGenerator": "Infobulle des arbres fruitier",
   "FruitTreeTooltipGenerator.Description": "Une infobulle qui affiche le type d'arbre fruitier et le temps restant avant la récolte.",
 
