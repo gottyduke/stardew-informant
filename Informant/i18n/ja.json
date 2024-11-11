@@ -13,7 +13,7 @@
   "RarecrowDecorator.Description": "レアカカシの収集に必要なアイテムにマークを付ける",
 
   "SeedTooltipDecorator": "タネプレビュー デコレーター",
-  "SeedTooltipDecorator.Description": "タネからできる作物の売価を表示する",
+  "SeedTooltipDecorator.Description": "タネから育つ作物の売価を表示する",
 
   "SellPriceDisplayable": "売価 デコレーター",
   "SellPriceDisplayable.Description": "ツールチップ下部に売却価格を追加する",
