@@ -1,0 +1,21 @@
+{
+  "Name": "Informant Aquarium Addon",
+  "Author": "DK",
+  "Version": "1.0.0",
+  "Description": "Informant Addon for Stardew Aquarium",
+  "UniqueID": "Slothsoft.Informant.Aquarium",
+  "EntryDll": "Informant.Aquarium.dll",
+  "MinimumApiVersion": "4.0.2",
+  "Dependencies": [
+    {
+      "UniqueID": "Cherry.StardewAquarium"
+    },
+    {
+      "UniqueID": "Slothsoft.Informant",
+      "MinimumVersion": "1.9.0"
+    }
+  ],
+  "UpdateKeys": [
+    "Nexus:21286"
+  ]
+}
