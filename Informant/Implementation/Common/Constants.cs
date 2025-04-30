@@ -216,11 +216,6 @@ public static class BigCraftableIds
 
 public static class CropIds
 {
-    // Ship 15 of each crop
-    public static readonly string[] Polyculture = new[] {
-        24, 188, 190, 192, 248, 250, 252, 254, 256, 258, 260, 262, 264, 266, 268, 270, 272, 274, 276, 278, 280, 282, 284, 300, 304, 398, 400, 433
-    }.Select(id => id.ToString()).ToArray();
-
     public const string Ginger = "829";
     public const string MixedFlowers = "MixedFlowerSeeds";
     public const string MixedSeeds = "770";
