@@ -1,7 +1,7 @@
 {
   "Name": "Informant Aquarium Addon",
   "Author": "DK",
-  "Version": "1.0.0",
+  "Version": "1.9.3",
   "Description": "Informant Addon for Stardew Aquarium",
   "UniqueID": "Slothsoft.Informant.Aquarium",
   "EntryDll": "Informant.Aquarium.dll",
