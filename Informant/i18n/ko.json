@@ -5,36 +5,27 @@
   "BundleTooltipDecorator.DecorateLockedBundles.Description": "아직 잠겨있는 번들에 필요한 아이템도 표시합니다",
   "BundleTooltipDecorator.DecorateUnqualifiedBundles": "Decorate Unqualified Bundles",
   "BundleTooltipDecorator.DecorateUnqualifiedBundles.Description": "Displays bundle decorator for item that doesn't meet quality requirement",
-
   "FieldOfficeDecorator": "Field Office Decorator",
   "FieldOfficeDecorator.Description": "Marks items that are needed for the island field office",
-
   "RarecrowDecorator": "Rarecrow Decorator",
   "RarecrowDecorator.Description": "Marks items that are needed for the rarecrow collection",
-
   "SeedTooltipDecorator": "Seed Preview Decorator",
   "SeedTooltipDecorator.Description": "Preview the seed product and its sell value",
-
   "SellPriceDisplayable": "판매 가격 표시",
   "SellPriceDisplayable.Description": "툴팁 하단에 판매 가격을 표시합니다",
-
   "MuseumDecorator": "박물관 표시",
   "MuseumDecorator.Description": "박물관에 기증해야 하는 아이템을 표시합니다",
-
   "NewRecipeDisplayable": "새 제작법 표시",
   "NewRecipeDisplayable.Description": "아직 요리하거나 제작해본적 없는 제작법을 표시합니다",
-
   "ShippingBinDecorator": "출하 표시",
   "ShippingBinDecorator.Description": "출하한적 없는 아이템을 표시합니다",
   "ShippingBinDecorator.TrackingType": "Shipping Tracking Type",
   "ShippingBinDecorator.TrackingType.All": "All Collection",
   "ShippingBinDecorator.TrackingType.Collection": "Shipping Only",
-
   "AnimalTooltipGenerator": "Animals Tooltip",
   "AnimalTooltipGenerator.Description": "Displays additional information for farm animals",
   "AnimalTooltipGenerator.DecoratePet": "Display Pet",
   "AnimalTooltipGenerator.DecoratePet.Description": "Displays pet info",
-
   "CropTooltipGenerator": "작물 정보",
   "CropTooltipGenerator.Description": "작물의 종류와 수확까지 남은 시간을 보여줍니다",
   "CropTooltipGenerator.0DaysLeft": "다 자람",
@@ -46,28 +37,22 @@
   "CropTooltipGenerator.DecorateFertilizer.Description": "Displays soil fertilizer on crop tooltip",
   "CropTooltipGenerator.DecorateNotWatered": "Display Crop Not Watered",
   "CropTooltipGenerator.DecorateNotWatered.Description": "Displays crop not watered tooltip",
-
   "TreeTooltipGenerator.DecorateFertilizer": "Display Tree Fertilizer",
   "TreeTooltipGenerator.DecorateFertilizer.Description": "Displays fertilizer on tree tooltip",
-
   "FruitTreeTooltipGenerator": "과일 나무 정보",
   "FruitTreeTooltipGenerator.Description": "과일 나무의 정보와 수확까지 남은 시간을 보여줍니다",
-
   "TeaBushTooltipGenerator": "Tea Bush Tooltip",
   "TeaBushTooltipGenerator.Description": "A tooltip that displays the remaining days of tea bush",
-
   "CustomBushToolTipGenerator.NotThisSeason": "Does not produce this season",
   "CustomBushToolTipGenerator.NotThisSeasonAnymore": "Does not produce this season anymore",
   "CropTooltipGenerator.1DayLeftMature": "1 day left to mature",
   "CropTooltipGenerator.XDaysLeftMature": "{{X}} days left to mature",
-
   "MachineTooltipGenerator": "기계 정보",
   "MachineTooltipGenerator.Description": "기계의 결과물과 남은 시간을 보여줍니다",
   "MachineTooltipGenerator.Finished": "완료",
   "MachineTooltipGenerator.CannotBeUnloaded": "취소 불가능",
   "MachineTooltipGenerator.ForNextQuality": "다음 등급까지 {{X}}",
   "MachineTooltipGenerator.ForTotal": "총 {{X}}",
-
   "TreeTooltipGenerator": "나무 정보",
   "TreeTooltipGenerator.Description": "나무의 정보를 보여줍니다",
   "TreeTooltipGenerator.Type1": "참나무",
@@ -97,17 +82,14 @@
   "TreeTooltipGenerator.ShowGrowthStage.Description": "Displays tree growth stage(in numeric form)",
   "TreeTooltipGenerator.ShowGrowthStage.GrowthStage": "Stage {{N}} of {{T}}",
   "TreeTooltipGenerator.ShowGrowthStage.MatureStage": "Mature",
-
   "Config.Decorators.GeneralSection": "표시기 - 일반",
   "Config.Decorators.Visibility": "표시기 - 활성화",
   "Config.TooltipGenerators.GeneralSection": "정보 - 일반",
   "Config.TooltipGenerators.Visibility": "정보 - 활성화",
-
   "Config.TooltipTrigger": "정보 표시 조건",
   "Config.TooltipTrigger.Hover": "커서 가져다댈 때",
   "Config.TooltipTrigger.ButtonHeld": "버튼 누를 때",
   "Config.TooltipTriggerButton": "정보 표시 버튼",
-
   "Config.HideMachineTooltips": "기계 정보 숨기기",
   "Config.HideMachineTooltips.ForNonMachines": "비기계류에 대해",
   "Config.HideMachineTooltips.ForChests": "상자에 대해",

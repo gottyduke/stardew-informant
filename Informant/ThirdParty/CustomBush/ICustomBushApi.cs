@@ -1,5 +1,5 @@
-﻿using StardewValley.TerrainFeatures;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
+using StardewValley.TerrainFeatures;
 
 namespace Informant.ThirdParty.CustomBush;
 
@@ -18,8 +18,8 @@ public interface ICustomBushApi
     /// <summary>Tries to get the custom bush model associated with the given bush.</summary>
     /// <param name="bush">The bush.</param>
     /// <param name="customBush">
-    ///   When this method returns, contains the custom bush associated with the given bush, if found;
-    ///   otherwise, it contains null.
+    ///     When this method returns, contains the custom bush associated with the given bush, if found;
+    ///     otherwise, it contains null.
     /// </param>
     /// <returns>true if the custom bush associated with the given bush is found; otherwise, false.</returns>
     public bool TryGetCustomBush(Bush bush, [NotNullWhen(true)] out ICustomBush? customBush);
@@ -27,15 +27,15 @@ public interface ICustomBushApi
     /// <summary>Tries to get the custom bush model associated with the given bush.</summary>
     /// <param name="bush">The bush.</param>
     /// <param name="customBush">
-    ///   When this method returns, contains the custom bush associated with the given bush, if found;
-    ///   otherwise, it contains null.
+    ///     When this method returns, contains the custom bush associated with the given bush, if found;
+    ///     otherwise, it contains null.
     /// </param>
     /// <param name="id">When this method returns, contains the id of the custom bush, if found; otherwise, it contains null.</param>
     /// <returns>true if the custom bush associated with the given bush is found; otherwise, false.</returns>
     public bool TryGetCustomBush(
-      Bush bush,
-      [NotNullWhen(true)] out ICustomBush? customBush,
-      [NotNullWhen(true)] out string? id
+        Bush bush,
+        [NotNullWhen(true)] out ICustomBush? customBush,
+        [NotNullWhen(true)] out string? id
     );
 
     /// <summary>Tries to get the custom bush drop associated with the given bush id.</summary>

@@ -5,36 +5,27 @@
   "BundleTooltipDecorator.DecorateLockedBundles.Description": "Displays bundle decorator for still locked bundles",
   "BundleTooltipDecorator.DecorateUnqualifiedBundles": "Decorate Unqualified Bundles",
   "BundleTooltipDecorator.DecorateUnqualifiedBundles.Description": "Displays bundle decorator for item that doesn't meet quality requirement",
-
   "FieldOfficeDecorator": "Field Office Decorator",
   "FieldOfficeDecorator.Description": "Marks items that are needed for the island field office",
-
   "RarecrowDecorator": "Rarecrow Decorator",
   "RarecrowDecorator.Description": "Marks items that are needed for the rarecrow collection",
-
   "SeedTooltipDecorator": "Seed Preview Decorator",
   "SeedTooltipDecorator.Description": "Preview the seed product and its sell value",
-
   "SellPriceDisplayable": "Sell Price Decorator",
   "SellPriceDisplayable.Description": "Adds the sell price at the bottom of the tooltip",
-
   "MuseumDecorator": "Museum Decorator",
   "MuseumDecorator.Description": "Marks items that are needed for the museum",
-
   "NewRecipeDisplayable": "New Recipe Decorator",
   "NewRecipeDisplayable.Description": "Marks recipes that where not yet cooked / crafted",
-
   "ShippingBinDecorator": "Shipping Decorator",
   "ShippingBinDecorator.Description": "Marks items that were not shipped yet",
   "ShippingBinDecorator.TrackingType": "Shipping Tracking Type",
   "ShippingBinDecorator.TrackingType.All": "All Collection",
   "ShippingBinDecorator.TrackingType.Collection": "Shipping Only",
-
   "AnimalTooltipGenerator": "Animals Tooltip",
   "AnimalTooltipGenerator.Description": "Displays additional information for farm animals",
   "AnimalTooltipGenerator.DecoratePet": "Display Pet",
   "AnimalTooltipGenerator.DecoratePet.Description": "Displays pet info",
-
   "CropTooltipGenerator": "Crops Tooltip",
   "CropTooltipGenerator.Description": "A tooltip that displays the type of crop and remaining days till harvest",
   "CropTooltipGenerator.0DaysLeft": "Ready to harvest",
@@ -46,28 +37,22 @@
   "CropTooltipGenerator.DecorateFertilizer.Description": "Displays soil fertilizer on crop tooltip",
   "CropTooltipGenerator.DecorateNotWatered": "Display Crop Not Watered",
   "CropTooltipGenerator.DecorateNotWatered.Description": "Displays crop not watered tooltip",
-
   "TreeTooltipGenerator.DecorateFertilizer": "Display Tree Fertilizer",
   "TreeTooltipGenerator.DecorateFertilizer.Description": "Displays fertilizer on tree tooltip",
-
   "FruitTreeTooltipGenerator": "Fruit Trees Tooltip",
   "FruitTreeTooltipGenerator.Description": "A tooltip that displays the type of fruit tree and remaining days till harvest",
-
   "TeaBushTooltipGenerator": "Tea Bush Tooltip",
   "TeaBushTooltipGenerator.Description": "A tooltip that displays the remaining days of tea bush",
-
   "CustomBushToolTipGenerator.NotThisSeason": "Does not produce this season",
   "CustomBushToolTipGenerator.NotThisSeasonAnymore": "Does not produce this season anymore",
   "CropTooltipGenerator.1DayLeftMature": "1 day left to mature",
   "CropTooltipGenerator.XDaysLeftMature": "{{X}} days left to mature",
-
   "MachineTooltipGenerator": "Machines Tooltip",
   "MachineTooltipGenerator.Description": "A tooltip that displays the type of result and remaining time",
   "MachineTooltipGenerator.Finished": "Finished",
   "MachineTooltipGenerator.CannotBeUnloaded": "Cannot be unloaded",
   "MachineTooltipGenerator.ForNextQuality": "{{X}} for next quality",
   "MachineTooltipGenerator.ForTotal": "{{X}} in total",
-
   "TreeTooltipGenerator": "Trees Tooltip",
   "TreeTooltipGenerator.Description": "A tooltip that displays the type of tree",
   "TreeTooltipGenerator.Type1": "Oak Tree",
@@ -97,18 +82,15 @@
   "TreeTooltipGenerator.ShowGrowthStage.Description": "Displays tree growth stage(in numeric form)",
   "TreeTooltipGenerator.ShowGrowthStage.GrowthStage": "Stage {{N}} of {{T}}",
   "TreeTooltipGenerator.ShowGrowthStage.MatureStage": "Mature",
-
   "Config.Decorators.GeneralSection": "Decorators - General",
   "Config.Decorators.Visibility": "Decorators - Visibility",
   "Config.TooltipGenerators.GeneralSection": "Tooltips - General",
   "Config.TooltipGenerators.Visibility": "Tooltips - Visibility",
   "Config.TooltipGenerators.ShowModSource": "Tooltips - Show Mod Source",
-
   "Config.TooltipTrigger": "Tooltip Trigger",
   "Config.TooltipTrigger.Hover": "On hover",
   "Config.TooltipTrigger.ButtonHeld": "On button held",
   "Config.TooltipTriggerButton": "Tooltip Button",
-
   "Config.HideMachineTooltips": "Hide Machine Tooltips",
   "Config.HideMachineTooltips.ForNonMachines": "For non-machines",
   "Config.HideMachineTooltips.ForChests": "For chests",

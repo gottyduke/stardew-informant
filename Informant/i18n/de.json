@@ -5,36 +5,27 @@
   "BundleTooltipDecorator.DecorateLockedBundles.Description": "Displays bundle decorator for still locked bundles",
   "BundleTooltipDecorator.DecorateUnqualifiedBundles": "Decorate Unqualified Bundles",
   "BundleTooltipDecorator.DecorateUnqualifiedBundles.Description": "Displays bundle decorator for item that doesn't meet quality requirement",
-
   "FieldOfficeDecorator": "Außenstelle-Dekoration",
   "FieldOfficeDecorator.Description": "Markiert Gegenstände, die für die Insel-Außenstelle gebraucht werden",
-
   "RarecrowDecorator": "Vogelscheuchen-Dekoration",
   "RarecrowDecorator.Description": "Markiert Gegenstände, die für die Vogelscheuchensammlung gebraucht werden",
-
   "SeedTooltipDecorator": "Seed Preview Decorator",
   "SeedTooltipDecorator.Description": "Preview the seed product and its sell value",
-
   "SellPriceDisplayable": "Verkaufspreis-Dekoration",
   "SellPriceDisplayable.Description": "Fügt den Verkaufspreis unten am Tooltip ein",
-
   "MuseumDecorator": "Museum-Dekoration",
   "MuseumDecorator.Description": "Markiert Gegenstände, die für das Museum gebraucht werden",
-
   "NewRecipeDisplayable": "Neue-Rezepte-Dekoration",
   "NewRecipeDisplayable.Description": "Markiert Rezepte, die noch nicht gefertigt / gekocht worden sind",
-
   "ShippingBinDecorator": "Versand-Dekoration",
   "ShippingBinDecorator.Description": "Markiert Gegenstände, die noch nie versandt worden sind",
   "ShippingBinDecorator.TrackingType": "Shipping Tracking Type",
   "ShippingBinDecorator.TrackingType.All": "All Collection",
   "ShippingBinDecorator.TrackingType.Collection": "Shipping Only",
-
   "AnimalTooltipGenerator": "Animals Tooltip",
   "AnimalTooltipGenerator.Description": "Displays additional information for farm animals",
   "AnimalTooltipGenerator.IncludePet": "Display Pet",
   "AnimalTooltipGenerator.IncludePet.Description": "Displays pet with farm animals together",
-
   "CropTooltipGenerator": "Nutzpflanzen-Tooltip",
   "CropTooltipGenerator.Description": "Ein Tooltip, der die Art der Nutzpflanze und die Tage bis zur Ernte zeigt",
   "CropTooltipGenerator.0DaysLeft": "Bereit zur Ernte",
@@ -46,28 +37,22 @@
   "CropTooltipGenerator.ShowFertilizer.Description": "Zeigt Bodendünger im Tooltip der Pflanze an",
   "CropTooltipGenerator.DecorateNotWatered": "Erntegut nicht bewässert anzeigen",
   "CropTooltipGenerator.DecorateNotWatered.Description": "Zeigt den Tooltip Ernte nicht bewässert an",
-
   "TreeTooltipGenerator.DecorateFertilizer": "Baumdünger anzeigen",
   "TreeTooltipGenerator.DecorateFertilizer.Description": "Zeigt Dünger auf Baum Tooltip",
-
   "FruitTreeTooltipGenerator": "Fruchtbäume-Tooltip",
   "FruitTreeTooltipGenerator.Description": "Ein Tooltip, der die Art des Fruchtbaums und die Tage bis zur Ernte zeigt",
-
   "TeaBushTooltipGenerator": "Tea Bush Tooltip",
   "TeaBushTooltipGenerator.Description": "A tooltip that displays the remaining days of tea bush",
-
   "CustomBushToolTipGenerator.NotThisSeason": "Does not produce this season",
   "CustomBushToolTipGenerator.NotThisSeasonAnymore": "Does not produce this season anymore",
   "CropTooltipGenerator.1DayLeftMature": "1 day left to mature",
   "CropTooltipGenerator.XDaysLeftMature": "{{X}} days left to mature",
-
   "MachineTooltipGenerator": "Machinen-Tooltip",
   "MachineTooltipGenerator.Description": "Ein Tooltip, der die Art des Erzeugnisses und die verbleibende Zeit zeigt",
   "MachineTooltipGenerator.Finished": "Fertig",
   "MachineTooltipGenerator.CannotBeUnloaded": "Kann nicht entladen werden",
   "MachineTooltipGenerator.ForNextQuality": "{{X}} bis zur nächsten Qualität",
   "MachineTooltipGenerator.ForTotal": "{{X}} total",
-
   "TreeTooltipGenerator": "Bäume-Tooltip",
   "TreeTooltipGenerator.Description": "Ein Tooltip, der die Art des Baums zeigt",
   "TreeTooltipGenerator.Type1": "Eiche",
@@ -97,17 +82,14 @@
   "TreeTooltipGenerator.ShowGrowthStage.Description": "Displays tree growth stage(in numeric form)",
   "TreeTooltipGenerator.ShowGrowthStage.GrowthStage": "Stage {{N}} of {{T}}",
   "TreeTooltipGenerator.ShowGrowthStage.MatureStage": "Mature",
-
   "Config.Decorators.GeneralSection": "Dekorationen - Allgemein",
   "Config.Decorators.Visibility": "Dekorationen - Sichtbarkeit",
   "Config.TooltipGenerators.GeneralSection": "Tooltips - Allgemein",
   "Config.TooltipGenerators.Visibility": "Tooltips - Sichtbarkeit",
-
   "Config.TooltipTrigger": "Tooltip-Auslöser",
   "Config.TooltipTrigger.Hover": "Mausberührung",
   "Config.TooltipTrigger.ButtonHeld": "Bei gedrückter Taste",
   "Config.TooltipTriggerButton": "Tooltip-Taste",
-
   "Config.HideMachineTooltips": "Verstecke Machinen-Tooltips",
   "Config.HideMachineTooltips.ForNonMachines": "Alle außer Machinen",
   "Config.HideMachineTooltips.ForChests": "Kisten",

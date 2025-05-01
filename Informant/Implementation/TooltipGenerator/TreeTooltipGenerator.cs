@@ -7,8 +7,8 @@ namespace Slothsoft.Informant.Implementation.TooltipGenerator;
 
 internal class TreeTooltipGenerator : ITooltipGenerator<TerrainFeature>
 {
-
     private readonly IModHelper _modHelper;
+    public string FertilizerId = "805";
 
     public TreeTooltipGenerator(IModHelper modHelper)
     {
@@ -18,8 +18,7 @@ internal class TreeTooltipGenerator : ITooltipGenerator<TerrainFeature>
     public string Id => "tree";
     public string DisplayName => _modHelper.Translation.Get("TreeTooltipGenerator");
     public string Description => _modHelper.Translation.Get("TreeTooltipGenerator.Description");
-    public string FertilizerId = "805";
-    
+
     public bool HasTooltip(TerrainFeature input)
     {
         return input is Tree;
@@ -30,18 +29,22 @@ internal class TreeTooltipGenerator : ITooltipGenerator<TerrainFeature>
         return CreateTooltip(_modHelper, (Tree)input);
     }
 
-    internal Tooltip CreateTooltip(IModHelper modHelper, Tree tree) {
+    internal Tooltip CreateTooltip(IModHelper modHelper, Tree tree)
+    {
         var text = CreateText(modHelper, tree);
-        var fertilizerIcon = tree.growthStage.Value < Tree.treeStage && tree.fertilized.Value && (InformantMod.Instance?.Config.DecorateTreeFertilizer ?? false) ?
-                Icon.ForUnqualifiedItemId(
+        var fertilizerIcon =
+            tree.growthStage.Value < Tree.treeStage && tree.fertilized.Value &&
+            (InformantMod.Instance?.Config.DecorateTreeFertilizer ?? false)
+                ? Icon.ForUnqualifiedItemId(
                     FertilizerId,
                     IPosition.CenterRight,
                     new Vector2(Game1.tileSize / 2f, Game1.tileSize / 2f)
-                ) : null;
-        return new Tooltip(text) {
+                )
+                : null;
+        return new(text) {
             Icon = [
                 fertilizerIcon,
-            ]
+            ],
         };
     }
 
@@ -74,13 +77,12 @@ internal class TreeTooltipGenerator : ITooltipGenerator<TerrainFeature>
                 if (tree.hasMoss.Value) {
                     treeString = modHelper.Translation.Get("TreeTooltipGenerator.MossCovered", new { X = treeString });
                 }
+
                 break;
             case Tree.greenRainTreeBushy:
             case Tree.greenRainTreeLeafy:
             case Tree.greenRainTreeFern:
                 treeString = modHelper.Translation.Get("TreeTooltipGenerator.Type10");
-                break;
-            default:
                 break;
         }
 
@@ -95,13 +97,16 @@ internal class TreeTooltipGenerator : ITooltipGenerator<TerrainFeature>
     {
         var growthStage = -1;
         var treeStage = Tree.treeStage;
-        if (treeFeature is Tree tree) {
-            growthStage = tree.growthStage.Value;
+        switch (treeFeature) {
+            case Tree tree:
+                growthStage = tree.growthStage.Value;
+                break;
+            case FruitTree fruitTree:
+                growthStage = fruitTree.growthStage.Value;
+                treeStage = FruitTree.treeStage;
+                break;
         }
-        if (treeFeature is FruitTree fruitTree) {
-            growthStage = fruitTree.growthStage.Value;
-            treeStage = FruitTree.treeStage;
-        }
+
         var stageString = growthStage < treeStage
             ? modHelper.Translation.Get("TreeTooltipGenerator.ShowGrowthStage.GrowthStage", new {
                 N = growthStage,

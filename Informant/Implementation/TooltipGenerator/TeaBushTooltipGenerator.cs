@@ -2,29 +2,28 @@
 using Informant.ThirdParty.CustomBush;
 using Microsoft.Xna.Framework;
 using Slothsoft.Informant.Api;
-using StardewValley.ItemTypeDefinitions;
 using StardewValley.TerrainFeatures;
 using StardewValley.TokenizableStrings;
 
 namespace Slothsoft.Informant.Implementation.TooltipGenerator;
 
-
 internal class TeaBushTooltipGenerator : ITooltipGenerator<TerrainFeature>
 {
+    private readonly IEnumerable<int> _bloomWeek = Enumerable.Range(22, 7);
 
     private readonly IModHelper _modHelper;
-    private readonly IEnumerable<int> _bloomWeek = Enumerable.Range(22, 7);
 
     public TeaBushTooltipGenerator(IModHelper modHelper)
     {
         _modHelper = modHelper;
     }
 
+    public string NotThisSeason => _modHelper.Translation.Get("CustomBushTooltipGenerator.NotThisSeason");
+    public string NotThisSeasonAnymore => _modHelper.Translation.Get("CustomBushToolTipGenerator.NotThisSeasonAnymore");
+
     public string Id => "tea-bush";
     public string DisplayName => _modHelper.Translation.Get("TeaBushTooltipGenerator");
     public string Description => _modHelper.Translation.Get("TeaBushTooltipGenerator.Description");
-    public string NotThisSeason => _modHelper.Translation.Get("CustomBushTooltipGenerator.NotThisSeason");
-    public string NotThisSeasonAnymore => _modHelper.Translation.Get("CustomBushToolTipGenerator.NotThisSeasonAnymore");
 
     public bool HasTooltip(TerrainFeature input)
     {
@@ -47,7 +46,7 @@ internal class TeaBushTooltipGenerator : ITooltipGenerator<TerrainFeature>
 
         // Handle custom bush logic
         if (HookToCustomBush.GetApi(out ICustomBushApi? customBushApi)) {
-            if (customBushApi.TryGetCustomBush(bush, out ICustomBush? customBushData, out string? id)) {
+            if (customBushApi.TryGetCustomBush(bush, out var customBushData, out var id)) {
                 displayName = customBushData.DisplayName;
                 if (displayName.Contains("LocalizedText")) {
                     displayName = TokenParser.ParseText(displayName);
@@ -57,8 +56,7 @@ internal class TeaBushTooltipGenerator : ITooltipGenerator<TerrainFeature>
                 ageToMature = customBushData.AgeToProduce;
 
                 // Handle custom drops
-                if (customBushApi.TryGetDrops(id, out IList<ICustomBushDrop>? drops) &&
-                    drops != null && drops.Count > 0) {
+                if (customBushApi.TryGetDrops(id, out var drops) && drops.Count > 0) {
                     item = ItemRegistry.GetDataOrErrorItem(drops[0].ItemId);
                 }
 
@@ -68,11 +66,11 @@ internal class TeaBushTooltipGenerator : ITooltipGenerator<TerrainFeature>
 
         // Construct tooltip text
         // Determine if the bush is still maturing
-        bool isMaturing = bush.getAge() < ageToMature;
+        var isMaturing = bush.getAge() < ageToMature;
         var daysLeftText = CropTooltipGenerator.ToDaysLeftString(_modHelper, daysLeft, isMaturing);
 
         // Construct tooltip text
-        string tooltipText = displayName;
+        var tooltipText = displayName;
 
         if (isMaturing) {
             // Bush is still growing; show days until maturity
@@ -87,19 +85,21 @@ internal class TeaBushTooltipGenerator : ITooltipGenerator<TerrainFeature>
             tooltipText += $"\n{(willProduceThisSeason ? daysLeft == -1 ? NotThisSeasonAnymore : daysLeftText : NotThisSeason)}";
         }
 
-        return new Tooltip(tooltipText) {
-            Icon = [Icon.ForUnqualifiedItemId(
-            item.QualifiedItemId,
-            IPosition.CenterRight,
-            new Vector2(Game1.tileSize / 2, Game1.tileSize / 2)
-        )]
+        return new(tooltipText) {
+            Icon = [
+                Icon.ForUnqualifiedItemId(
+                    item.QualifiedItemId,
+                    IPosition.CenterRight,
+                    new Vector2(Game1.tileSize / 2, Game1.tileSize / 2)
+                ),
+            ],
         };
     }
 
     /// <summary>
-    /// The Tea Sapling is a seed that takes 20 days to grow into a Tea Bush. 
-    /// A Tea Bush produces one Tea Leaves item each day of the final week (days 22-28) of 
-    /// spring, summer, and fall (and winter if indoors).
+    ///     The Tea Sapling is a seed that takes 20 days to grow into a Tea Bush.
+    ///     A Tea Bush produces one Tea Leaves item each day of the final week (days 22-28) of
+    ///     spring, summer, and fall (and winter if indoors).
     /// </summary>
     internal int CalculateDaysLeft(Bush bush)
     {
@@ -122,7 +122,7 @@ internal class TeaBushTooltipGenerator : ITooltipGenerator<TerrainFeature>
             daysLeft += WorldDate.DaysPerMonth;
         }
 
-        int nextSeason = (daysLeft + today) / WorldDate.DaysPerMonth;
+        var nextSeason = (daysLeft + today) / WorldDate.DaysPerMonth;
         // outdoor tea bush cannot shake in winter
         if (!bush.IsSheltered() && Game1.Date.SeasonIndex + nextSeason == (int)Season.Winter) {
             daysLeft += WorldDate.DaysPerMonth;
@@ -131,7 +131,8 @@ internal class TeaBushTooltipGenerator : ITooltipGenerator<TerrainFeature>
         return daysLeft;
     }
 
-    internal static int CalculateCustomBushDaysLeft(Bush bush, ICustomBush customBushData, string id, ICustomBushApi customBushApi)
+    internal static int CalculateCustomBushDaysLeft(Bush bush, ICustomBush customBushData, string id,
+        ICustomBushApi customBushApi)
     {
         // If not mature yet, calculate days until maturity
         var bushAge = bush.getAge();
@@ -145,7 +146,7 @@ internal class TeaBushTooltipGenerator : ITooltipGenerator<TerrainFeature>
         }
 
         // If in production period and ready
-        if (customBushData.GetShakeOffItemIfReady(bush, out ParsedItemData? shakeOffItemData)) {
+        if (customBushData.GetShakeOffItemIfReady(bush, out var shakeOffItemData)) {
             var item = new CustomBushExtensions.PossibleDroppedItem(Game1.dayOfMonth, shakeOffItemData, 1.0f, id);
             if (item.ReadyToPick) {
                 return 0;
@@ -158,7 +159,8 @@ internal class TeaBushTooltipGenerator : ITooltipGenerator<TerrainFeature>
                 var nextProductionDay = drops
                     .Select(drop => drop.NextDayToProduce)
                     .Where(day => day > Game1.dayOfMonth)
-                    .DefaultIfEmpty(customBushData.DayToBeginProducing + WorldDate.DaysPerMonth) // If no days found, use next month
+                    .DefaultIfEmpty(customBushData.DayToBeginProducing +
+                                    WorldDate.DaysPerMonth) // If no days found, use next month
                     .Min();
 
                 return nextProductionDay - Game1.dayOfMonth;
@@ -167,14 +169,16 @@ internal class TeaBushTooltipGenerator : ITooltipGenerator<TerrainFeature>
 
         // If no production schedule found but in production period,
         // check if it's a valid production day
-        bool inProductionPeriod = Game1.dayOfMonth >= customBushData.DayToBeginProducing;
-        if (inProductionPeriod) {
-            // Check if production conditions are met (season, location, etc)
-            if (!customBushData.Seasons.Contains(Game1.season) ||
-                !bush.IsSheltered()) {
-                // Cannot produce under current conditions, try next season
-                return -1;
-            }
+        var inProductionPeriod = Game1.dayOfMonth >= customBushData.DayToBeginProducing;
+        if (!inProductionPeriod) {
+            return Math.Max(0, customBushData.DayToBeginProducing - Game1.dayOfMonth);
+        }
+
+        // Check if production conditions are met (season, location, etc)
+        if (!customBushData.Seasons.Contains(Game1.season) ||
+            !bush.IsSheltered()) {
+            // Cannot produce under current conditions, try next season
+            return -1;
         }
 
         // Not yet in production period

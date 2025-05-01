@@ -1,30 +1,29 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Immutable;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Slothsoft.Informant.Api;
 using StardewModdingAPI.Events;
 using StardewModdingAPI.Utilities;
 using StardewValley.Menus;
 using StardewValley.TerrainFeatures;
-using System.Collections.Immutable;
 
 namespace Slothsoft.Informant.Implementation;
 
 /// <summary>
-/// Generating tooltips for all kinds of objects is actually pretty similar, that's why this
-/// is only one instance for all <see cref="ITooltipGeneratorManager{TInput}"/> implementations.
+///     Generating tooltips for all kinds of objects is actually pretty similar, that's why this
+///     is only one instance for all <see cref="ITooltipGeneratorManager{TInput}" /> implementations.
 /// </summary>
-
-internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature>, ITooltipGeneratorManager<SObject>, ITooltipGeneratorManager<Character>
+internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature>, ITooltipGeneratorManager<SObject>,
+    ITooltipGeneratorManager<Character>
 {
-
     internal static Rectangle TooltipSourceRect = new(0, 256, 60, 60);
 
     private readonly IModHelper _modHelper;
-    private BaseTooltipGeneratorManager<TerrainFeature>? _terrainFeatureManager;
-    private BaseTooltipGeneratorManager<SObject>? _objectInformant;
-    private BaseTooltipGeneratorManager<Character>? _characterInformant;
 
     private readonly PerScreen<IEnumerable<Tooltip>?> _tooltips = new();
+    private BaseTooltipGeneratorManager<Character>? _characterInformant;
+    private BaseTooltipGeneratorManager<SObject>? _objectInformant;
+    private BaseTooltipGeneratorManager<TerrainFeature>? _terrainFeatureManager;
 
     public TooltipGeneratorManager(IModHelper modHelper)
     {
@@ -34,14 +33,38 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
         modHelper.Events.Display.Rendered += OnRendered;
     }
 
-    IEnumerable<IDisplayable> ITooltipGeneratorManager<TerrainFeature>.Generators =>
-        _terrainFeatureManager?.Generators.ToImmutableArray() ?? Enumerable.Empty<IDisplayable>();
+    IEnumerable<IDisplayable> ITooltipGeneratorManager<Character>.Generators =>
+        _characterInformant?.Generators.ToImmutableArray() ?? Enumerable.Empty<IDisplayable>();
+
+    public void Add(ITooltipGenerator<Character> generator)
+    {
+        _characterInformant ??= new();
+        _characterInformant.Add(generator);
+    }
 
     IEnumerable<IDisplayable> ITooltipGeneratorManager<SObject>.Generators =>
         _objectInformant?.Generators.ToImmutableArray() ?? Enumerable.Empty<IDisplayable>();
 
-    IEnumerable<IDisplayable> ITooltipGeneratorManager<Character>.Generators =>
-        _characterInformant?.Generators.ToImmutableArray() ?? Enumerable.Empty<IDisplayable>();
+    public void Add(ITooltipGenerator<SObject> generator)
+    {
+        _objectInformant ??= new();
+        _objectInformant.Add(generator);
+    }
+
+    IEnumerable<IDisplayable> ITooltipGeneratorManager<TerrainFeature>.Generators =>
+        _terrainFeatureManager?.Generators.ToImmutableArray() ?? Enumerable.Empty<IDisplayable>();
+
+    public void Add(ITooltipGenerator<TerrainFeature> generator)
+    {
+        _terrainFeatureManager ??= new();
+        _terrainFeatureManager.Add(generator);
+    }
+
+    public void Remove(string generatorId)
+    {
+        _terrainFeatureManager?.Remove(generatorId);
+        _objectInformant?.Remove(generatorId);
+    }
 
     private void OnUpdateTicked(object? sender, UpdateTickedEventArgs e2)
     {
@@ -56,9 +79,9 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
         }
 
         _tooltips.Value = [
-            .. GenerateTerrainFeatureTooltips(),
-            .. GenerateObjectTooltips(),
-            .. GenerateCharacterTooltips(),
+            ..GenerateTerrainFeatureTooltips(),
+            ..GenerateObjectTooltips(),
+            ..GenerateCharacterTooltips(),
         ];
     }
 
@@ -72,7 +95,7 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
         var shouldRender = config.TooltipTrigger switch {
             TooltipTrigger.Hover => true, // hover is ALWAYS triggered
             TooltipTrigger.ButtonHeld => _modHelper.Input.GetState(config.TooltipTriggerButton) == SButtonState.Held,
-            _ => false // we don't know this trigger
+            _ => false, // we don't know this trigger
         };
 
         return shouldRender && (!Game1.options.gamepadControls || Game1.timerUntilMouseFade > 0);
@@ -99,9 +122,9 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
     private IEnumerable<Tooltip> GenerateCharacterTooltips()
     {
         return GenerateTooltips(_characterInformant, (mouseX, mouseY) => [
-            .. Game1.player.currentLocation.characters
+            ..Game1.player.currentLocation.characters
                 .Where(c => c.GetBoundingBox().Contains(mouseX + Game1.viewport.X, mouseY + Game1.viewport.Y)),
-            .. Game1.player.currentLocation.animals.Values
+            ..Game1.player.currentLocation.animals.Values
                 .Where(a => a.GetCursorPetBoundingBox().Contains(mouseX + Game1.viewport.X, mouseY + Game1.viewport.Y)),
         ]);
     }
@@ -113,6 +136,7 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
             if (tooltipsArray.Length == 0) {
                 return;
             }
+
             const int borderSize = 3 * Game1.pixelZoom;
             var font = Game1.smallFont;
             var approximateBounds = CalculateApproximateBounds(tooltipsArray, font);
@@ -134,7 +158,7 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
                 DrawSimpleTooltip(Game1.spriteBatch, tooltip, font, extendedBounds with {
                     Y = startY,
                     Height = height,
-                }, new Vector2(approximateBounds.X, startY));
+                }, new(approximateBounds.X, startY));
                 startY += height - borderSize;
             }
         }
@@ -144,10 +168,11 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
     {
         var posX = (x + Game1.viewport.X) / Game1.tileSize;
         var posY = (y + Game1.viewport.Y) / Game1.tileSize;
-        return new Vector2(posX, posY);
+        return new(posX, posY);
     }
 
-    private static IEnumerable<Tooltip> GenerateTooltips<TTile>(BaseTooltipGeneratorManager<TTile>? manager, Func<int, int, TTile[]> getTilesForBounds)
+    private static IEnumerable<Tooltip> GenerateTooltips<TTile>(BaseTooltipGeneratorManager<TTile>? manager,
+        Func<int, int, TTile[]> getTilesForBounds)
     {
         if (manager == null) {
             // if there is no generator in that, we don't need to do anything further
@@ -183,7 +208,8 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
             x += Game1.tileSize / 4;
             y = (int)(Game1.viewport.Height - height);
         }
-        return new Rectangle(x, y, (int)textSize.X + Game1.tileSize / 2, (int)textSize.Y);
+
+        return new(x, y, (int)textSize.X + Game1.tileSize / 2, (int)textSize.Y);
     }
 
     private static Rectangle ApplyTooltipIconPositions(Rectangle toolTipBounds, params Tooltip[] tooltips)
@@ -195,6 +221,7 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
             if (icons == null) {
                 continue;
             }
+
             foreach (var icon in icons.Where(i => i != null)) {
                 var iconPosition = icon!.CalculateTooltipPosition(result);
                 result.X = Math.Min(result.X, iconPosition.X);
@@ -204,19 +231,24 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
                 break;
             }
         }
+
         // TODO: test this method?
         return result;
     }
 
-    private static void DrawSimpleTooltip(SpriteBatch b, Tooltip tooltip, SpriteFont font, Rectangle textureBoxBounds, Vector2 textPosition)
+    private static void DrawSimpleTooltip(SpriteBatch b, Tooltip tooltip, SpriteFont font, Rectangle textureBoxBounds,
+        Vector2 textPosition)
     {
         IClickableMenu.drawTextureBox(b, Game1.menuTexture, TooltipSourceRect, textureBoxBounds.X, textureBoxBounds.Y,
             textureBoxBounds.Width, textureBoxBounds.Height, Color.White);
 
         var position = new Vector2(textPosition.X + Game1.tileSize / 4f, textPosition.Y + Game1.tileSize / 4f + 4);
-        b.DrawString(font, tooltip.Text, position + new Vector2(2f, 2f), Game1.textShadowColor, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
-        b.DrawString(font, tooltip.Text, position + new Vector2(0f, 2f), Game1.textShadowColor, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
-        b.DrawString(font, tooltip.Text, position + new Vector2(2f, 0f), Game1.textShadowColor, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+        b.DrawString(font, tooltip.Text, position + new Vector2(2f, 2f), Game1.textShadowColor, 0, Vector2.Zero, 1f,
+            SpriteEffects.None, 0);
+        b.DrawString(font, tooltip.Text, position + new Vector2(0f, 2f), Game1.textShadowColor, 0, Vector2.Zero, 1f,
+            SpriteEffects.None, 0);
+        b.DrawString(font, tooltip.Text, position + new Vector2(2f, 0f), Game1.textShadowColor, 0, Vector2.Zero, 1f,
+            SpriteEffects.None, 0);
         b.DrawString(font, tooltip.Text, position, Game1.textColor * 0.9f, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
 
         if (tooltip.Icon != null) {
@@ -233,18 +265,19 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
                 .GroupBy(i => i.Position ?? IPosition.TopLeft);
             foreach (var subsets in icons) {
                 var offset = new Point();
-                var horizontalAlignment = IsHorizontalAligned(textureBoxBoundsWithoutBorder, subsets.First().CalculateIconPosition(textureBoxBoundsWithoutBorder));
+                var horizontalAlignment = IsHorizontalAligned(textureBoxBoundsWithoutBorder,
+                    subsets.First().CalculateIconPosition(textureBoxBoundsWithoutBorder));
 
                 if (subsets.Count() > 1) {
                     // if multiple icons, force align from middle
-                    var subsetPos = subsets.Select(i => i.CalculateIconPosition(textureBoxBoundsWithoutBorder));
+                    var subsetPos = subsets.Select(i => i.CalculateIconPosition(textureBoxBoundsWithoutBorder)).ToArray();
                     var subsetWidth = subsetPos.Sum(i => i.Width);
                     var subsetHeight = subsetPos.Sum(i => i.Height);
 
                     offset = horizontalAlignment
-                        ? new Point {
+                        ? new() {
                             X = textureBoxBoundsWithoutBorder.X + (textureBoxBoundsWithoutBorder.Width - subsetWidth) / 2,
-                            Y = (int)subsetPos.Average(i => i.Y)
+                            Y = (int)subsetPos.Average(i => i.Y),
                         }
                         : new Point {
                             X = (int)subsetPos.Average(i => i.X),
@@ -285,29 +318,5 @@ internal class TooltipGeneratorManager : ITooltipGeneratorManager<TerrainFeature
         diffY = Math.Min(diffY, diffY2);
 
         return diffX >= diffY;
-    }
-
-    public void Add(ITooltipGenerator<TerrainFeature> generator)
-    {
-        _terrainFeatureManager ??= new BaseTooltipGeneratorManager<TerrainFeature>();
-        _terrainFeatureManager.Add(generator);
-    }
-
-    public void Add(ITooltipGenerator<SObject> generator)
-    {
-        _objectInformant ??= new BaseTooltipGeneratorManager<SObject>();
-        _objectInformant.Add(generator);
-    }
-
-    public void Add(ITooltipGenerator<Character> generator)
-    {
-        _characterInformant ??= new BaseTooltipGeneratorManager<Character>();
-        _characterInformant.Add(generator);
-    }
-
-    public void Remove(string generatorId)
-    {
-        _terrainFeatureManager?.Remove(generatorId);
-        _objectInformant?.Remove(generatorId);
     }
 }

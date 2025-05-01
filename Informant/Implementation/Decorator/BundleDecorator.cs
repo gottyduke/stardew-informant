@@ -11,11 +11,8 @@ namespace Slothsoft.Informant.Implementation.Decorator;
 
 internal class BundleDecorator : IDecorator<Item>
 {
-    public static readonly Color[] QualityColor = [Color.White, Color.White, Color.Gold, Color.MediumPurple];
-
-    internal record ParsedSimpleBundle(string UnqualifiedItemId, int Quantity, int Quality, int Color);
-
     public const int DefaultBundleColor = -1;
+    public static readonly Color[] QualityColor = [Color.White, Color.White, Color.Gold, Color.MediumPurple];
 
     private static Texture2D? BundleTexture;
     private static readonly Dictionary<int, Texture2D> Bundles = [];
@@ -63,10 +60,24 @@ internal class BundleDecorator : IDecorator<Item>
 
             var config = InformantMod.Instance?.Config ?? new InformantConfig();
             LastCachedBundle = GetNeededItems(allowedAreas, config.DecorateLockedBundles)
-                .Where(item => input.ItemId == item.UnqualifiedItemId && (config.DecorateUnqualifiedBundles || input.Quality >= item.Quality));
+                .Where(item =>
+                    input.ItemId == item.UnqualifiedItemId &&
+                    (config.DecorateUnqualifiedBundles || input.Quality >= item.Quality));
             return LastCachedBundle.Any();
         }
+
         return false;
+    }
+
+    public Decoration Decorate(Item input)
+    {
+        var decorations = LastCachedBundle!
+            .Select(bundle => new Decoration(GetOrCacheBundleTexture(bundle.Color)) {
+                Counter = bundle.Quantity,
+                CounterColor = QualityColor[Math.Min(bundle.Quality, 3)],
+            })
+            .ToArray();
+        return decorations.First() with { ExtraDecorations = decorations.Skip(1).ToArray() };
     }
 
     internal static IEnumerable<ParsedSimpleBundle> GetNeededItems(int[]? allowedAreas, bool decorateLockedBundles)
@@ -99,7 +110,8 @@ internal class BundleDecorator : IDecorator<Item>
         foreach (var bundleTitle in bundleData.Keys) {
             var bundleTitleSplit = bundleTitle.Split('/');
             var bundleTitleId = bundleTitleSplit[0];
-            if (allowedAreas != null && !allowedAreas.Contains(CommunityCenter.getAreaNumberFromName(bundleTitleId)) && !decorateLockedBundles) {
+            if (allowedAreas != null && !allowedAreas.Contains(CommunityCenter.getAreaNumberFromName(bundleTitleId)) &&
+                !decorateLockedBundles) {
                 // bundle was not yet unlocked or already completed
                 continue;
             }
@@ -108,19 +120,21 @@ internal class BundleDecorator : IDecorator<Item>
             var bundleDataSplit = bundleData[bundleTitle].Split('/');
             var indexStackQuality = bundleDataSplit[2].Split(' ');
             for (var index = 0; index < indexStackQuality.Length; index += 3) {
-                if (!bundlesCompleted[bundleIndex][index / 3]) {
-                    _ = int.TryParse(indexStackQuality[index + 1], out var quantity);
-                    _ = int.TryParse(indexStackQuality[index + 2], out var quality);
-                    _ = int.TryParse(bundleDataSplit[3], out var color);
-                    // old index, unqualified
-                    var unqualifiedItem = ItemRegistry.GetDataOrErrorItem(indexStackQuality[index]);
-                    yield return new ParsedSimpleBundle(
-                        unqualifiedItem.IsErrorItem ? indexStackQuality[index] : unqualifiedItem.ItemId,
-                        quantity,
-                        quality,
-                        color
-                    );
+                if (bundlesCompleted[bundleIndex][index / 3]) {
+                    continue;
                 }
+
+                _ = int.TryParse(indexStackQuality[index + 1], out var quantity);
+                _ = int.TryParse(indexStackQuality[index + 2], out var quality);
+                _ = int.TryParse(bundleDataSplit[3], out var color);
+                // old index, unqualified
+                var unqualifiedItem = ItemRegistry.GetDataOrErrorItem(indexStackQuality[index]);
+                yield return new(
+                    unqualifiedItem.IsErrorItem ? indexStackQuality[index] : unqualifiedItem.ItemId,
+                    quantity,
+                    quality,
+                    color
+                );
             }
         }
     }
@@ -128,22 +142,15 @@ internal class BundleDecorator : IDecorator<Item>
     internal static Texture2D GetOrCacheBundleTexture(int? color)
     {
         var colorIndex = color ?? DefaultBundleColor;
-        if (!Bundles.ContainsKey(colorIndex)) {
-            var rect = new Rectangle(colorIndex * 256 % 512, 244 + colorIndex * 256 / 512 * 16, 16, 16);
-            Bundles[colorIndex] = BundleTexture!.Blit(rect);
+        if (Bundles.TryGetValue(colorIndex, out var texture)) {
+            return texture;
         }
+
+        var rect = new Rectangle(colorIndex * 256 % 512, 244 + colorIndex * 256 / 512 * 16, 16, 16);
+        Bundles[colorIndex] = BundleTexture!.Blit(rect);
 
         return Bundles[colorIndex];
     }
 
-    public Decoration Decorate(Item input)
-    {
-        var decorations = LastCachedBundle!
-            .Select(bundle => new Decoration(GetOrCacheBundleTexture(bundle.Color)) {
-                Counter = bundle.Quantity,
-                CounterColor = QualityColor[Math.Min(bundle.Quality, 3)],
-            })
-            .ToArray();
-        return decorations.First() with { ExtraDecorations = decorations.Skip(1).ToArray() };
-    }
+    internal record ParsedSimpleBundle(string UnqualifiedItemId, int Quantity, int Quality, int Color);
 }

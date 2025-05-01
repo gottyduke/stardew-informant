@@ -15,10 +15,11 @@ public interface ICustomBushDrop : ISpawnItemData
     public string? Condition { get; }
 
     /// <summary>
-    ///   An ID for this entry within the current list (not the item itself, which is
-    ///   <see cref="P:StardewValley.GameData.GenericSpawnItemData.ItemId" />). This only needs to be unique within the current
-    ///   list. For a custom entry, you should use a globally unique ID which includes your mod ID like
-    ///   <c>ExampleMod.Id_ItemName</c>.
+    ///     An ID for this entry within the current list (not the item itself, which is
+    ///     <see cref="P:StardewValley.GameData.GenericSpawnItemData.ItemId" />). This only needs to be unique within the
+    ///     current
+    ///     list. For a custom entry, you should use a globally unique ID which includes your mod ID like
+    ///     <c>ExampleMod.Id_ItemName</c>.
     /// </summary>
     public string? Id { get; }
 }

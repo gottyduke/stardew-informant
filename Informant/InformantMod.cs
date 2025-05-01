@@ -12,7 +12,6 @@ namespace Slothsoft.Informant;
 public class InformantMod : Mod
 {
     internal static InformantMod? Instance;
-
     private IInformant? _api;
     internal InformantConfig Config = null!;
 

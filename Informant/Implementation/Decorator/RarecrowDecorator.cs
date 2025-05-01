@@ -26,11 +26,12 @@ internal class RarecrowDecorator : IDecorator<Item>
             return BigCraftableIds.AllRarecrows.Contains(obj.ItemId) &&
                    !Utility.doesItemExistAnywhere(obj.ItemId);
         }
+
         return false;
     }
 
     public Decoration Decorate(Item input)
     {
-        return new Decoration(_rarecrow!);
+        return new(_rarecrow!);
     }
 }

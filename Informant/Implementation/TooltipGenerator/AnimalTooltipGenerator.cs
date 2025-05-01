@@ -26,16 +26,11 @@ internal class AnimalTooltipGenerator(IModHelper modHelper) : ITooltipGenerator<
 
     public Tooltip Generate(Character character)
     {
-        if (character is FarmAnimal animal) {
-            return CreateTooltip(modHelper, animal.displayName, animal.friendshipTowardFarmer.Value);
-        }
-
-        if (character is Pet pet) {
-            return CreateTooltip(modHelper, pet.displayName, pet.friendshipTowardFarmer.Value);
-        }
-
-        // something is wrong 
-        return CreateTooltip(modHelper, "???", 0);
+        return character switch {
+            FarmAnimal animal => CreateTooltip(modHelper, animal.displayName, animal.friendshipTowardFarmer.Value),
+            Pet pet => CreateTooltip(modHelper, pet.displayName, pet.friendshipTowardFarmer.Value),
+            _ => CreateTooltip(modHelper, "???", 0),
+        };
     }
 
     internal static Tooltip CreateTooltip(IModHelper modHelper, string name, int friendship)
@@ -49,6 +44,7 @@ internal class AnimalTooltipGenerator(IModHelper modHelper) : ITooltipGenerator<
         if (textLength < minimumLength) {
             displayName += new string(' ', (int)((minimumLength - textLength) / charLength) + 1);
         }
+
         // extra line for icons
         displayName += "\n";
 
@@ -56,10 +52,10 @@ internal class AnimalTooltipGenerator(IModHelper modHelper) : ITooltipGenerator<
         var hearts = Enumerable
             .Range(1, _friendship_max_level)
             .Select(i => love >= i * _friendship_per_heart
-                ? new Rectangle[] { _friendship_full }
-                : (love >= (i - 1) * _friendship_per_heart + _friendship_per_heart / 2
+                ? new[] { _friendship_full }
+                : love >= (i - 1) * _friendship_per_heart + _friendship_per_heart / 2
                     ? [_friendship_left_half, _friendship_right_half]
-                    : [_friendship_hollow]))
+                    : [_friendship_hollow])
             .SelectMany(rects => rects
                 .Select(t => new Icon(Game1.mouseCursors) {
                     SourceRectangle = t,
@@ -68,8 +64,8 @@ internal class AnimalTooltipGenerator(IModHelper modHelper) : ITooltipGenerator<
                 }))
             .ToArray();
 
-        return new Tooltip(displayName) {
-            Icon = hearts
+        return new(displayName) {
+            Icon = hearts,
         };
     }
 }

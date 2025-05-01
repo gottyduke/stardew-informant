@@ -3,7 +3,11 @@ using Slothsoft.Informant.Api;
 
 namespace Slothsoft.Informant.Implementation.Decorator;
 
-internal class Decorator<TInput>(string id, Func<string> displayName, Func<string> description, Func<TInput, Texture2D?> decorator) : IDecorator<TInput>
+internal class Decorator<TInput>(
+    string id,
+    Func<string> displayName,
+    Func<string> description,
+    Func<TInput, Texture2D?> decorator) : IDecorator<TInput>
 {
     public string Id { get; } = id;
     public string DisplayName => displayName();
@@ -16,6 +20,6 @@ internal class Decorator<TInput>(string id, Func<string> displayName, Func<strin
 
     public Decoration Decorate(TInput input)
     {
-        return new Decoration(decorator(input)!);
+        return new(decorator(input)!);
     }
 }

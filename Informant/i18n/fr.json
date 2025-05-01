@@ -5,36 +5,27 @@
   "BundleTooltipDecorator.DecorateLockedBundles.Description": "Signale par une icône les objets nécessaires pour les paquets du centre communautaire, même s’ils sont encore verrouillés.",
   "BundleTooltipDecorator.DecorateUnqualifiedBundles": "Annoter même pour des objets\navec mauvais pré-requis",
   "BundleTooltipDecorator.DecorateUnqualifiedBundles.Description": "Signale par une icône spécifique les objets nécessaires pour les paquets du centre communautaire, même s’ils ne rencontrent pas les pré-requis de qualité.",
-
   "FieldOfficeDecorator": "Annoter pour le Bureau local",
   "FieldOfficeDecorator.Description": "Signale par une icône spécifique les objets qui sont nécessaires pour le Bureau local de l'île Gingembre.",
-
   "RarecrowDecorator": "Annoter les épouvantails",
   "RarecrowDecorator.Description": "Signale par une icône spécifique les épouvantails qui sont nécessaires pour la collection.",
-
   "SeedTooltipDecorator": "Annoter les infos de graine",
   "SeedTooltipDecorator.Description": "Permet de voir le produit de la graine et son prix de vente.",
-
   "SellPriceDisplayable": "Annoter le prix de vente",
   "SellPriceDisplayable.Description": "Ajoute le prix de vente en bas de l'infobulle.",
-
   "MuseumDecorator": "Annoter pour le musée",
   "MuseumDecorator.Description": "Signale par une icône spécifique les objets qui sont nécessaires au musée.",
-
   "NewRecipeDisplayable": "Annoter les nouvelles recettes",
   "NewRecipeDisplayable.Description": "Signale spécifique les recettes qui n'ont pas encore été cuisinées / fabriquées.",
-
   "ShippingBinDecorator": "Annotation pour l'expédition",
   "ShippingBinDecorator.Description": "Signale par une icône spécifique (avec le nombre requis) les objets qui n'ont pas encore été expédiés.",
   "ShippingBinDecorator.TrackingType": "Type de suivi d’expédition",
   "ShippingBinDecorator.TrackingType.All": "Toutes les collections",
   "ShippingBinDecorator.TrackingType.Collection": "Expédition uniquement",
-
   "AnimalTooltipGenerator": "Infobulle d’animal",
   "AnimalTooltipGenerator.Description": "Affiche des informations additionnelles pour les animaux de ferme.",
   "AnimalTooltipGenerator.DecoratePet": "Infobulle d’animal domestique",
   "AnimalTooltipGenerator.DecoratePet.Description": "Affiche des informations additionnelles pour l’animal de compagnie.",
-
   "CropTooltipGenerator": "Infobulle des récoltes",
   "CropTooltipGenerator.Description": "Une infobulle qui affiche le type de culture et le temps restant avant la récolte.",
   "CropTooltipGenerator.0DaysLeft": "Prêt à récolter",
@@ -46,28 +37,22 @@
   "CropTooltipGenerator.DecorateFertilizer.Description": "Affiche les engrais de sol sur l'infobulle des plantations.",
   "CropTooltipGenerator.DecorateNotWatered": "Afficher la culture non arrosée",
   "CropTooltipGenerator.DecorateNotWatered.Description": "Affiche l'infobulle de la culture non arrosée",
-
   "TreeTooltipGenerator.DecorateFertilizer": "Afficher l'engrais de l'arbre",
   "TreeTooltipGenerator.DecorateFertilizer.Description": "Afficher l'engrais de l'arbre",
-
   "FruitTreeTooltipGenerator": "Infobulle des arbres fruitier",
   "FruitTreeTooltipGenerator.Description": "Une infobulle qui affiche le type d'arbre fruitier et le temps restant avant la récolte.",
-
   "TeaBushTooltipGenerator": "Infobulle du plant de thé",
   "TeaBushTooltipGenerator.Description": "Une infobulle qui affiche le temps restant avant la récolte d'un plant de thé.",
-
   "CustomBushToolTipGenerator.NotThisSeason": "Does not produce this season",
   "CustomBushToolTipGenerator.NotThisSeasonAnymore": "Does not produce this season anymore",
   "CropTooltipGenerator.1DayLeftMature": "1 day left to mature",
   "CropTooltipGenerator.XDaysLeftMature": "{{X}} days left to mature",
-
   "MachineTooltipGenerator": "Infobulle des machines",
   "MachineTooltipGenerator.Description": "Une infobulle qui affiche le type de résultat et le temps restant.",
   "MachineTooltipGenerator.Finished": "Fini",
   "MachineTooltipGenerator.CannotBeUnloaded": "Ne peut pas être déchargé",
   "MachineTooltipGenerator.ForNextQuality": "{{X}} pour la qualité suivante",
   "MachineTooltipGenerator.ForTotal": "{{X}} au total",
-
   "TreeTooltipGenerator": "Infobulle d'arbres",
   "TreeTooltipGenerator.Description": "Une infobulle qui affiche le type d'arbre",
   "TreeTooltipGenerator.Type1": "Chêne",
@@ -97,18 +82,15 @@
   "TreeTooltipGenerator.ShowGrowthStage.Description": "Affiche l’étape de croissance de l’arbre (sous format numérique).",
   "TreeTooltipGenerator.ShowGrowthStage.GrowthStage": "Étape {{N}} de {{T}}",
   "TreeTooltipGenerator.ShowGrowthStage.MatureStage": "Mature",
-
   "Config.Decorators.GeneralSection": "Annotation - Général",
   "Config.Decorators.Visibility": "Annotation - Visibilité",
   "Config.TooltipGenerators.GeneralSection": "Infobulles - Général",
   "Config.TooltipGenerators.Visibility": "Infobulles - Visibilité",
   "Config.TooltipGenerators.ShowModSource": "Infobulles - Montrer la source du mod",
-
   "Config.TooltipTrigger": "Déclencheur d'infobulle",
   "Config.TooltipTrigger.Hover": "Au survol",
   "Config.TooltipTrigger.ButtonHeld": "Au maintien de bouton",
   "Config.TooltipTriggerButton": "Au clic de bouton",
-
   "Config.HideMachineTooltips": "Masquer les bulles des machines",
   "Config.HideMachineTooltips.ForNonMachines": "Pour les non machines",
   "Config.HideMachineTooltips.ForChests": "Pour les coffres",

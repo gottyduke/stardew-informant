@@ -5,36 +5,27 @@
   "BundleTooltipDecorator.DecorateLockedBundles.Description": "Отображает декоратор связок для все еще заблокированных связок",
   "BundleTooltipDecorator.DecorateUnqualifiedBundles": "Украсьте неквалифицированные связки",
   "BundleTooltipDecorator.DecorateUnqualifiedBundles.Description": "Отображает декоратор связки для элемента, который не соответствует требованиям качества",
-
   "FieldOfficeDecorator": "Декоратор полевого офиса",
   "FieldOfficeDecorator.Description": "Отмечает предметы, необходимые для островного полевого офиса",
-
   "RarecrowDecorator": "Декоратор редкой вороны",
   "RarecrowDecorator.Description": "Помечает предметы, необходимые для коллекции редкой вороны",
-
   "SeedTooltipDecorator": "Декоратор предварительного просмотра семян",
   "SeedTooltipDecorator.Description": "Предварительный просмотр семенного продукта и его продажной стоимости",
-
   "SellPriceDisplayable": "Декоратор цены продажи",
   "SellPriceDisplayable.Description": "Добавляет цену продажи в нижней части всплывающей подсказки",
-
   "MuseumDecorator": "Музейный декоратор",
   "MuseumDecorator.Description": "Отмечает предметы, необходимые для музея",
-
   "NewRecipeDisplayable": "Новый декоратор рецептов",
   "NewRecipeDisplayable.Description": "Отмечает рецепты, которые еще не приготовлены/не созданы",
-
   "ShippingBinDecorator": "Декоратор доставки",
   "ShippingBinDecorator.Description": "Отмечает товары, которые еще не были отправлены",
   "ShippingBinDecorator.TrackingType": "Тип отслеживания доставки",
   "ShippingBinDecorator.TrackingType.All": "Вся коллекция",
   "ShippingBinDecorator.TrackingType.Collection": "Только доставка",
-
   "AnimalTooltipGenerator": "Подсказка о животных",
   "AnimalTooltipGenerator.Description": "Отображает дополнительную информацию о фермерских животных",
   "AnimalTooltipGenerator.DecoratePet": "Отобразить питомца",
   "AnimalTooltipGenerator.DecoratePet.Description": "Отображает информацию о домашнем животном",
-
   "CropTooltipGenerator": "Подсказка по культурам",
   "CropTooltipGenerator.Description": "Всплывающая подсказка, отображающая тип урожая и количество дней, оставшихся до сбора урожая",
   "CropTooltipGenerator.0DaysLeft": "Готов к сбору урожая",
@@ -46,28 +37,22 @@
   "CropTooltipGenerator.DecorateFertilizer.Description": "Отображает почвенные удобрения во всплывающей подсказке об культуре",
   "CropTooltipGenerator.DecorateNotWatered": "Показанный урожай не поливается",
   "CropTooltipGenerator.DecorateNotWatered.Description": "Отображает всплывающую подсказку о том, что урожай не поливали",
-
   "TreeTooltipGenerator.DecorateFertilizer": "Показать удобрения для деревьев",
   "TreeTooltipGenerator.DecorateFertilizer.Description": "Отображает удобрения во всплывающей подсказке дерева",
-
   "FruitTreeTooltipGenerator": "Подсказка о фруктовых деревьях",
   "FruitTreeTooltipGenerator.Description": "Всплывающая подсказка, показывающая тип фруктового дерева и количество дней, оставшихся до сбора урожая",
-
   "TeaBushTooltipGenerator": "Подсказка о чайном кусте",
   "TeaBushTooltipGenerator.Description": "Подсказка, показывающая оставшиеся дни чайного куста",
-
   "CustomBushToolTipGenerator.NotThisSeason": "В этом сезоне не производится",
   "CustomBushToolTipGenerator.NotThisSeasonAnymore": "В этом сезоне больше не производится",
   "CropTooltipGenerator.1DayLeftMature": "до созревания остался 1 день",
   "CropTooltipGenerator.XDaysLeftMature": "осталось {{X}} дней до созревания",
-
   "MachineTooltipGenerator": "Подсказка для станков",
   "MachineTooltipGenerator.Description": "Всплывающая подсказка, отображающая тип результата и оставшееся время",
   "MachineTooltipGenerator.Finished": "Законченный",
   "MachineTooltipGenerator.CannotBeUnloaded": "Невозможно выгрузить",
   "MachineTooltipGenerator.ForNextQuality": "{{X}} для следующего качества",
   "MachineTooltipGenerator.ForTotal": "{{X}} всего",
-
   "TreeTooltipGenerator": "Подсказка по деревьям",
   "TreeTooltipGenerator.Description": "Подсказка, отображающая тип дерева",
   "TreeTooltipGenerator.Type1": "Дубовое дерево",
@@ -97,18 +82,15 @@
   "TreeTooltipGenerator.ShowGrowthStage.Description": "Отображает стадию роста дерева (в числовой форме)",
   "TreeTooltipGenerator.ShowGrowthStage.GrowthStage": "Стадия {{N}} из {{T}}",
   "TreeTooltipGenerator.ShowGrowthStage.MatureStage": "Зрелый",
-
   "Config.Decorators.GeneralSection": "Декораторы - Общие",
   "Config.Decorators.Visibility": "Декораторы - Видимость",
   "Config.TooltipGenerators.GeneralSection": "Подсказки – Общие",
   "Config.TooltipGenerators.Visibility": "Подсказки — Видимость",
   "Config.TooltipGenerators.ShowModSource": "Подсказки - Показать источник мода",
-
   "Config.TooltipTrigger": "Триггер всплывающей подсказки",
   "Config.TooltipTrigger.Hover": "При наведении",
   "Config.TooltipTrigger.ButtonHeld": "Кнопка нажата",
   "Config.TooltipTriggerButton": "Кнопка подсказки",
-
   "Config.HideMachineTooltips": "Скрыть всплывающие подсказки станка",
   "Config.HideMachineTooltips.ForNonMachines": "Для не машин",
   "Config.HideMachineTooltips.ForChests": "Для сундуков",

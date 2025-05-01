@@ -21,7 +21,7 @@ internal class CropTooltipGenerator : ITooltipGenerator<TerrainFeature>
 
     public bool HasTooltip(TerrainFeature input)
     {
-        return input is HoeDirt { crop: { } } && IsInContext(input.Location);
+        return input is HoeDirt { crop: not null } && IsInContext(input.Location);
     }
 
     public Tooltip Generate(TerrainFeature input)
@@ -43,14 +43,16 @@ internal class CropTooltipGenerator : ITooltipGenerator<TerrainFeature>
         var displayName = TokenParser.ParseText(produce.DisplayName);
         var daysLeft = CalculateDaysLeftString(modHelper, crop);
 
-        bool hasCrop = dirt.crop is not null;
-        bool cropDead = crop.dead.Value;
-        bool notWatered = dirt.state.Value != 1 && hasCrop && !cropDead;
-        bool hasFertilizer = dirt.HasFertilizer();
+        var hasCrop = dirt.crop is not null;
+        var cropDead = crop.dead.Value;
+        var notWatered = dirt.state.Value != 1 && hasCrop && !cropDead &&
+                         (InformantMod.Instance?.Config.DecorateNotWatered ?? false);
+        var hasFertilizer = dirt.HasFertilizer() && (InformantMod.Instance?.Config.DecorateFertilizer ?? false);
 
-        string tooltipText = $"{displayName}\n{daysLeft}";
+        var tooltipText = $"{displayName}\n{daysLeft}";
+
         // NotWatered text
-        if ((InformantMod.Instance?.Config.DecorateNotWatered ?? false) && notWatered) {
+        if (notWatered) {
             var notWateredText = modHelper.Translation.Get("CropTooltipGenerator.NotWatered");
             tooltipText += $"\n{notWateredText}";
         }
@@ -59,34 +61,35 @@ internal class CropTooltipGenerator : ITooltipGenerator<TerrainFeature>
             tooltipText += "\n\n";
         }
 
-        return new Tooltip(tooltipText) {
+        return new(tooltipText) {
             Icon = [
-                hasCrop ?
-                Icon.ForUnqualifiedItemId(
-                    // dead crop icon
-                    !cropDead ? cropId : "748",
-                    IPosition.CenterRight,
-                    new Vector2(Game1.tileSize / 2f, Game1.tileSize / 2f)
-                ) : null,
+                hasCrop
+                    ? Icon.ForUnqualifiedItemId(
+                        // dead crop icon
+                        !cropDead ? cropId : "748",
+                        IPosition.CenterRight,
+                        new Vector2(Game1.tileSize / 2f, Game1.tileSize / 2f)
+                    )
+                    : null,
                 // Adds compatibility to fertilizer mods
-                .. GetFertilizerIconList(dirt),
+                ..GetFertilizerIconList(dirt),
                 // Not watered soil
-                notWatered ?
-                Icon.ForUnqualifiedItemId(
-                    GetWateringCanId(),
-                    IPosition.CenterRight,
-                    new Vector2(Game1.tileSize / 2f, Game1.tileSize / 2f)
-                ) : null
-            ]
+                notWatered
+                    ? Icon.ForUnqualifiedItemId(
+                        GetWateringCanId(),
+                        IPosition.CenterRight,
+                        new Vector2(Game1.tileSize / 2f, Game1.tileSize / 2f)
+                    )
+                    : null,
+            ],
         };
     }
 
     internal static string CalculateDaysLeftString(IModHelper modHelper, Crop crop)
     {
-        if (crop.dead.Value) {
-            return modHelper.Translation.Get("CropTooltipGenerator.Dead");
-        }
-        return ToDaysLeftString(modHelper, CalculateDaysLeft(crop));
+        return crop.dead.Value
+            ? modHelper.Translation.Get("CropTooltipGenerator.Dead")
+            : ToDaysLeftString(modHelper, CalculateDaysLeft(crop));
     }
 
     internal static string ToDaysLeftString(IModHelper modHelper, int daysLeft, bool bush = false)
@@ -95,7 +98,8 @@ internal class CropTooltipGenerator : ITooltipGenerator<TerrainFeature>
             -1 => "", // something went very wrong, but we don't want to break the game
             0 => modHelper.Translation.Get("CropTooltipGenerator.0DaysLeft"),
             1 => modHelper.Translation.Get(bush ? "CropTooltipGenerator.1DayLeftMature" : "CropTooltipGenerator.1DayLeft"),
-            _ => modHelper.Translation.Get(bush ? "CropTooltipGenerator.XDaysLeftMature" : "CropTooltipGenerator.XDaysLeft", new { X = daysLeft })
+            _ => modHelper.Translation.Get(bush ? "CropTooltipGenerator.XDaysLeftMature" : "CropTooltipGenerator.XDaysLeft",
+                new { X = daysLeft }),
         };
     }
 
@@ -127,10 +131,12 @@ internal class CropTooltipGenerator : ITooltipGenerator<TerrainFeature>
 
         return result;
     }
+
     // Upgrades icon with farming level
-    internal static string GetWateringCanId() {
-        int level = Game1.player.farmingLevel.Value;
-        string quality = level switch {
+    internal static string GetWateringCanId()
+    {
+        var level = Game1.player.farmingLevel.Value;
+        var quality = level switch {
             > 8 => "Iridium",
             > 5 => "Gold",
             > 4 => "Steel",
@@ -141,10 +147,15 @@ internal class CropTooltipGenerator : ITooltipGenerator<TerrainFeature>
     }
 
     // Adds compatibility to fertilizer mods
-    internal static Icon?[] GetFertilizerIconList(HoeDirt dirt) {
-        if ((InformantMod.Instance?.Config.DecorateFertilizer ?? false) && dirt.HasFertilizer()) {
-            if (dirt.fertilizer.Value.Contains('|')) {
-                return [.. dirt.fertilizer.Value.Split("|")
+    internal static Icon?[] GetFertilizerIconList(HoeDirt dirt)
+    {
+        if (!dirt.HasFertilizer()) {
+            return [];
+        }
+
+        if (dirt.fertilizer.Value.Contains('|')) {
+            return [
+                .. dirt.fertilizer.Value.Split("|")
                     .GroupBy(id => ItemRegistry.GetData(id)?.DisplayName ?? "Unknown Fertilizer")
                     .OrderBy(g => g.Key)
                     .SelectMany(g => g)
@@ -154,15 +165,16 @@ internal class CropTooltipGenerator : ITooltipGenerator<TerrainFeature>
                             IPosition.BottomCenter,
                             new Vector2(Game1.tileSize / 2f, Game1.tileSize / 2f)
                         )
-                    )];
-            } else {
-                return [Icon.ForUnqualifiedItemId(
-                    dirt.fertilizer.Value,
-                    IPosition.CenterRight,
-                    new Vector2(Game1.tileSize / 2f, Game1.tileSize / 2f)
-                )];
-            };
+                    ),
+            ];
         }
-        return [];
+
+        return [
+            Icon.ForUnqualifiedItemId(
+                dirt.fertilizer.Value,
+                IPosition.CenterRight,
+                new Vector2(Game1.tileSize / 2f, Game1.tileSize / 2f)
+            ),
+        ];
     }
 }

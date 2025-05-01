@@ -4,9 +4,9 @@ namespace Slothsoft.Informant.Implementation.TooltipGenerator;
 
 internal class TooltipGenerator<TInput> : ITooltipGenerator<TInput>
 {
+    private readonly Func<string> _description;
 
     private readonly Func<string> _displayName;
-    private readonly Func<string> _description;
     private readonly Func<TInput, string?> _generator;
 
     public TooltipGenerator(string id, Func<string> displayName, Func<string> description, Func<TInput, string?> generator)
@@ -28,6 +28,6 @@ internal class TooltipGenerator<TInput> : ITooltipGenerator<TInput>
 
     public Tooltip Generate(TInput input)
     {
-        return new Tooltip(_generator(input)!);
+        return new(_generator(input)!);
     }
 }

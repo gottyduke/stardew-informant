@@ -1,9 +1,10 @@
-﻿using StardewValley.Extensions;
+﻿using System.Diagnostics.CodeAnalysis;
+using StardewValley.Extensions;
 using StardewValley.ItemTypeDefinitions;
 using StardewValley.TerrainFeatures;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Informant.ThirdParty.CustomBush;
+
 internal static class CustomBushExtensions
 {
     private const string ShakeOffItem = "furyx639.CustomBush/ShakeOff";
@@ -12,14 +13,14 @@ internal static class CustomBushExtensions
         this ICustomBush customBush,
         Bush bush,
         [NotNullWhen(true)] out ParsedItemData? item
-      )
+    )
     {
         item = null;
         if (bush.size.Value != Bush.greenTeaBush) {
             return false;
         }
 
-        if (!bush.modData.TryGetValue(ShakeOffItem, out string itemId)) {
+        if (!bush.modData.TryGetValue(ShakeOffItem, out var itemId)) {
             return false;
         }
 
@@ -32,37 +33,37 @@ internal static class CustomBushExtensions
         ICustomBush bush,
         string? id,
         bool includeToday = false
-      )
+    )
     {
         if (id == null || string.IsNullOrEmpty(id)) {
-            return new List<PossibleDroppedItem>();
+            return new();
         }
 
-        api.TryGetDrops(id, out IList<ICustomBushDrop>? drops);
+        api.TryGetDrops(id, out var drops);
         return drops == null
-          ? new List<PossibleDroppedItem>()
-          : GetGenericDropItems(drops, id, includeToday, bush.DisplayName, BushDropConverter);
+            ? new()
+            : GetGenericDropItems(drops, id, includeToday, bush.DisplayName, BushDropConverter);
 
         DropInfo BushDropConverter(ICustomBushDrop input)
         {
-            return new DropInfo(input.Condition, input.Chance, input.ItemId);
+            return new(input.Condition, input.Chance, input.ItemId);
         }
     }
 
     public static List<PossibleDroppedItem> GetGenericDropItems<T>(
-    IEnumerable<T> drops,
-    string? customId,
-    bool includeToday,
-    string displayName,
-    Func<T, DropInfo> extractDropInfo
-  )
+        IEnumerable<T> drops,
+        string? customId,
+        bool includeToday,
+        string displayName,
+        Func<T, DropInfo> extractDropInfo
+    )
     {
         List<PossibleDroppedItem> items = new();
 
-        foreach (T drop in drops) {
-            DropInfo dropInfo = extractDropInfo(drop);
-            int? nextDay = GetNextDay(dropInfo.Condition, includeToday);
-            int? lastDay = GetLastDay(dropInfo.Condition);
+        foreach (var drop in drops) {
+            var dropInfo = extractDropInfo(drop);
+            var nextDay = GetNextDay(dropInfo.Condition, includeToday);
+            var lastDay = GetLastDay(dropInfo.Condition);
 
             if (!nextDay.HasValue) {
                 if (!lastDay.HasValue) {
@@ -71,7 +72,7 @@ internal static class CustomBushExtensions
                 continue;
             }
 
-            ParsedItemData? itemData = ItemRegistry.GetData(dropInfo.ItemId);
+            var itemData = ItemRegistry.GetData(dropInfo.ItemId);
             if (itemData == null) {
                 continue;
             }
@@ -80,7 +81,7 @@ internal static class CustomBushExtensions
                 continue;
             }
 
-            items.Add(new PossibleDroppedItem(nextDay.Value, itemData, dropInfo.Chance, customId));
+            items.Add(new(nextDay.Value, itemData, dropInfo.Chance, customId));
         }
 
         return items;
@@ -89,8 +90,8 @@ internal static class CustomBushExtensions
     public static int? GetNextDay(string? condition, bool includeToday)
     {
         return string.IsNullOrEmpty(condition)
-          ? Game1.dayOfMonth + (includeToday ? 0 : 1)
-          : GetNextDayFromCondition(condition, includeToday);
+            ? Game1.dayOfMonth + (includeToday ? 0 : 1)
+            : GetNextDayFromCondition(condition, includeToday);
     }
 
     public static int? GetLastDay(string? condition)
@@ -98,24 +99,11 @@ internal static class CustomBushExtensions
         return GetLastDayFromCondition(condition);
     }
 
-    public record PossibleDroppedItem(int NextDayToProduce, ParsedItemData Item, float Chance, string? CustomId = null)
-    {
-        public bool ReadyToPick => Game1.dayOfMonth == NextDayToProduce;
-    }
-
-    public record DropInfo(string? Condition, float Chance, string ItemId)
-    {
-        public int? GetNextDay(bool includeToday)
-        {
-            return LocalGetNextDay(Condition, includeToday);
-        }
-    }
-
     public static int? LocalGetNextDay(string? condition, bool includeToday)
     {
         return string.IsNullOrEmpty(condition)
-          ? Game1.dayOfMonth + (includeToday ? 0 : 1)
-          : GetNextDayFromCondition(condition, includeToday);
+            ? Game1.dayOfMonth + (includeToday ? 0 : 1)
+            : GetNextDayFromCondition(condition, includeToday);
     }
 
     public static int? GetNextDayFromCondition(string? condition, bool includeToday = true)
@@ -125,9 +113,9 @@ internal static class CustomBushExtensions
             return null;
         }
 
-        GameStateQuery.ParsedGameStateQuery[]? conditionEntries = GameStateQuery.Parse(condition);
+        var conditionEntries = GameStateQuery.Parse(condition);
 
-        foreach (GameStateQuery.ParsedGameStateQuery parsedGameStateQuery in conditionEntries) {
+        foreach (var parsedGameStateQuery in conditionEntries) {
             days.AddRange(GetDaysFromCondition(parsedGameStateQuery));
         }
 
@@ -143,13 +131,13 @@ internal static class CustomBushExtensions
             return days;
         }
 
-        string queryStr = parsedGameStateQuery.Query[0];
+        var queryStr = parsedGameStateQuery.Query[0];
         if (!"day_of_month".Equals(queryStr, StringComparison.OrdinalIgnoreCase)) {
             return days;
         }
 
         for (var i = 1; i < parsedGameStateQuery.Query.Length; i++) {
-            string dayStr = parsedGameStateQuery.Query[i];
+            var dayStr = parsedGameStateQuery.Query[i];
             if ("even".Equals(dayStr, StringComparison.OrdinalIgnoreCase)) {
                 days.AddRange(Enumerable.Range(1, 28).Where(x => x % 2 == 0));
                 continue;
@@ -161,7 +149,7 @@ internal static class CustomBushExtensions
             }
 
             try {
-                int parsedInt = int.Parse(dayStr);
+                var parsedInt = int.Parse(dayStr);
                 days.Add(parsedInt);
             } catch (Exception) {
                 // ignored
@@ -178,12 +166,25 @@ internal static class CustomBushExtensions
             return null;
         }
 
-        GameStateQuery.ParsedGameStateQuery[]? conditionEntries = GameStateQuery.Parse(condition);
+        var conditionEntries = GameStateQuery.Parse(condition);
 
-        foreach (GameStateQuery.ParsedGameStateQuery parsedGameStateQuery in conditionEntries) {
+        foreach (var parsedGameStateQuery in conditionEntries) {
             days.AddRange(GetDaysFromCondition(parsedGameStateQuery));
         }
 
         return days.Count == 0 ? null : days.Max();
+    }
+
+    public record PossibleDroppedItem(int NextDayToProduce, ParsedItemData Item, float Chance, string? CustomId = null)
+    {
+        public bool ReadyToPick => Game1.dayOfMonth == NextDayToProduce;
+    }
+
+    public record DropInfo(string? Condition, float Chance, string ItemId)
+    {
+        public int? GetNextDay(bool includeToday)
+        {
+            return LocalGetNextDay(Condition, includeToday);
+        }
     }
 }

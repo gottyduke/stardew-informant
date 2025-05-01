@@ -5,36 +5,27 @@
   "BundleTooltipDecorator.DecorateLockedBundles.Description": "Exibe o decorador de conjuntos para conjuntos ainda bloqueados",
   "BundleTooltipDecorator.DecorateUnqualifiedBundles": "Decorar pacotes não qualificados",
   "BundleTooltipDecorator.DecorateUnqualifiedBundles.Description": "Exibe o decorador de conjuntos para itens que não atendem aos requisitos de qualidade",
-
   "FieldOfficeDecorator": "Decorador do Escritório da Ilha",
   "FieldOfficeDecorator.Description": "Marca os itens necessários para o Escritório Local da Ilha",
-
   "RarecrowDecorator": "Decorador de Espantalhos Raros",
   "RarecrowDecorator.Description": "Marca itens que são necessários para a coleção Espantalhos Raros",
-
   "SeedTooltipDecorator": "Decorador de Prévia de Sementes",
   "SeedTooltipDecorator.Description": "Visualize o produto das sementes e seu valor de venda",
-
   "SellPriceDisplayable": "Decorador de Preço de Venda",
   "SellPriceDisplayable.Description": "Adiciona o preço de venda na parte inferior da descrição do item",
-
   "MuseumDecorator": "Decorador do Museu",
   "MuseumDecorator.Description": "Marca os itens necessários para o Museu",
-
   "NewRecipeDisplayable": "Decorador de Nova Receita",
   "NewRecipeDisplayable.Description": "Marca as receitas que ainda não foram cozidas/feitas",
-
   "ShippingBinDecorator": "Decorador de Remessa",
   "ShippingBinDecorator.Description": "Marca os itens que ainda não foram enviados",
   "ShippingBinDecorator.TrackingType": "Tipo de Rastreamento de Remessa",
   "ShippingBinDecorator.TrackingType.All": "Toda a Coleção",
   "ShippingBinDecorator.TrackingType.Collection": "Somente Envio",
-
   "AnimalTooltipGenerator": "Dica de Ferramenta de Animais",
   "AnimalTooltipGenerator.Description": "Exibe informações adicionais sobre os Animais da Fazenda",
   "AnimalTooltipGenerator.DecoratePet": "Exibir Animal de Estimação",
   "AnimalTooltipGenerator.DecoratePet.Description": "Exibe informações sobre o animal de estimação",
-
   "CropTooltipGenerator": "Dica de Ferramenta de Plantações",
   "CropTooltipGenerator.Description": "Uma dica de ferramenta que exibe o tipo de plantação e os dias restantes até a colheita",
   "CropTooltipGenerator.0DaysLeft": "Pronto para colher",
@@ -46,28 +37,22 @@
   "CropTooltipGenerator.DecorateFertilizer.Description": "Exibe o fertilizante do solo na dica de ferramenta da plantação",
   "CropTooltipGenerator.DecorateNotWatered": "Exibir Plantação não regada",
   "CropTooltipGenerator.DecorateNotWatered.Description": "Exibe a dica de ferramenta da plantação não regada",
-
   "TreeTooltipGenerator.DecorateFertilizer": "Exibir Fertilizante de Árvore",
   "TreeTooltipGenerator.DecorateFertilizer.Description": "Exibe a dica de ferramenta do fertilizante de árvore",
-
   "FruitTreeTooltipGenerator": "Dica de ferramenta de Árvores Frutíferas",
   "FruitTreeTooltipGenerator.Description": "Uma dica de ferramenta que exibe o tipo de árvore frutífera e os dias restantes até a colheita",
-
   "TeaBushTooltipGenerator": "Dica de ferramenta de Broto de Chá",
   "TeaBushTooltipGenerator.Description": "Uma dica de ferramenta que exibe os dias restantes do broto de chá",
-
   "CustomBushToolTipGenerator.NotThisSeason": "Não produz nesta estação",
   "CustomBushToolTipGenerator.NotThisSeasonAnymore": "Não produz mais nesta estação",
   "CropTooltipGenerator.1DayLeftMature": "1 dia restante para amadurecer",
   "CropTooltipGenerator.XDaysLeftMature": "{{X}} dias restantes para amadurecer",
-
   "MachineTooltipGenerator": "Dica de ferramenta de Máquinas",
   "MachineTooltipGenerator.Description": "Uma dica de ferramenta que exibe o tipo do resultado e o tempo restante",
   "MachineTooltipGenerator.Finished": "Finalizado",
   "MachineTooltipGenerator.CannotBeUnloaded": "Não pode ser descarregado",
   "MachineTooltipGenerator.ForNextQuality": "{{X}} dias para a próxima qualidade",
   "MachineTooltipGenerator.ForTotal": "{{X}} dias no total",
-
   "TreeTooltipGenerator": "Dica de ferramenta de Árvores",
   "TreeTooltipGenerator.Description": "Uma dica de ferramenta que exibe o tipo da árvore",
   "TreeTooltipGenerator.Type1": "Carvalho",
@@ -97,18 +82,15 @@
   "TreeTooltipGenerator.ShowGrowthStage.Description": "Exibe o estágio de crescimento da árvore (em formato numérico)",
   "TreeTooltipGenerator.ShowGrowthStage.GrowthStage": "Estágio {{N}} de {{T}}",
   "TreeTooltipGenerator.ShowGrowthStage.MatureStage": "Adulto",
-
   "Config.Decorators.GeneralSection": "Decoradores - Geral",
   "Config.Decorators.Visibility": "Decoradores - Visibilidade",
   "Config.TooltipGenerators.GeneralSection": "Dicas de ferramentas - Geral",
   "Config.TooltipGenerators.Visibility": "Dicas de ferramentas - Visibilidade",
   "Config.TooltipGenerators.ShowModSource": "Dicas de ferramentas - Mostrar Origem do Mod",
-
   "Config.TooltipTrigger": "Disparador de dica de ferramenta",
   "Config.TooltipTrigger.Hover": "Ao passar o mouse",
   "Config.TooltipTrigger.ButtonHeld": "Ao manter o botão pressionado",
   "Config.TooltipTriggerButton": "Botão de dica de ferramenta",
-
   "Config.HideMachineTooltips": "Ocultar Dicas de Ferramentas de Máquinas",
   "Config.HideMachineTooltips.ForNonMachines": "Para não máquinas",
   "Config.HideMachineTooltips.ForChests": "Para baús",

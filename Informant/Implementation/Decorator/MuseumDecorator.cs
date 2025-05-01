@@ -23,20 +23,22 @@ internal class MuseumDecorator : IDecorator<Item>
 
     public bool HasDecoration(Item input)
     {
-        if (_museum != null && input is SObject obj && !obj.bigCraftable.Value && obj.Type != null && ValidTypes.Contains(obj.Type)) {
+        if (_museum != null && input is SObject obj && !obj.bigCraftable.Value && obj.Type != null &&
+            ValidTypes.Contains(obj.Type)) {
             return IsNeeded(obj);
         }
+
         return false;
+    }
+
+    public Decoration Decorate(Item input)
+    {
+        return new(_museum!);
     }
 
     private static bool IsNeeded(Item item)
     {
         return Game1.netWorldState.Value.MuseumPieces.Pairs
             .All(pair => item.ItemId != pair.Value);
-    }
-
-    public Decoration Decorate(Item input)
-    {
-        return new Decoration(_museum!);
     }
 }

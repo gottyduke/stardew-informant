@@ -12,14 +12,14 @@ public class AquariumDecorator
         _modHelper = modHelper;
         _fish ??= modHelper.ModContent.Load<Texture2D>("assets/aquarium.png");
     }
-        
+
     public string Id => "aquarium";
 
     public string GetDisplayName()
     {
         return _modHelper.Translation.Get("AquariumTooltipDecorator");
     }
-        
+
     public string GetDescription()
     {
         return _modHelper.Translation.Get("AquariumTooltipDecorator.Description");
@@ -27,8 +27,10 @@ public class AquariumDecorator
 
     public Texture2D? GetDecorator(Item input)
     {
-        if (_fish == null || input.Category != SObject.FishCategory) return null;
-            
+        if (_fish == null || input.Category != SObject.FishCategory) {
+            return null;
+        }
+
         // Aquarium Data
         // ==========
         // See https://www.nexusmods.com/stardewvalley/mods/6372?tab=description

@@ -1,13 +1,13 @@
 <Project>
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <RootNamespace>Slothsoft.Informant</RootNamespace>
-  </PropertyGroup>
-  <Import Project="..\build\common.targets" />
-  <ItemGroup>
-    <Using Include="StardewValley" />
-    <Using Include="StardewModdingAPI" />
-  </ItemGroup>
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>Slothsoft.Informant</RootNamespace>
+    </PropertyGroup>
+    <Import Project="..\build\common.targets"/>
+    <ItemGroup>
+        <Using Include="StardewValley"/>
+        <Using Include="StardewModdingAPI"/>
+    </ItemGroup>
 </Project>

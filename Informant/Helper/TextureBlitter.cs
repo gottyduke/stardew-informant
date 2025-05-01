@@ -10,7 +10,7 @@ internal static class TextureBlitter
     {
         device ??= Game1.graphics.GraphicsDevice;
         var texture = new Texture2D(device, rectangle.Width, rectangle.Height);
-        Color[] data = new Color[rectangle.Width * rectangle.Height];
+        var data = new Color[rectangle.Width * rectangle.Height];
         source.GetData(0, rectangle, data, 0, data.Length);
         texture.SetData(data);
         return texture;

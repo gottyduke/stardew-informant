@@ -1,14 +1,23 @@
-﻿using Slothsoft.Informant.Api;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
+using Slothsoft.Informant.Api;
 
 namespace Slothsoft.Informant.Implementation;
 
 internal class BaseTooltipGeneratorManager<TInput> : ITooltipGeneratorManager<TInput>
 {
-
     private readonly List<ITooltipGenerator<TInput>> _generators = [];
 
     public IEnumerable<IDisplayable> Generators => _generators.ToImmutableArray();
+
+    public void Add(ITooltipGenerator<TInput> generator)
+    {
+        _generators.Add(generator);
+    }
+
+    public void Remove(string generatorId)
+    {
+        _generators.RemoveAll(g => g.Id == generatorId);
+    }
 
     internal IEnumerable<Tooltip> Generate(params TInput[] inputs)
     {
@@ -20,15 +29,5 @@ internal class BaseTooltipGeneratorManager<TInput> : ITooltipGeneratorManager<TI
                 .Where(g.HasTooltip)
                 .Select(g.Generate)
             );
-    }
-
-    public void Add(ITooltipGenerator<TInput> generator)
-    {
-        _generators.Add(generator);
-    }
-
-    public void Remove(string generatorId)
-    {
-        _generators.RemoveAll(g => g.Id == generatorId);
     }
 }

@@ -5,36 +5,27 @@
   "BundleTooltipDecorator.DecorateLockedBundles.Description": "まだ解放されていないバンドルのデコレーターを表示する",
   "BundleTooltipDecorator.DecorateUnqualifiedBundles": "品質の足りていないバンドル品のマーク",
   "BundleTooltipDecorator.DecorateUnqualifiedBundles.Description": "品質要件を満たさないアイテムのバンドル デコレーターを表示する",
-
   "FieldOfficeDecorator": "フィールドオフィス デコレーター",
   "FieldOfficeDecorator.Description": "島のフィールドオフィスに必要なアイテムにマークを付ける",
-
   "RarecrowDecorator": "レアカカシ デコレーター",
   "RarecrowDecorator.Description": "レアカカシの収集に必要なアイテムにマークを付ける",
-
   "SeedTooltipDecorator": "タネプレビュー デコレーター",
   "SeedTooltipDecorator.Description": "タネから育つ作物の売価を表示する",
-
   "SellPriceDisplayable": "売価 デコレーター",
   "SellPriceDisplayable.Description": "ツールチップ下部に売却価格を追加する",
-
   "MuseumDecorator": "博物館 デコレーター",
   "MuseumDecorator.Description": "博物館に必要なアイテムにマークを付ける",
-
   "NewRecipeDisplayable": "新レシピ デコレーター",
   "NewRecipeDisplayable.Description": "まだ作っていない料理とクラフト品のレシピにマークを付ける",
-
   "ShippingBinDecorator": "出荷 デコレーター",
   "ShippingBinDecorator.Description": "まだ出荷していないアイテムにマークを付ける",
   "ShippingBinDecorator.TrackingType": "出荷確認タイプ",
   "ShippingBinDecorator.TrackingType.All": "全てのコレクション",
   "ShippingBinDecorator.TrackingType.Collection": "出荷物のみ",
-
   "AnimalTooltipGenerator": "動物ツールチップ",
   "AnimalTooltipGenerator.Description": "家畜の情報を表示する",
   "AnimalTooltipGenerator.DecoratePet": "ペットの表示",
   "AnimalTooltipGenerator.DecoratePet.Description": "ペット情報の表示",
-
   "CropTooltipGenerator": "作物ツールチップ",
   "CropTooltipGenerator.Description": "作物の種類と収穫までの残り日数を表示するツールチップ",
   "CropTooltipGenerator.0DaysLeft": "収穫可能",
@@ -46,28 +37,22 @@
   "CropTooltipGenerator.DecorateFertilizer.Description": "作物ツールチップに肥料を表示する",
   "CropTooltipGenerator.DecorateNotWatered": "作物の水やりの表示",
   "CropTooltipGenerator.DecorateNotWatered.Description": "水やりが済んでいない作物にツールチップを表示する",
-
   "TreeTooltipGenerator.DecorateFertilizer": "木の肥料の表示",
   "TreeTooltipGenerator.DecorateFertilizer.Description": "樹木ツールチップに肥料を表示する",
-
   "FruitTreeTooltipGenerator": "果樹ツールチップ",
   "FruitTreeTooltipGenerator.Description": "果樹の種類と収穫までの残り日数を表示するツールチップ",
-
   "TeaBushTooltipGenerator": "茶の木ツールチップ",
   "TeaBushTooltipGenerator.Description": "茶葉が成長する残り日数を表示するツールチップ",
-
   "CustomBushToolTipGenerator.NotThisSeason": "今季は生産しない",
   "CustomBushToolTipGenerator.NotThisSeasonAnymore": "今季はもう生産しない",
   "CropTooltipGenerator.1DayLeftMature": "明日に成長する",
   "CropTooltipGenerator.XDaysLeftMature": "{{X}}日で成長する",
-
   "MachineTooltipGenerator": "加工器具ツールチップ",
   "MachineTooltipGenerator.Description": "完成品と処理完了時間を表示するツールチップ",
   "MachineTooltipGenerator.Finished": "完了",
   "MachineTooltipGenerator.CannotBeUnloaded": "取り出せない",
   "MachineTooltipGenerator.ForNextQuality": "{{X}}後に品質が上がる",
   "MachineTooltipGenerator.ForTotal": "合計{{X}}",
-
   "TreeTooltipGenerator": "樹木ツールチップ",
   "TreeTooltipGenerator.Description": "樹木の種類を表示するツールチップ",
   "TreeTooltipGenerator.Type1": "オークの木",
@@ -97,18 +82,15 @@
   "TreeTooltipGenerator.ShowGrowthStage.Description": "木の成長ステージを表示 (数値形式)",
   "TreeTooltipGenerator.ShowGrowthStage.GrowthStage": "ステージ {{N}}/{{T}}",
   "TreeTooltipGenerator.ShowGrowthStage.MatureStage": "成長済み",
-
   "Config.Decorators.GeneralSection": "デコレーター - 全般",
   "Config.Decorators.Visibility": "デコレーター - 表示",
   "Config.TooltipGenerators.GeneralSection": "ツールチップ - 全般",
   "Config.TooltipGenerators.Visibility": "ツールチップ - 表示",
   "Config.TooltipGenerators.ShowModSource": "ツールチップ - Modソースを表示",
-
   "Config.TooltipTrigger": "ツールチップトリガー",
   "Config.TooltipTrigger.Hover": "カーソルを合わせる",
   "Config.TooltipTrigger.ButtonHeld": "ボタンを押す",
   "Config.TooltipTriggerButton": "ツールチップボタン",
-
   "Config.HideMachineTooltips": "設備のツールチップを非表示",
   "Config.HideMachineTooltips.ForNonMachines": "加工器具以外",
   "Config.HideMachineTooltips.ForChests": "チェストのみ",

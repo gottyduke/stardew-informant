@@ -1,9 +1,8 @@
-﻿using HarmonyLib;
-using Microsoft.Xna.Framework;
+﻿using System.Collections.Immutable;
+using HarmonyLib;
 using Microsoft.Xna.Framework.Graphics;
 using Slothsoft.Informant.Api;
 using StardewValley.Menus;
-using System.Collections.Immutable;
 using Color = Microsoft.Xna.Framework.Color;
 using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
@@ -11,7 +10,6 @@ namespace Slothsoft.Informant.Implementation;
 
 internal class ItemDecoratorManager : IDecoratorManager<Item>
 {
-
     private static readonly List<IDecorator<Item>> DecoratorsList = [];
     private static Rectangle? _lastToolTipCoordinates;
 
@@ -19,16 +17,16 @@ internal class ItemDecoratorManager : IDecoratorManager<Item>
 
     public ItemDecoratorManager(IModHelper modHelper)
     {
-        _harmony = new Harmony(InformantMod.Instance!.ModManifest.UniqueID);
+        _harmony = new(InformantMod.Instance!.ModManifest.UniqueID);
         _harmony.Patch(
-            original: AccessTools.Method(
+            AccessTools.Method(
                 typeof(IClickableMenu),
                 nameof(IClickableMenu.drawToolTip)
             ),
-            postfix: new HarmonyMethod(typeof(ItemDecoratorManager), nameof(DrawToolTip))
+            postfix: new(typeof(ItemDecoratorManager), nameof(DrawToolTip))
         );
         _harmony.Patch(
-            original: AccessTools.Method(
+            AccessTools.Method(
                 typeof(IClickableMenu),
                 nameof(IClickableMenu.drawTextureBox),
                 [
@@ -42,11 +40,23 @@ internal class ItemDecoratorManager : IDecoratorManager<Item>
                     typeof(Color),
                     typeof(float),
                     typeof(bool),
-                    typeof(float)
+                    typeof(float),
                 ]
             ),
-            postfix: new HarmonyMethod(typeof(ItemDecoratorManager), nameof(RememberToolTipCoordinates))
+            postfix: new(typeof(ItemDecoratorManager), nameof(RememberToolTipCoordinates))
         );
+    }
+
+    public IEnumerable<IDisplayable> Decorators => DecoratorsList.ToImmutableArray();
+
+    public void Add(IDecorator<Item> decorator)
+    {
+        DecoratorsList.Add(decorator);
+    }
+
+    public void Remove(string decoratorId)
+    {
+        DecoratorsList.RemoveAll(g => g.Id == decoratorId);
     }
 
     private static void DrawToolTip(SpriteBatch b, Item? hoveredItem)
@@ -80,7 +90,8 @@ internal class ItemDecoratorManager : IDecoratorManager<Item>
         const int decoratorsHeight = Game1.tileSize;
         const int decorationPerTile = decoratorsHeight - 2 * indent;
 
-        var decoratorsBox = new Rectangle(tipCoordinates.X, tipCoordinates.Y - decoratorsHeight + borderSize, tipCoordinates.Width, decoratorsHeight);
+        var decoratorsBox = new Rectangle(tipCoordinates.X, tipCoordinates.Y - decoratorsHeight + borderSize,
+            tipCoordinates.Width, decoratorsHeight);
         // extend the box vertically if necessary
         var rows = 1;
         var drawableWidth = decoratorsBox.Width - 2 * (indent + borderSize);
@@ -91,16 +102,19 @@ internal class ItemDecoratorManager : IDecoratorManager<Item>
                 // what is this texture...
                 continue;
             }
+
             decoratorWidthPerRow += widthRequired;
             if (decoratorWidthPerRow > drawableWidth) {
                 rows++;
                 decoratorWidthPerRow = widthRequired;
             }
         }
+
         if (rows > 1 && decoratorWidthPerRow > 0) {
             // remainder fits on the last row
             rows++;
         }
+
         // fit the extra rows
         var extraRows = rows - 1;
         decoratorsBox.Y -= extraRows * (decorationPerTile + spacing);
@@ -139,7 +153,7 @@ internal class ItemDecoratorManager : IDecoratorManager<Item>
                 // these x and y coordinates are the top left of the right-most number of the counter
                 var x = destinationRectangle.X + destinationRectangle.Width - NumberSprite.getWidth(counter.Value % 10) + 2;
                 var y = destinationRectangle.Y + destinationRectangle.Height - NumberSprite.getHeight() + 2;
-                NumberSprite.draw(counter.Value, b, new Vector2(x, y), decoration.CounterColor ?? Color.White, scale, 1, 1, 0);
+                NumberSprite.draw(counter.Value, b, new(x, y), decoration.CounterColor ?? Color.White, scale, 1, 1, 0);
             }
 
             destinationRectangle.X += destinationRectangle.Width + spacing;
@@ -150,17 +164,5 @@ internal class ItemDecoratorManager : IDecoratorManager<Item>
     private static void RememberToolTipCoordinates(int x, int y, int width, int height)
     {
         _lastToolTipCoordinates = new Rectangle(x, y, width, height);
-    }
-
-    public IEnumerable<IDisplayable> Decorators => DecoratorsList.ToImmutableArray();
-
-    public void Add(IDecorator<Item> decorator)
-    {
-        DecoratorsList.Add(decorator);
-    }
-
-    public void Remove(string decoratorId)
-    {
-        DecoratorsList.RemoveAll(g => g.Id == decoratorId);
     }
 }

@@ -5,36 +5,27 @@
   "BundleTooltipDecorator.DecorateLockedBundles.Description": "Muestra la decoracion para lotes aun bloqueados",
   "BundleTooltipDecorator.DecorateUnqualifiedBundles": "Decorar lotes no calificados",
   "BundleTooltipDecorator.DecorateUnqualifiedBundles.Description": "Muestra la decoracion para los items que no cumplen con la calidad requerida",
-
   "FieldOfficeDecorator": "Decoracion de la Oficina de Campo",
   "FieldOfficeDecorator.Description": "Marca los objetos que son necesarios para la Oficina de la isla",
-
   "RarecrowDecorator": "Decoracion de los Espantapájaros Raros",
   "RarecrowDecorator.Description": "Marca los objetos necesarios para la colección de espantapájaros raros",
-
   "SeedTooltipDecorator": "Vista previa de semilla",
   "SeedTooltipDecorator.Description": "Vista previa del producto de la semilla y su valor",
-
   "SellPriceDisplayable": "Precio de Venta",
   "SellPriceDisplayable.Description": "Añade el precio de venta en la parte inferior de la descripción emergente",
-
   "MuseumDecorator": "Decoracion de Museo",
   "MuseumDecorator.Description": "Marca los objetos necesarios para el museo",
-
   "NewRecipeDisplayable": "Etiqueta de Recetas Nuevas",
   "NewRecipeDisplayable.Description": "Marca las recetas que aún no se han cocinado / elaborado",
-
   "ShippingBinDecorator": "Etiqueta de Envío",
   "ShippingBinDecorator.Description": "Marca los objetos que aún no se han enviado",
   "ShippingBinDecorator.TrackingType": "Tipo de seguimiento de envios",
   "ShippingBinDecorator.TrackingType.All": "Toda colleccion",
   "ShippingBinDecorator.TrackingType.Collection": "Solo enviados",
-
   "AnimalTooltipGenerator": "Info de los animales",
   "AnimalTooltipGenerator.Description": "Muestra información adicional sobre los animales de granja",
   "AnimalTooltipGenerator.DecoratePet": "Mostrar Mascotas",
   "AnimalTooltipGenerator.DecoratePet.Description": "Muestra información de las mascotas",
-
   "CropTooltipGenerator": "Info de los Cultivos",
   "CropTooltipGenerator.Description": "Ventana emergente que muestra el tipo de cultivo y los días restantes hasta la cosecha",
   "CropTooltipGenerator.0DaysLeft": "Listo para cosechar",
@@ -46,28 +37,22 @@
   "CropTooltipGenerator.DecorateFertilizer.Description": "Muestra el fertilizante usado en el mensaje emergente de los cultivos",
   "CropTooltipGenerator.DecorateNotWatered": "Mostrar Cultivo sin Regar",
   "CropTooltipGenerator.DecorateNotWatered.Description": "Ventana emergente que muestra los cultivos sin regar",
-
   "TreeTooltipGenerator.DecorateFertilizer": "Mostrar Fertilizante para arboles",
   "TreeTooltipGenerator.DecorateFertilizer.Description": "Muestra el fertilizante en la descripción emergente del arbol",
-
   "FruitTreeTooltipGenerator": "Descripción Emergente de Árboles Frutales",
   "FruitTreeTooltipGenerator.Description": "Descripción emergente que muestra el tipo de fruta y los días restantes hasta la cosecha",
-
   "TeaBushTooltipGenerator": "Descripción emergente de los Arbolitos de té",
   "TeaBushTooltipGenerator.Description": "Descripción emergente que muestra los días restantes del arbolito de té",
-
   "CustomBushToolTipGenerator.NotThisSeason": "No produce esta temporada",
   "CustomBushToolTipGenerator.NotThisSeasonAnymore": "Ya no produce en esta temporada",
   "CropTooltipGenerator.1DayLeftMature": "1 dia restante para madurar",
   "CropTooltipGenerator.XDaysLeftMature": "{{X}} dias restantes para madurar",
-
   "MachineTooltipGenerator": "Descripción Emergente de Máquinas",
   "MachineTooltipGenerator.Description": "Descripción emergente que muestra el tipo de resultado y el tiempo restante",
   "MachineTooltipGenerator.Finished": "Finalizado",
   "MachineTooltipGenerator.CannotBeUnloaded": "No se puede descargar",
   "MachineTooltipGenerator.ForNextQuality": "{{X}} para la siguiente calidad",
   "MachineTooltipGenerator.ForTotal": "{{X}} en total",
-
   "TreeTooltipGenerator": "Descripción Emergente de los arboles",
   "TreeTooltipGenerator.Description": "Descripción emergente que muestra el tipo de árbol",
   "TreeTooltipGenerator.Type1": "Árbol de Roble",
@@ -97,18 +82,15 @@
   "TreeTooltipGenerator.ShowGrowthStage.Description": "Muestra la fase de crecimiento del arbol (en forma numerica)",
   "TreeTooltipGenerator.ShowGrowthStage.GrowthStage": "Fase {{N}} de {{T}}",
   "TreeTooltipGenerator.ShowGrowthStage.MatureStage": "Maduro",
-
   "Config.Decorators.GeneralSection": "Decoraciones - General",
   "Config.Decorators.Visibility": "Decoraciones - Visibilidad",
   "Config.TooltipGenerators.GeneralSection": "Descripciones Emergentes - General",
   "Config.TooltipGenerators.Visibility": "Descripciones Emergentes - Visibilidad",
   "Config.TooltipGenerators.ShowModSource": "Descripcion emergente - Mostrar fuente del mod",
-
   "Config.TooltipTrigger": "Activador de la Descripción Emergente",
   "Config.TooltipTrigger.Hover": "Al pasar el cursor",
   "Config.TooltipTrigger.ButtonHeld": "Al mantener presionado el botón",
   "Config.TooltipTriggerButton": "Botón Emergente",
-
   "Config.HideMachineTooltips": "Ocultar Descripciones Emergentes de Máquinas",
   "Config.HideMachineTooltips.ForNonMachines": "Para objetos que no son máquinas",
   "Config.HideMachineTooltips.ForChests": "Para cofres",

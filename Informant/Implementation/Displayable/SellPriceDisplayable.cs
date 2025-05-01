@@ -10,32 +10,28 @@ namespace Slothsoft.Informant.Implementation.Displayable;
 
 internal class SellPriceDisplayable : IDisplayable
 {
-
-    private static string DisplayableId => "sell-price";
     private static readonly Rectangle CoinSourceBounds = new(5, 69, 6, 6);
-
-    private record MoneyToDisplay(int One, int? Stack);
 
     private static Vector2? _lastCurrencyCoordinates;
     private static bool _myCall;
+    private readonly Harmony _harmony;
 
     private readonly IModHelper _modHelper;
-    private readonly Harmony _harmony;
 
     public SellPriceDisplayable(IModHelper modHelper, string? uniqueId = null)
     {
         _modHelper = modHelper;
-        _harmony = new Harmony(uniqueId ?? InformantMod.Instance!.ModManifest.UniqueID);
+        _harmony = new(uniqueId ?? InformantMod.Instance!.ModManifest.UniqueID);
         _harmony.Patch(
-            original: AccessTools.Method(
+            AccessTools.Method(
                 typeof(IClickableMenu),
                 nameof(IClickableMenu.drawToolTip)
             ),
-            prefix: new HarmonyMethod(typeof(SellPriceDisplayable), nameof(ManipulateMoneyValue)),
-            postfix: new HarmonyMethod(typeof(SellPriceDisplayable), nameof(DrawAdditionalMoneyValues))
+            new(typeof(SellPriceDisplayable), nameof(ManipulateMoneyValue)),
+            new(typeof(SellPriceDisplayable), nameof(DrawAdditionalMoneyValues))
         );
         _harmony.Patch(
-            original: AccessTools.Method(
+            AccessTools.Method(
                 typeof(SpriteBatch),
                 nameof(SpriteBatch.Draw),
                 [
@@ -50,9 +46,11 @@ internal class SellPriceDisplayable : IDisplayable
                     typeof(float),
                 ]
             ),
-            prefix: new HarmonyMethod(typeof(SellPriceDisplayable), nameof(RememberCurrencyCoordinates))
+            new(typeof(SellPriceDisplayable), nameof(RememberCurrencyCoordinates))
         );
     }
+
+    private static string DisplayableId => "sell-price";
 
     public string Id => DisplayableId;
     public string DisplayName => _modHelper.Translation.Get("SellPriceDisplayable");
@@ -70,14 +68,18 @@ internal class SellPriceDisplayable : IDisplayable
             return; // this "decorator" is deactivated
         }
 
-        if (hoveredItem != null && moneyAmountToShowAtBottom < 0) {
-            moneyAmountToShowAtBottom = CalculateSellPrice(hoveredItem) ?? -1;
-
-            if (moneyAmountToShowAtBottom >= 0) {
-                int? stackMoney = hoveredItem.Stack > 1 ? hoveredItem.Stack * moneyAmountToShowAtBottom : null;
-                __state = new MoneyToDisplay(moneyAmountToShowAtBottom, stackMoney);
-            }
+        if (hoveredItem == null || moneyAmountToShowAtBottom >= 0) {
+            return;
         }
+
+        moneyAmountToShowAtBottom = CalculateSellPrice(hoveredItem) ?? -1;
+
+        if (moneyAmountToShowAtBottom < 0) {
+            return;
+        }
+
+        int? stackMoney = hoveredItem.Stack > 1 ? hoveredItem.Stack * moneyAmountToShowAtBottom : null;
+        __state = new(moneyAmountToShowAtBottom, stackMoney);
     }
 
     private static int? CalculateSellPrice(Item item)
@@ -86,7 +88,7 @@ internal class SellPriceDisplayable : IDisplayable
             return null; // we only sell SObjects
         }
 
-        var price = Utility.getSellToStorePriceOfItem(item, countStack: false);
+        var price = Utility.getSellToStorePriceOfItem(item, false);
         return price >= 0 || obj.canBeShipped() ? price : null;
     }
 
@@ -121,7 +123,8 @@ internal class SellPriceDisplayable : IDisplayable
         _myCall = false;
     }
 
-    private static void RememberCurrencyCoordinates(Texture2D texture, Vector2 position, Rectangle? sourceRectangle, Color color, float rotation, Vector2 origin, Vector2 scale, SpriteEffects effects, float layerDepth)
+    private static void RememberCurrencyCoordinates(Texture2D texture, Vector2 position, Rectangle? sourceRectangle, Color color,
+        float rotation, Vector2 origin, Vector2 scale, SpriteEffects effects, float layerDepth)
     {
         if (_myCall) {
             return; // we don't need to remember our own calls
@@ -143,4 +146,6 @@ internal class SellPriceDisplayable : IDisplayable
             }
         }
     }
+
+    private record MoneyToDisplay(int One, int? Stack);
 }

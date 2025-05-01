@@ -7,7 +7,6 @@ namespace Slothsoft.Informant.Implementation.TooltipGenerator;
 
 internal class MachineTooltipGenerator : ITooltipGenerator<SObject>
 {
-
     private readonly IModHelper _modHelper;
 
     public MachineTooltipGenerator(IModHelper modHelper)
@@ -24,34 +23,35 @@ internal class MachineTooltipGenerator : ITooltipGenerator<SObject>
         return HasTooltip(input, InformantMod.Instance?.Config.HideMachineTooltips ?? HideMachineTooltips.ForNonMachines);
     }
 
+    public Tooltip Generate(SObject input)
+    {
+        if (input.ItemId == BigCraftableIds.GardenPot) {
+            return input is not IndoorPot gardenPot || gardenPot.hoeDirt.Value.crop == null
+                ? new("???")
+                : CropTooltipGenerator.CreateTooltip(_modHelper, gardenPot.hoeDirt.Value);
+        }
+
+        return CreateTooltip(input);
+    }
+
     internal static bool HasTooltip(SObject input, HideMachineTooltips hideMachineTooltips)
     {
         if (!input.bigCraftable.Value) {
             return false;
         }
 
-        if (input.ItemId == BigCraftableIds.GardenPot) {
-            var gardenPot = input as IndoorPot;
-            var crop = gardenPot?.hoeDirt.Value.crop;
-            return crop != null;
+        if (input.ItemId != BigCraftableIds.GardenPot) {
+            return hideMachineTooltips switch {
+                HideMachineTooltips.Never => true,
+                HideMachineTooltips.ForChests => !BigCraftableIds.AllChests.Contains(input.ItemId),
+                _ => !BigCraftableIds.AllChests.Contains(input.ItemId) &&
+                     !BigCraftableIds.AllStaticCraftables.Contains(input.ItemId),
+            };
         }
 
-        return hideMachineTooltips switch {
-            HideMachineTooltips.Never => true,
-            HideMachineTooltips.ForChests => !BigCraftableIds.AllChests.Contains(input.ItemId),
-            _ => !BigCraftableIds.AllChests.Contains(input.ItemId) &&
-                 !BigCraftableIds.AllStaticCraftables.Contains(input.ItemId)
-        };
-    }
-
-    public Tooltip Generate(SObject input)
-    {
-        if (input.ItemId == BigCraftableIds.GardenPot) {
-            return input is not IndoorPot gardenPot || gardenPot.hoeDirt.Value.crop == null
-                ? new Tooltip("???")
-                : CropTooltipGenerator.CreateTooltip(_modHelper, gardenPot.hoeDirt.Value);
-        }
-        return CreateTooltip(input);
+        var gardenPot = input as IndoorPot;
+        var crop = gardenPot?.hoeDirt.Value.crop;
+        return crop != null;
     }
 
     private Tooltip CreateTooltip(SObject input)
@@ -60,19 +60,20 @@ internal class MachineTooltipGenerator : ITooltipGenerator<SObject>
 
         var heldObject = input.heldObject.Value;
         if (heldObject == null || BigCraftableIds.AutoGrabber == input.ItemId) {
-            return new Tooltip(displayName); // we don't show any icon for AutoGrabber
+            return new(displayName); // we don't show any icon for AutoGrabber
         }
+
         var heldObjectName = heldObject.DisplayName;
         var heldObjectStack = heldObject.Stack > 1 ? $"x{heldObject.Stack}" : "";
         var daysLeft = CalculateMinutesLeftString(input);
-        return new Tooltip($"{displayName}\n> {heldObjectName} {heldObjectStack}\n{daysLeft}") {
+        return new($"{displayName}\n> {heldObjectName} {heldObjectStack}\n{daysLeft}") {
             Icon = [
                 Icon.ForObject(
                     heldObject,
                     IPosition.CenterRight,
                     new Vector2(Game1.tileSize / 2, Game1.tileSize / 2)
-                )
-            ]
+                ),
+            ],
         };
     }
 
@@ -89,8 +90,9 @@ internal class MachineTooltipGenerator : ITooltipGenerator<SObject>
             case 0:
                 return _modHelper.Translation.Get("MachineTooltipGenerator.Finished");
         }
+
         var minutesLeft = minutesUntilReady % 60;
-        var hoursLeft = (minutesUntilReady / 60) % 24;
+        var hoursLeft = minutesUntilReady / 60 % 24;
         var daysLeft = minutesUntilReady / 60 / 24;
         return $"{daysLeft:D2}:{hoursLeft:D2}:{minutesLeft:D2}";
     }
@@ -100,6 +102,7 @@ internal class MachineTooltipGenerator : ITooltipGenerator<SObject>
         if (input.MinutesUntilReady == 1) {
             return _modHelper.Translation.Get("MachineTooltipGenerator.Finished");
         }
+
         var daysForQuality = input.GetDaysForQuality(input.GetNextQuality(input.heldObject.Value.Quality));
         var daysNeededForNextQuality = (int)((input.daysToMature.Value - daysForQuality) / input.agingRate.Value);
         var daysNeededTotal = (int)(input.daysToMature.Value / input.agingRate.Value);
