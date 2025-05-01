@@ -50,7 +50,7 @@ internal class CropTooltipGenerator : ITooltipGenerator<TerrainFeature>
 
         string tooltipText = $"{displayName}\n{daysLeft}";
         // NotWatered text
-        if (notWatered) {
+        if ((InformantMod.Instance?.Config.DecorateNotWatered ?? false) && notWatered) {
             var notWateredText = modHelper.Translation.Get("CropTooltipGenerator.NotWatered");
             tooltipText += $"\n{notWateredText}";
         }
@@ -142,7 +142,7 @@ internal class CropTooltipGenerator : ITooltipGenerator<TerrainFeature>
 
     // Adds compatibility to fertilizer mods
     internal static Icon?[] GetFertilizerIconList(HoeDirt dirt) {
-        if ((InformantMod.Instance?.Config.DecorateNotWatered ?? false) && dirt.HasFertilizer()) {
+        if ((InformantMod.Instance?.Config.DecorateFertilizer ?? false) && dirt.HasFertilizer()) {
             if (dirt.fertilizer.Value.Contains('|')) {
                 return [.. dirt.fertilizer.Value.Split("|")
                     .GroupBy(id => ItemRegistry.GetData(id)?.DisplayName ?? "Unknown Fertilizer")

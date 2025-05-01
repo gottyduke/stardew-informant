@@ -142,7 +142,8 @@ internal class BundleDecorator : IDecorator<Item>
             .Select(bundle => new Decoration(GetOrCacheBundleTexture(bundle.Color)) {
                 Counter = bundle.Quantity,
                 CounterColor = QualityColor[Math.Min(bundle.Quality, 3)],
-            });
+            })
+            .ToArray();
         return decorations.First() with { ExtraDecorations = decorations.Skip(1).ToArray() };
     }
 }
