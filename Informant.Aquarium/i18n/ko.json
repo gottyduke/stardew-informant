@@ -1,4 +1,4 @@
 ﻿{
-  "AquariumTooltipDecorator": "스타듀 수족관 장식가",
-  "AquariumTooltipDecorator.Description": "스타듀 수족관에 기증되지 않은 물고기를 표시합니다"
+  "AquariumTooltipDecorator": "아쿠아리움 기증 표시",
+  "AquariumTooltipDecorator.Description": "아쿠아리움에 아직 기증되지 않은 물고기를 표시합니다"
 }
