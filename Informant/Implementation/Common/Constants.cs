@@ -265,6 +265,23 @@ public static class WagTreeIds
     public const string WitchwoodTree = "wildflour.ateliercrops_Witchwood_tree";
 }
 
+public static class SASSTreeIds
+{
+    public const string BlushingTopHatTree = "Wildflour.SASS_Blushing_TopHat_Tree";
+    public const string CandyButtonTree = "Wildflour.SASS_Candy_Button_Tree";
+    public const string CoralFungusTree = "Wildflour.SASS_Coral_Fungus_Tree";
+    public const string FrillyGillyTree = "Wildflour.SASS_Frilly_Gilly_Tree";
+    public const string GhostlyParasolTree = "Wildflour.SASS_Ghostly_Parasol_Tree";
+    public const string IndigoCapTree = "Wildflour.SASS_Indigo_Cap_Tree";
+    public const string LilacFunnelTree = "Wildflour.SASS_Lilac_Funnel_Tree";
+    public const string LimeyBonnetTree = "Wildflour.SASS_Limey_Bonnet_Tree";
+    public const string LunarPoofTree = "Wildflour.SASS_Lunar_Poof_Tree";
+    public const string RustgillTree = "Wildflour.SASS_Rustgill_Tree";
+    public const string SeafoamWaxcapTree = "Wildflour.SASS_Seafoam_Waxcap_Tree";
+    public const string SparklingAgaricTree = "Wildflour.SASS_Sparkling_Agaric_Tree";
+    public const string StoutFunnelTree = "Wildflour.SASS_Stout_Funnel_Tree";
+}
+
 public static class PcTreeIds
 {
     public const string ReuuTree = "Fellowclown.PC_ReuuTree";

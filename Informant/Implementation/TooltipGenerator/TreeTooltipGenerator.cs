@@ -70,6 +70,19 @@ internal class TreeTooltipGenerator : ITooltipGenerator<TerrainFeature>
             case WagTreeIds.MysticTrumpetTree:
             case WagTreeIds.StrangeInkCapTree:
             case WagTreeIds.WitchwoodTree:
+            case SASSTreeIds.BlushingTopHatTree:
+            case SASSTreeIds.CandyButtonTree:
+            case SASSTreeIds.CoralFungusTree:
+            case SASSTreeIds.FrillyGillyTree:
+            case SASSTreeIds.GhostlyParasolTree:
+            case SASSTreeIds.IndigoCapTree:
+            case SASSTreeIds.LilacFunnelTree:
+            case SASSTreeIds.LimeyBonnetTree:
+            case SASSTreeIds.LunarPoofTree:
+            case SASSTreeIds.RustgillTree:
+            case SASSTreeIds.SeafoamWaxcapTree:
+            case SASSTreeIds.SparklingAgaricTree:
+            case SASSTreeIds.StoutFunnelTree:
             case PcTreeIds.ReuuTree:
             case PcTreeIds.MeekTree:
             case PcTreeIds.HeaviousTree:
