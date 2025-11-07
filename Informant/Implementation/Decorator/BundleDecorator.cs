@@ -120,14 +120,28 @@ internal class BundleDecorator : IDecorator<Item>
             var bundleDataSplit = bundleData[bundleTitle].Split('/');
             var indexStackQuality = bundleDataSplit[2].Split(' ');
             for (var index = 0; index < indexStackQuality.Length; index += 3) {
-                if (bundlesCompleted[bundleIndex][index / 3]) {
+                if (!bundlesCompleted.TryGetValue(bundleIndex, out var completedArray) || completedArray == null) {
+                    continue;
+                }
+                var completedIndex = index / 3;
+                if (completedIndex < 0 || completedIndex >= completedArray.Length) {
+                    continue;
+                }
+                // Defensive: check indexStackQuality bounds
+                if (index + 2 >= indexStackQuality.Length) {
+                    continue;
+                }
+                // Defensive: check bundleDataSplit bounds
+                if (bundleDataSplit.Length < 4) {
+                    continue;
+                }
+                if (completedArray[completedIndex]) {
                     continue;
                 }
 
                 _ = int.TryParse(indexStackQuality[index + 1], out var quantity);
                 _ = int.TryParse(indexStackQuality[index + 2], out var quality);
                 _ = int.TryParse(bundleDataSplit[3], out var color);
-                // old index, unqualified
                 var unqualifiedItem = ItemRegistry.GetDataOrErrorItem(indexStackQuality[index]);
                 yield return new(
                     unqualifiedItem.IsErrorItem ? indexStackQuality[index] : unqualifiedItem.ItemId,
