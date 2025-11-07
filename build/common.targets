@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <PackageVersion>1.7.3</PackageVersion>
+        <PackageVersion>1.9.6</PackageVersion>
         <Authors>Slothsoft</Authors>
         <RepositoryType>git</RepositoryType>
         <RepositoryUrl>https://github.com/slothsoft/stardew-informant</RepositoryUrl>
@@ -17,7 +17,7 @@
         </AssemblyAttribute>
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.3.2" />
+        <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.4.0" />
     </ItemGroup>
     <ItemGroup>
         <Using Include="StardewValley" />
