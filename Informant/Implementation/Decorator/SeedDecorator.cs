@@ -52,11 +52,15 @@ internal class SeedDecorator : IDecorator<Item>
         var decorations = CachedCropData[input.ItemId].HarvestId
             .Select(crop => {
                 _ = ItemRegistry.GetDataOrErrorItem(crop);
+                if (string.IsNullOrEmpty(crop)) {
+                    return null;
+                }
                 var monoItem = ItemRegistry.Create(crop);
                 return new Decoration(GetOrCacheCropTexture(crop)) {
                     Counter = Utility.getSellToStorePriceOfItem(monoItem),
                 };
             })
+            .OfType<Decoration>()
             .ToArray();
         return decorations[0] with { ExtraDecorations = decorations[1..] };
     }
